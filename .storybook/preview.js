@@ -1,5 +1,3 @@
-import 'bootstrap';
-
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -9,3 +7,6 @@ export const parameters = {
     },
   },
 }
+
+import '../src/styles/main.scss';
+import 'bootstrap';
