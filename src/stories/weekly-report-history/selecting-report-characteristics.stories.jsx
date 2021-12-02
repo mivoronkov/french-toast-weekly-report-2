@@ -3,7 +3,7 @@ import React from 'react';
 import  SelectingReportCharacteristics  from '../../modules/weekly-report-history/selecting-report-characteristics.component';
 
 export default {
-    title: 'Selecting report characteristics buttons',
+    title: 'Selectors',
     component: SelectingReportCharacteristics
 }
 
