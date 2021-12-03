@@ -1,6 +1,6 @@
 import React from 'react';
 
-import  TeamSelector  from '../../modules/common/components/topbar/team-selector.component';
+import {TeamSelector} from '../../modules/common/components/topbar/team-selector.component';
 
 export default {
     title: 'Selectors',

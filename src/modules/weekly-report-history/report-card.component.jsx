@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes, {number} from 'prop-types';
 
-function ReportEmotionalCard ({memberName, mood}) {
+export function ReportEmotionalCard ({memberName, mood}) {
     let smiles = mood.map(el => {
         let smile;
         switch (el) {
@@ -25,7 +25,7 @@ function ReportEmotionalCard ({memberName, mood}) {
                 break;
             default:
                 smile = 'unmarked';
-        };
+        }
         return <img src={smile + ".svg"} alt="smile" className="smile col m-auto"/>;
     });
 
@@ -38,8 +38,6 @@ return (
     </div>
 );
 }
-
-export default ReportEmotionalCard;
 
 ReportEmotionalCard.propTypes  ={
     memberName: PropTypes.string,

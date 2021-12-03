@@ -1,6 +1,6 @@
 import React from 'react';
 
-import  ReportCalendar  from '../../modules/common/components/topbar/report-calendar.component';
+import {ReportCalendar} from '../../modules/common/components/topbar/report-calendar.component';
 
 export default {
     title: 'Selectors',

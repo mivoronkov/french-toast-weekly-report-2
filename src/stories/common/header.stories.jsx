@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HeaderComponent from "../../modules/common/components/header/header.component";
+import {HeaderComponent} from "../../modules/common/components/header/header.component";
 
 export default {
     title: 'Header',

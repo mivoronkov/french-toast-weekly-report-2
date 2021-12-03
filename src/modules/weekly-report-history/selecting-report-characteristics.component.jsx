@@ -1,4 +1,4 @@
-function SelectingReportCharacteristics() {
+export function SelectingReportCharacteristics() {
     return (
         <ul className="pagination pagination-sm my-3">
             <li className="page-item"><a href="#" className="page-link bg-dark">Overall</a></li>
@@ -8,5 +8,3 @@ function SelectingReportCharacteristics() {
         </ul>
     );
 }
-
-export default SelectingReportCharacteristics;

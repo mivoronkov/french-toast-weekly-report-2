@@ -1,6 +1,6 @@
 import React from 'react';
 
-import  ReportEmotionalCard  from '../../modules/weekly-report-history/report-card.component';
+import {ReportEmotionalCard} from '../../modules/weekly-report-history/report-card.component';
 
 export default {
     title: 'Report emotional card',
