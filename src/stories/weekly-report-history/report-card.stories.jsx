@@ -10,5 +10,6 @@ export default {
 const Template = (args) => <ReportEmotionalCard {...args}/>;
 export const NamedCard = Template.bind({});
 NamedCard.args = {
-    memberName: 'Aleksey Petrov'
+    memberName: 'Aleksey Petrov',
+    mood: [0,1,2,3,4,5,3,4,5]
 };
