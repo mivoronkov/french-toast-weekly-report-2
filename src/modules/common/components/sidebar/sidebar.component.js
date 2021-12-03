@@ -7,7 +7,7 @@ function SidebarComponent() {
                 <img src={logo} alt="logo"/>
                     <ul className="nav nav-pills flex-column">
                         <li className="nav-item p-2">
-                            <a className="nav-link active" aria-current="page" href="#">Launch Guide</a>
+                            <a className="nav-link" href="#">Launch Guide</a>
                         </li>
                         <li className="nav-item p-2">
                             <a className="nav-link" href="invite_your_team.html">Invite Your Team</a>
