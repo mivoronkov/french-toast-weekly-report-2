@@ -1,6 +1,6 @@
 import React from 'react';
 
-import  SectionLabel  from '../../modules/common/components/labels/section-label.component';
+import {SectionLabel} from '../../modules/common/components/labels/section-label.component';
 
 export default {
     title: 'Section label with yellow line',

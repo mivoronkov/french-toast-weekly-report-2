@@ -1,6 +1,8 @@
+import React from "react";
+
 import logo from '../../../../img/logo.png';
 
-function SidebarComponent() {
+export function SidebarComponent() {
     return (
         <aside className="p-3 d-flex flex-column justify-content-between text">
             <div>
@@ -42,5 +44,3 @@ function SidebarComponent() {
         </aside>
     );
 }
-
-export default SidebarComponent;

@@ -1,9 +1,11 @@
+import React from "react";
+
 import launch_guide_invite from '../../img/launch_guide_invite.png';
 import launch_guide_encourage from '../../img/launch_guide_encourage.png';
 import launch_guide_remind from '../../img/launch_guide_remind.png';
 import launch_guide_read from '../../img/launch_guide_read.png';
 
-function LaunchGuideComponent() {
+export function LaunchGuideComponent() {
     return (
         <div className="p-sm-5 container">
             <div className="row justify-content-center pb-5 pt-5">
@@ -79,5 +81,3 @@ function LaunchGuideComponent() {
         </div>
     );
 }
-
-export default LaunchGuideComponent;

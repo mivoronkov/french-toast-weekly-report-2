@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LaunchGuideComponent from "../../modules/launch-guide/launch-guide.component";
+import {LaunchGuideComponent} from "../../modules/launch-guide/launch-guide.component";
 
 export default {
     title: 'Launch Guide',

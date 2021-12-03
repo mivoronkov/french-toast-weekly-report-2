@@ -1,6 +1,6 @@
 import React from "react";
 
-function ReportCalendar ({previousPeriod, currentPeriod,...props}) {
+export function ReportCalendar ({previousPeriod, currentPeriod,...props}) {
     return (
         <ul className="pagination pagination-sm my-3">
             <li className="page-item"><a href="#" className="page-link bg-dark">Previous period:{previousPeriod}</a></li>
@@ -9,5 +9,3 @@ function ReportCalendar ({previousPeriod, currentPeriod,...props}) {
         </ul>
     );
 }
-
-export default ReportCalendar;

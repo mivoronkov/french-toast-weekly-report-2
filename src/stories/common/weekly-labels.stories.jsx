@@ -1,6 +1,6 @@
 import React from 'react';
 
-import  WeeklyLabels  from '../../modules/weekly-report-history/weekly-labels.component';
+import {WeeklyLabels} from '../../modules/weekly-report-history/weekly-labels.component';
 
 export default {
     title: 'Weekly labels',

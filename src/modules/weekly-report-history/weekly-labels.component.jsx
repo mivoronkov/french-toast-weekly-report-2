@@ -1,6 +1,6 @@
 import React from "react";
 
-function WeeklyLabels() {
+export function WeeklyLabels() {
     return (
         <div className="row flex-nowrap w-85">
             <div className="col-lg-5 py-3 m-2 "></div>
@@ -18,6 +18,4 @@ function WeeklyLabels() {
             </div>
         </div>
     );
-};
-
-export default WeeklyLabels;
+}

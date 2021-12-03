@@ -1,6 +1,6 @@
 import React from 'react';
 
-import  SelectingReportCharacteristics  from '../../modules/weekly-report-history/selecting-report-characteristics.component';
+import {SelectingReportCharacteristics} from '../../modules/weekly-report-history/selecting-report-characteristics.component';
 
 export default {
     title: 'Selectors',

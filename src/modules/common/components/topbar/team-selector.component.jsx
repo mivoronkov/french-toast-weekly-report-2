@@ -1,6 +1,6 @@
 import React from "react";
 
-function TeamSelector ({...props}) {
+export function TeamSelector ({...props}) {
     return (
         <ul className="pagination pagination-sm my-3">
             <li className="page-item"><a href="team_reports.html" className="page-link bg-dark">Immediate Team</a></li>
@@ -8,5 +8,3 @@ function TeamSelector ({...props}) {
         </ul>
     );
 }
-
-export default TeamSelector;
