@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes, {number} from 'prop-types';
+import React from 'react';
+import PropTypes, { number } from 'prop-types';
 
-export function ReportEmotionalCard ({memberName, mood}) {
-    let smiles = mood.map(el => {
+export function ReportEmotionalCard({ memberName, mood }) {
+    let smiles = mood.map((el, index) => {
         let smile;
         switch (el) {
             case 0:
@@ -26,24 +26,32 @@ export function ReportEmotionalCard ({memberName, mood}) {
             default:
                 smile = 'unmarked';
         }
-        return <img src={smile + ".svg"} alt="smile" className="smile col m-auto"/>;
+        return (
+            <img
+                src={smile + '.svg'}
+                alt='smile'
+                className='smile col m-auto'
+                key={index}
+            />
+        );
     });
 
-return (
-    <div className="row flex-nowrap bg-white w-85 align-items-center mb-2">
-        <p className="py-3 m-2 col-lg-5">{memberName}</p>
-        <div className="col-lg-7 row flex-nowrap justify-content-around">
-            {smiles}
+    return (
+        <div className='row flex-nowrap bg-white w-85 align-items-center mb-2'>
+            <p className='py-3 m-2 col-lg-5'>{memberName}</p>
+            <div className='col-lg-7 row flex-nowrap justify-content-around'>
+                {smiles}
+            </div>
         </div>
-    </div>
-);
+    );
 }
 
-ReportEmotionalCard.propTypes  ={
+ReportEmotionalCard.propTypes = {
     memberName: PropTypes.string,
-    mood: PropTypes.arrayOf(number)
-}
-ReportEmotionalCard.defaultProps   ={
+    mood: PropTypes.arrayOf(number),
+};
+
+ReportEmotionalCard.defaultProps = {
     memberName: 'Unknown',
-    mood: new Array(9).fill(0)
-}
+    mood: new Array(9).fill(0),
+};

@@ -38,7 +38,7 @@ export function LaunchGuideComponent() {
                     <div className="launch-guide-text-info">
                         When they receive your invitation, team
                         members will be prompted to complete their
-                        profiles. If a team member hasn't created their
+                        profiles. If a team member hasn&apos;t created their
                         profile within 24 hours, follow up with them!
                     </div>
                 </div>
@@ -49,7 +49,7 @@ export function LaunchGuideComponent() {
                         Remind Your Team
                     </div>
                     <div className="launch-guide-text-info">
-                        Every Friday, we'll automatically send your team
+                        Every Friday, we&apos;ll automatically send your team
                         members an email reminding them to fill out
                         their Weekly Report. But we also encourage <strong className="fst-italic">you</strong>
                         to constantly request their Weekly Reports so
@@ -72,7 +72,7 @@ export function LaunchGuideComponent() {
                         Set aside some time on Monday to read all the
                         reports. Then reach out to any team members
                         who need to be acknowledged for a success or
-                        supported during a difficult time. (And yes, we'll
+                        supported during a difficult time. (And yes, we&apos;ll
                         send you a reminder to read your reports each
                         week too.)
                     </div>

@@ -1,3 +1,5 @@
+import React from "react";
+
 export function SelectingReportCharacteristics() {
     return (
         <ul className="pagination pagination-sm my-3">

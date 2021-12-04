@@ -12,13 +12,13 @@ export function InviteYourTeamSuccessMessageComponent() {
                             </strong>
                         </div>
                         <div className="pb-2">
-                            Once they accept your invitation, they'll be able to create their reports.
+                            Once they accept your invitation, they&apos;ll be able to create their reports.
                         </div>
                     </div>
                 </div>
             </div>
             <div className="form mx-auto pt-3">
-                <p className="font-weight-500"><i className="bi bi-caret-right-fill"></i> The team member didn't receive
+                <p className="font-weight-500"><i className="bi bi-caret-right-fill"/> The team member didn&apos;t receive
                     your invite?</p>
             </div>
         </div>
