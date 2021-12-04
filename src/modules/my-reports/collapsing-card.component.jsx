@@ -4,18 +4,17 @@ import PropTypes from "prop-types";
 import {WeeklyReportInformation} from "./weekly-report-information.component";
 import {WeeklyCardNotation} from "./weekly-card-notation.component";
 
-export function CollapsingCard({weeklyInformation, weeklyNotations, isShouldCollapse}){
+export function CollapsingCard({weeklyInformation, weeklyNotations, idCollpase}){
     let informationReport = weeklyInformation.map(el =>{
         return (<WeeklyReportInformation comments={el.comments} stateLevel={el.stateLevel} stateName={el.stateName} key={el.stateName} />)
     });
     let notations = weeklyNotations.map( el => {
         return (<WeeklyCardNotation notationText={el.text} notationTitle={el.title} key ={el.title}/>)
     });
-    let classList =["collapse", "bg-white", "p-3", "mb-2"];
-    !isShouldCollapse ? classList.push('show'): '';
+    let classList =["collapse", "bg-white", "p-3", "mb-2", "w-100"];
 
     return(
-        <div className={classList.join(' ')}>
+        <div id={idCollpase} className={classList.join(' ')}>
             {informationReport}
             {notations}
         </div>
@@ -32,5 +31,5 @@ CollapsingCard.propTypes = {
         text: PropTypes.string,
         title: PropTypes.string,
     })),
-    isShouldCollapse: PropTypes.bool
+    idCollpase: PropTypes.string
 };
