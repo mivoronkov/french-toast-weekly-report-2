@@ -14,7 +14,7 @@ export function ExpandReportCard({duration, weeklyInformation, weeklyNotations})
 
     let classList = ["row", "flex-nowrap", "align-items-center", "justify-content-around", "p-0", "m-0", "col-lg-5"];
 
-    let images = toggledState ? <div  className="col-9" ></div>: weeklyInformation.map(el=>{
+    let smileImages = toggledState ? <div  className="col-9" ></div>: weeklyInformation.map(el=>{
         return(
             <div className="col d-flex justify-content-center" key={el.stateName}>
                 <ExtensibleSmile smileNumber={el.stateLevel} additionalClasses={'big-smile'}/>
@@ -29,7 +29,7 @@ export function ExpandReportCard({duration, weeklyInformation, weeklyNotations})
             <div className="row flex-nowrap bg-white justify-content-between align-items-center mb-2 w-100">
                 <p className="py-3 my-2 col-lg-7 fw-bold">{duration}</p>
                 <div className={classList.join(" ")}>
-                    {images}
+                    {smileImages}
                     <button
                         type="button"
                         className="btn dropdown-toggle col"
