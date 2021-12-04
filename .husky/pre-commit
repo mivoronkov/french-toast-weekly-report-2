@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-./node_modules/.bin/eslint
+./node_modules/.bin/eslint --ext .jsx --ext .js
 ./node_modules/.bin/prettier --write src/**/*.js
