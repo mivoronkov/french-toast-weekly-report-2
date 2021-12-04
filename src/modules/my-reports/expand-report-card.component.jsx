@@ -1,28 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from "prop-types";
 
-import {WeeklyReportInformation} from './weekly-report-information.component';
-import {WeeklyCardNotation} from './weekly-card-notation.component';
+import {CollapsingCard} from './collapsing-card.component';
 
 export function ExpandReportCard({duration, weeklyInformation, weeklyNotations}){
-    let informationReport = weeklyInformation.map(el =>{
-        return (<WeeklyReportInformation comments={el.comments} stateLevel={el.stateLevel} stateName={el.stateName} key={el.stateName} />)
-    });
-    let notations = weeklyNotations.map( el => {
-        return (<WeeklyCardNotation notationText={el.text} notationTitle={el.title} key ={el.title}/>)
-    });
+    const [toggledState, setToggledState] = useState(false);
+
+    let onClickHandler =() =>{
+        setToggledState(prevState => !prevState);
+    };
+    let classList = ["row", "flex-nowrap", "align-items-center", "justify-content-between", "mb-0"];
+    toggledState ? classList.push("bg-white") : classList.push("bg-dark");
+
     return(
         <div className="w-90">
-            <div className="row flex-nowrap bg-white align-items-center justify-content-between mb-0">
+            <div className={classList.join(" ")}>
                 <p className="py-3 my-2 col-lg-7 collapsed-card-label">{duration}</p>
-                <button type="button" className="btn dropdown-toggle col-lg-1 btn-dark me-4" data-bs-toggle="collapse"
-                        data-bs-target="#collapseCard">Collapse
+                <button
+                    type="button"
+                    className="btn dropdown-toggle col-lg-1 btn-dark me-4"
+                    onClick={onClickHandler}
+                >
+                    {toggledState ? 'Collapse' : 'Expand'}
                 </button>
             </div>
-            <div id="collapseCard" className="collapse bg-white p-3 mb-2">
-                {informationReport}
-                {notations}
-            </div>
+            <CollapsingCard isShouldCollapse={toggledState} weeklyNotations={weeklyNotations} weeklyInformation={weeklyInformation}/>
         </div>
     );
 }

@@ -1,24 +1,25 @@
-import React from 'react';
-import PropTypes from "prop-types";
+import React, {useState} from 'react';
+import {element} from "prop-types";
 
-export function ExpandAll({idItems}){
-    const controls = idItems.join(" ");
+export function ExpandAll(){
+    const [toggledState, setToggledState] = useState(false)
+    const onToggleHandler =()=>{
+        const idCollapsedElement = document.querySelectorAll('.collapse');
+        const toggleAction = toggledState ? 'remove' : 'add';
+        idCollapsedElement.forEach(element =>{
+            element.classList[toggleAction]('show');
+        });
+        setToggledState(prevState => !prevState);
+    };
     return(
         <div className="d-flex flex-nowrap w-90 justify-content-end align-items-center my-2">
             <button
                 type="button"
                 className="btn btn-dark px-4"
-                data-bs-toggle="collapse"
-                data-bs-target=".collapse"
-                aria-expanded="false"
-                aria-controls={controls}
+                onClick={onToggleHandler}
             >
-                Expand All
+                {toggledState ? 'Collapse All' : 'Expand All'}
             </button>
         </div>
     );
-}
-
-ExpandAll.propTypes = {
-    idItems: PropTypes.arrayOf(PropTypes.string)
 }

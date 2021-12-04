@@ -7,10 +7,10 @@ export default {
     component: ExpandAll
 }
 
-const Template = (args) => {
+const Template = () => {
     return (
         <div>
-            <ExpandAll {...args}/>
+            <ExpandAll />
             <ExpandCard {...ExpandCard.args}/>
             <ExpandCard {...ExpandCard.args}/>
             <ExpandCard {...ExpandCard.args}/>
@@ -18,6 +18,3 @@ const Template = (args) => {
     )
 };
 export const ExpandAllButton = Template.bind({});
-ExpandAllButton.args = {
-    idItems: ['morale1', 'monday3', 'yellow6', ExpandCard.args.duration]
-};
