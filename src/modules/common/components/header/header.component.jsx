@@ -1,5 +1,6 @@
 import React from "react";
 import logo from '../../../../img/logo.png';
+import PropTypes from "prop-types";
 
 export function HeaderComponent({title}) {
     return (
@@ -9,3 +10,7 @@ export function HeaderComponent({title}) {
         </header>
     );
 }
+
+HeaderComponent.propTypes = {
+    title: PropTypes.string
+};

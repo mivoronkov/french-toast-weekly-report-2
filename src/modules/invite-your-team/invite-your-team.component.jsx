@@ -16,7 +16,7 @@ export function InviteYourTeamComponent() {
                                 <strong>Enter the team member you would like to invite.</strong>
                             </div>
                             <div className="pb-2">
-                                Don't Worry! You'll be able to add more team members later.
+                                Don&apos;t Worry! You&apos;ll be able to add more team members later.
                             </div>
                             <div className="form-group pt-2 pb-2">
                                 <label>
