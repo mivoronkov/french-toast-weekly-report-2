@@ -1,38 +1,11 @@
 import React from 'react';
 import PropTypes, { number } from 'prop-types';
+import {ExtensibleSmile} from "../common/components/pictures/smile.component";
 
 export function ReportEmotionalCard({ memberName, mood }) {
     let smiles = mood.map((el, index) => {
-        let smile;
-        switch (el) {
-            case 0:
-                smile = 'unmarked';
-                break;
-            case 1:
-                smile = 'very-sad';
-                break;
-            case 2:
-                smile = 'sad';
-                break;
-            case 3:
-                smile = 'neutral';
-                break;
-            case 4:
-                smile = 'happy';
-                break;
-            case 5:
-                smile = 'very-happy';
-                break;
-            default:
-                smile = 'unmarked';
-        }
         return (
-            <img
-                src={smile + '.svg'}
-                alt='smile'
-                className='smile col m-auto'
-                key={index}
-            />
+            <ExtensibleSmile additionalClasses={' col m-auto'} smileNumber={el} key={index}/>
         );
     });
 
