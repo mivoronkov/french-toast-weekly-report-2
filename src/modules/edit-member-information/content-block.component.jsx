@@ -1,13 +1,17 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-function ContentBlock({title, content}) {
+export function ContentBlock({ title, content }) {
     return (
         <div>
-            <div className="fw-bold text-uppercase">{title}</div>
-            <hr className="mt-1"/>
+            <div className='fw-bold text-uppercase'>{title}</div>
+            <hr className='mt-1' />
             {content}
         </div>
     );
 }
 
-export default ContentBlock;
+ContentBlock.propTypes = {
+    title: PropTypes.string.isRequired,
+    content: PropTypes.element,
+};
