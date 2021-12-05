@@ -15,6 +15,20 @@
   border: none;
 }
 
+[type=radio] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+[type=radio] + div.smile-card {
+  filter: grayscale(100);
+}
+[type=radio]:checked + div.smile-card {
+  outline: 2px solid #f00;
+  filter: grayscale(0);
+}
+
 .smile-icon{
   height: $smile-size;
   width: $smile-size;

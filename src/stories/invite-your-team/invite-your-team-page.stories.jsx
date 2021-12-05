@@ -4,7 +4,7 @@ import {InviteYourTeamComponent} from "../../modules/invite-your-team/invite-you
 
 export default {
     title: 'Invite Your Team',
-    component: InviteYourTeamComponent()
+    component: InviteYourTeamComponent
 }
 
 const Template = () => <InviteYourTeamComponent />;
