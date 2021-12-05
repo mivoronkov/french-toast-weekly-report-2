@@ -6,7 +6,7 @@ import {ExtensibleSmile} from '../common/components/pictures/smile.component';
 
 export function ExpandReportCard({duration, weeklyInformation, weeklyNotations}){
     const [toggledState, setToggledState] = useState(false);
-    const [randomId] = useState((Math.random()+1).toString(36).substring(2));
+    const [randomId] = useState('w'+(Math.random()+1).toString(36).substring(2));
 
     let onClickHandler =() =>{
         setToggledState(prevState => !prevState);
