@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function ContentBlock({ title, content }) {
+export function ContentBlockComponent({ title, children }) {
     return (
-        <div>
+        <div className='mt-3 mb-5'>
             <div className='fw-bold text-uppercase'>{title}</div>
             <hr className='mt-1' />
-            {content}
+            {children}
         </div>
     );
 }
 
-ContentBlock.propTypes = {
+ContentBlockComponent.propTypes = {
     title: PropTypes.string.isRequired,
-    content: PropTypes.element,
+    children: PropTypes.element,
 };

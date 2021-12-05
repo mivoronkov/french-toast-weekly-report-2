@@ -1,17 +1,17 @@
 import React from 'react';
 
-import { ContentBlock } from '../../modules/edit-member-information/content-block.component';
+import { ContentBlockComponent } from '../../modules/edit-member-information/content-block.component';
 
 export default {
     title: 'Content block',
-    component: ContentBlock,
+    component: ContentBlockComponent,
 };
 
-const Template = (args) => <ContentBlock {...args} />;
+const Template = (args) => <ContentBlockComponent {...args} />;
 export const BasicProfileInformation = Template.bind({});
 BasicProfileInformation.args = {
     title: 'Basic profile information',
-    content: (
+    children: (
         <div>
             <div className='form-group mt-2 mb-2'>
                 <label htmlFor='first-name' className='fw-bold'>
@@ -56,7 +56,7 @@ BasicProfileInformation.args = {
 export const InviteLink = Template.bind({});
 InviteLink.args = {
     title: "Anatoliy's invite link",
-    content: (
+    children: (
         <div>
             <p>
                 Share the following link to invite team members on
