@@ -4,7 +4,7 @@ import {InviteYourTeamSuccessMessageComponent} from "../../modules/invite-your-t
 
 export default {
     title: 'Invite Your Team',
-    component: InviteYourTeamSuccessMessageComponent()
+    component: InviteYourTeamSuccessMessageComponent
 }
 
 const Template = () => <InviteYourTeamSuccessMessageComponent />;
