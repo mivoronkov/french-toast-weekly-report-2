@@ -15,6 +15,7 @@ export function ProfileHeaderComponent({
                     lastName={last_name}
                     firstName={first_name}
                     avatarPath={avatar_path}
+                    size='big'
                 />
             </div>
             <h1 className='big-title fw-bold'>{`${first_name} ${last_name}`}</h1>

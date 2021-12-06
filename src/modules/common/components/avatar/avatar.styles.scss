@@ -1,0 +1,28 @@
+.avatar-border{
+  border-radius: 50%;
+  border: 3px solid white;
+  color: #333a3d;
+  text-align: center;
+}
+
+.avatar-size-default{
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  font-size: 1.25rem;
+}
+
+.avatar-size-big{
+  width: 150px;
+  height: 150px;
+  line-height: 150px;
+  font-size: 50px;
+}
+
+.avatar-bg-gray{
+  background: #d5d9db;
+}
+
+.avatar-bg-yellow{
+  background: #ffc107;
+}
