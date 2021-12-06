@@ -1,16 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from "prop-types";
 
 import {CollapsingCard} from './collapsing-card.component';
 import {ExtensibleSmile} from '../common/components/pictures/smile.component';
 
-export function ExpandReportCard({duration, weeklyInformation, weeklyNotations}){
+export function ExpandReportCard({duration, weeklyInformation, weeklyNotations, externalControl}){
     const [toggledState, setToggledState] = useState(false);
-    const [randomId] = useState('w'+(Math.random()+1).toString(36).substring(2));
 
     let onClickHandler =() =>{
         setToggledState(prevState => !prevState);
     };
+    useEffect(()=>{
+        console.log(externalControl);
+        setToggledState(externalControl);
+    },[externalControl])
 
     let classList = ["row", "flex-nowrap", "align-items-center", "justify-content-around", "p-0", "m-0", "col-lg-5"];
 
@@ -21,8 +24,8 @@ export function ExpandReportCard({duration, weeklyInformation, weeklyNotations})
             </div>
         );
     });
-    const collapsedButtonClasses =['btn', 'dropdown-toggle'];
-    toggledState ? collapsedButtonClasses.push('btn-white') : collapsedButtonClasses.push('btn-dark');
+    const collapsedButtonClasses =['btn', 'dropdown-toggle', 'col'];
+    toggledState ? collapsedButtonClasses.push('btn-dark') : collapsedButtonClasses.push('btn-white');
 
     return(
         <div className="w-90 d-flex flex-column align-items-center main-background">
@@ -32,18 +35,14 @@ export function ExpandReportCard({duration, weeklyInformation, weeklyNotations})
                     {smileImages}
                     <button
                         type="button"
-                        className="btn dropdown-toggle col"
-                        data-bs-toggle="collapse"
-                        data-bs-target={'#' + randomId}
-                        aria-expanded="false"
-                        aria-controls="multiCollapseExample2"
+                        className={collapsedButtonClasses.join(" ")}
                         onClick={onClickHandler}
                     >
                         {toggledState ? 'Collapse' : 'Expand'}
                     </button>
                 </div>
             </div>
-            <CollapsingCard idCollpase={randomId} weeklyNotations={weeklyNotations} weeklyInformation={weeklyInformation}/>
+            <CollapsingCard weeklyNotations={weeklyNotations} weeklyInformation={weeklyInformation} isCollapsed={toggledState}/>
         </div>
     );
 }
@@ -58,5 +57,6 @@ ExpandReportCard.propTypes = {
     weeklyNotations: PropTypes.arrayOf(PropTypes.shape({
         text: PropTypes.string,
         title: PropTypes.string,
-    }))
+    })),
+    externalControl: PropTypes.bool
 };

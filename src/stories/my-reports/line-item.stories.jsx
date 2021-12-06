@@ -8,7 +8,7 @@ export default {
     component: LineItem
 }
 
-export const ReportLineItem = () => {
+export const ReportLineItemComparing = () => {
     return(
         <div className="w-100">
             <LineItem/>
@@ -16,3 +16,4 @@ export const ReportLineItem = () => {
         </div>
         )
 };
+export const ReportLineItem = () => <LineItem/>;
