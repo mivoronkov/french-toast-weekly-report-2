@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { make_avatar_text } from '../common/components/avatar/avatar.component';
+import { makeAvatarText } from '../common/components/avatar/avatar.component';
 
 export function TeamReportsLineItem({ firstName, lastName, reportInfo }) {
     return (
@@ -9,7 +9,7 @@ export function TeamReportsLineItem({ firstName, lastName, reportInfo }) {
                 <div className='col px-4'>
                     <div className='user-avatar-circle justify-content-center align-items-center'>
                         <h5 className='text-dark m-0'>
-                            {make_avatar_text(firstName, lastName)}
+                            {makeAvatarText(firstName, lastName)}
                         </h5>
                     </div>
                 </div>

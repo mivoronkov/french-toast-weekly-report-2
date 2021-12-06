@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { make_avatar_text } from '../common/components/avatar/avatar.component';
+import { makeAvatarText } from '../common/components/avatar/avatar.component';
 
 export function TeamReportsAvatar({
     firstName,
@@ -15,7 +15,7 @@ export function TeamReportsAvatar({
                     divExtraClasses ? ' ' + divExtraClasses : ''
                 }`}>
                 <h5 className='text-dark m-0'>
-                    {make_avatar_text(firstName, lastName)}
+                    {makeAvatarText(firstName, lastName)}
                 </h5>
             </div>
         </div>

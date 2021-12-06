@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ReportCalendar } from '../common/components/topbar/report-calendar.component';
 import { SectionLabel } from '../common/components/labels/section-label.component';
-import { ExpandAll } from '../common/components/buttons/expand-all-button.component';
 import { TeamReportsLineItem } from './team-reports-line-item.component';
 
 export function TeamReports({ previousPeriod, currentPeriod, members }) {
