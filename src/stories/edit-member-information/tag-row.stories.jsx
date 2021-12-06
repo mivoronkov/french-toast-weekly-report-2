@@ -1,0 +1,19 @@
+import React from 'react';
+import { TagRowComponent } from '../../modules/edit-member-information/tag-row.component';
+
+export default {
+    title: 'Tag row',
+    component: TagRowComponent,
+};
+
+const Template = (args) => <TagRowComponent {...args} />;
+export const TagRowTemplate = Template.bind({});
+TagRowTemplate.args = {
+    tag_names: [
+        'Nikolai Kapustin',
+        'Nina Mammadova',
+        'Natalia Starkova',
+        'Anton Tarkhanov',
+        'Alexandr Vovchuk',
+    ],
+};
