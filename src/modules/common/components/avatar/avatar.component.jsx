@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function make_avatar_text(first_name, last_name) {
+export function make_avatar_text(first_name, last_name) {
     return (first_name[0] + last_name[0]).toUpperCase();
 }
 

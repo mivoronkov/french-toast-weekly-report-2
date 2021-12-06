@@ -7,7 +7,6 @@ export function ExpandAllButton(props){
     const onToggleHandler =()=>{
         setToggledState(prevState => !prevState);
     };
-    // eslint-disable-next-line react/prop-types
     let expandCards = props.data.map((el,index)=><ExpandReportCard
         weeklyNotations={el.weeklyNotations}
         duration={el.duration}
