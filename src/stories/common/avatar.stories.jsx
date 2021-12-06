@@ -11,7 +11,6 @@ export const AvatarTemplateWithoutImage = Template.bind({});
 AvatarTemplateWithoutImage.args = {
     firstName: 'Anatoliy',
     lastName: 'Kolodkin',
-    avatar_path: null,
 };
 
 export const AvatarTemplateWithImage = Template.bind({});
