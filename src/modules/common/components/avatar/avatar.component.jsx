@@ -1,28 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function make_avatar_text(first_name, last_name) {
-    return (first_name[0] + last_name[0]).toUpperCase();
+function makeAvatarText(firstName, lastName) {
+    return (firstName[0] + lastName[0]).toUpperCase();
 }
 
-export function AvatarComponent({ first_name, last_name, avatar_path }) {
-    return avatar_path ? (
+export var AvatarComponent = function ({
+    firstName,
+    lastName,
+    avatarPath = '',
+}) {
+    return avatarPath ? (
         <img
             className='avatar-border center-block'
-            src={avatar_path}
-            alt={`Avatar of ${first_name} ${last_name}`}
+            src={avatarPath}
+            alt={`Avatar of ${firstName} ${lastName}`}
         />
     ) : (
         <div className='avatar-border'>
             <span className='fw-bold user-select-none'>
-                {make_avatar_text(first_name, last_name)}
+                {makeAvatarText(firstName, lastName)}
             </span>
         </div>
     );
-}
+};
 
 AvatarComponent.propTypes = {
-    first_name: PropTypes.string.isRequired,
-    last_name: PropTypes.string.isRequired,
-    avatar_path: PropTypes.string,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    avatarPath: PropTypes.string,
 };

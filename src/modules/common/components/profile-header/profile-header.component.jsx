@@ -12,9 +12,9 @@ export function ProfileHeaderComponent({
         <header className='d-flex flex-column bg-dark p-5 text-center text-light'>
             <div className='mx-auto'>
                 <AvatarComponent
-                    last_name={last_name}
-                    first_name={first_name}
-                    avatar_path={avatar_path}
+                    lastName={last_name}
+                    firstName={first_name}
+                    avatarPath={avatar_path}
                 />
             </div>
             <h1 className='big-title fw-bold'>{`${first_name} ${last_name}`}</h1>
