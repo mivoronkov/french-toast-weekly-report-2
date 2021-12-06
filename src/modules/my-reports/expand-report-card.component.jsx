@@ -11,7 +11,6 @@ export function ExpandReportCard({duration, weeklyInformation, weeklyNotations, 
         setToggledState(prevState => !prevState);
     };
     useEffect(()=>{
-        console.log(externalControl);
         setToggledState(externalControl);
     },[externalControl])
 
@@ -25,12 +24,23 @@ export function ExpandReportCard({duration, weeklyInformation, weeklyNotations, 
         );
     });
     const collapsedButtonClasses =['btn', 'dropdown-toggle', 'col'];
-    toggledState ? collapsedButtonClasses.push('btn-dark') : collapsedButtonClasses.push('btn-white');
+    const durationLabelClasses =["py-3", 'my-2', 'col-lg-7', "fw-bold"];
+    const cardControlClasses =["row", 'flex-nowrap', 'justify-content-between', 'align-items-center', 'mb-2', "w-100"];
+    if(toggledState){
+        collapsedButtonClasses.push('btn-dark');
+        cardControlClasses.push('bg-dark');
+    } else {
+        collapsedButtonClasses.push('btn-white');
+        cardControlClasses.push('bg-white');
+    }
 
     return(
         <div className="w-90 d-flex flex-column align-items-center main-background">
-            <div className="row flex-nowrap bg-white justify-content-between align-items-center mb-2 w-100">
-                <p className="py-3 my-2 col-lg-7 fw-bold">{duration}</p>
+            <div className={cardControlClasses.join(" ")}>
+                <p className={durationLabelClasses.join(" ")}
+                   style={toggledState ? {color: 'var(--bs-warning)'}: {color: 'black'}}
+                >
+                    {duration}</p>
                 <div className={classList.join(" ")}>
                     {smileImages}
                     <button
