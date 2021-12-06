@@ -21,3 +21,14 @@
   width: 2rem;
   border: 0.2rem solid $yellow;
 }
+
+.hidden-card{
+  max-height: 0;
+}
+.shown-card{
+  max-height: 100vh;
+}
+.hidden-card-transform{
+  overflow: hidden;
+  transition: max-height 0.5s;
+}

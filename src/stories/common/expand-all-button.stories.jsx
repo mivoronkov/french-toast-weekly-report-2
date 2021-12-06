@@ -1,20 +1,85 @@
 import React from 'react';
 
-import {ExpandAll} from '../../modules/common/components/buttons/expand-all-button.component';
-import {ExpandCard} from '../my-reports/expand-report-card.stories'
+import {ExpandAllButton} from '../../modules/common/components/buttons/expand-all-button.component';
+import {ReportLineItem} from '../my-reports/line-item.stories'
 export default {
     title: 'My reports',
-    component: ExpandAll
+    component: ExpandAllButton
 }
 
-const Template = () => {
+const Template = (args) => {
     return (
-        <div>
-            <ExpandAll />
-            <ExpandCard {...ExpandCard.args}/>
-            <ExpandCard {...ExpandCard.args}/>
-            <ExpandCard {...ExpandCard.args}/>
-        </div>
-    )
+        <ExpandAllButton {...args}>
+            <ReportLineItem/>
+        </ExpandAllButton>
+    );
 };
-export const ExpandAllButton = Template.bind({});
+export const ExpandAll = Template.bind({});
+ExpandAll.args = {
+    data: [
+        {duration: 'May 3-May 9, 2020',
+        weeklyInformation: [
+            {
+                stateName: 'morale',
+                stateLevel: 2,
+                comments: 'Zero tolerance'
+            },
+            {
+                stateName: 'stress',
+                stateLevel: 4,
+                comments: 'its ok'
+            },
+            {
+                stateName: 'workload',
+                stateLevel: 1,
+                comments: 'burn burn burn'
+            },
+        ],
+        weeklyNotations: [
+            {
+                title: 'Weekly High',
+                text: 'Identified our goal and priorities'
+            },
+            {
+                title: 'Weekly Low',
+                text: 'Cold weather'
+            },
+            {
+                title: 'Anything Else',
+                text: 'Look up'
+            },
+    ]},
+        {duration: 'May 3-May 9, 2020',
+            weeklyInformation: [
+                {
+                    stateName: 'morale',
+                    stateLevel: 2,
+                    comments: 'Zero tolerance'
+                },
+                {
+                    stateName: 'stress',
+                    stateLevel: 4,
+                    comments: 'its ok'
+                },
+                {
+                    stateName: 'workload',
+                    stateLevel: 1,
+                    comments: 'burn burn burn'
+                },
+            ],
+            weeklyNotations: [
+                {
+                    title: 'Weekly High',
+                    text: 'Identified our goal and priorities'
+                },
+                {
+                    title: 'Weekly Low',
+                    text: 'Cold weather'
+                },
+                {
+                    title: 'Anything Else',
+                    text: 'Look up'
+                },
+            ]}
+    ]
+};
