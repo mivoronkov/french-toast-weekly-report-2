@@ -1,44 +1,46 @@
-import React from "react";
+import React from 'react';
 
 import logo from '../../../../img/logo.png';
+import { SidebarElementComponent } from './sidebar-element.component';
 
 export function SidebarComponent() {
     return (
-        <aside className="p-3 d-flex flex-column justify-content-between text">
+        <aside className='p-3 d-flex flex-column justify-content-between text'>
             <div>
-                <img src={logo} alt="logo"/>
-                    <ul className="nav nav-pills flex-column">
-                        <li className="nav-item p-2">
-                            <a className="nav-link" href="#">Launch Guide</a>
-                        </li>
-                        <li className="nav-item p-2">
-                            <a className="nav-link" href="invite_your_team.html">Invite Your Team</a>
-                        </li>
-                        <li className="nav-item p-2">
-                            <a className="nav-link" href="team_reports.html">Team Reports</a>
-                        </li>
-                        <li className="nav-item p-2">
-                            <a className="nav-link" href="my_reports.html">My Reports</a>
-                        </li>
-                        <li className="nav-item p-2">
-                            <a className="nav-link text-warning" href="fill-out-report.html">Fill out a Report</a>
-                        </li>
-                    </ul>
+                <img src={logo} alt='logo' />
+                <ul className='nav nav-pills flex-column'>
+                    <SidebarElementComponent
+                        elementName={'Launch Guide'}
+                        extraLinkClasses={'active'}
+                    />
+                    <SidebarElementComponent elementName={'Invite Your Team'} />
+                    <SidebarElementComponent elementName={'Team Reports'} />
+                    <SidebarElementComponent elementName={'My Reports'} />
+                    <SidebarElementComponent
+                        elementName={'Fill out a Report'}
+                        extraLinkClasses={'text-warning'}
+                    />
+                </ul>
             </div>
             <div>
-                <ul className="nav nav-pills flex-column">
-                    <li className="nav-item p-2 pb-3">
-                        <a className="nav-link" href="#">Back to Elite</a>
-                    </li>
-                    <li className="nav-item p-2 pt-3 pb-3">
-                        <a className="nav-link" href="my_company.html">My Company</a>
-                    </li>
-                    <li className="nav-item p-2 pt-3 pb-3">
-                        <a className="nav-link" href="edit-profile.html"><i className="bi bi-gear-fill"></i> My Profile</a>
-                    </li>
-                    <li className="nav-item p-2">
-                        <a className="nav-link" href="#"><i className="bi bi-arrow-left-square-fill"></i> Sign Out</a>
-                    </li>
+                <ul className='nav nav-pills flex-column'>
+                    <SidebarElementComponent
+                        elementName={'Back to Elite'}
+                        extraClasses={'p-2 pb-3'}
+                    />
+                    <SidebarElementComponent
+                        elementName={'My Company'}
+                        extraClasses={'pt-3 pb-3'}
+                    />
+                    <SidebarElementComponent
+                        elementName={' My Profile'}
+                        extraClasses={'pt-3 pb-3'}
+                        iconClass={'bi bi-gear-fill'}
+                    />
+                    <SidebarElementComponent
+                        elementName={' Sign Out'}
+                        iconClass={'bi bi-arrow-left-square-fill'}
+                    />
                 </ul>
             </div>
         </aside>
