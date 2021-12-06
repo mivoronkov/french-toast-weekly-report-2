@@ -2,7 +2,7 @@ import React from 'react';
 import { EditFieldComponent } from '../../modules/edit-member-information/edit-field.component';
 
 export default {
-    title: 'Edit field',
+    title: 'Elements/Common/Edit field',
     component: EditFieldComponent,
 };
 

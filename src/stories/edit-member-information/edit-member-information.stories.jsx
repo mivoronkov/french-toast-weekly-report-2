@@ -2,7 +2,7 @@ import React from 'react';
 import { EditMemberInformation } from '../../modules/edit-member-information/edit-member-information.component';
 
 export default {
-    title: 'Edit member',
+    title: 'Pages/Edit member information',
     component: EditMemberInformation,
 };
 
