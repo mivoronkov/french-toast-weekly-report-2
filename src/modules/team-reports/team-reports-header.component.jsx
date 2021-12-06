@@ -22,8 +22,8 @@ export function TeamReportsHeader({ members }) {
 
                 {members.length > 1 ? (
                     <TeamReportsAvatar
-                        lastName={members[0].lastName}
-                        firstName={members[0].firstName}
+                        lastName={members[1].lastName}
+                        firstName={members[1].firstName}
                         colExtraClasses={'z-3'}
                         divExtraClasses={'user-avatar-circle-2'}
                     />
@@ -33,8 +33,8 @@ export function TeamReportsHeader({ members }) {
 
                 {members.length > 2 ? (
                     <TeamReportsAvatar
-                        lastName={members[0].lastName}
-                        firstName={members[0].firstName}
+                        lastName={members[2].lastName}
+                        firstName={members[2].firstName}
                         colExtraClasses={'z-2'}
                         divExtraClasses={'user-avatar-circle-3'}
                     />
@@ -44,8 +44,8 @@ export function TeamReportsHeader({ members }) {
 
                 {members.length > 3 ? (
                     <TeamReportsAvatar
-                        lastName={members[0].lastName}
-                        firstName={members[0].firstName}
+                        lastName={members[3].lastName}
+                        firstName={members[3].firstName}
                         colExtraClasses={'z-1'}
                         divExtraClasses={'user-avatar-circle-4'}
                     />
