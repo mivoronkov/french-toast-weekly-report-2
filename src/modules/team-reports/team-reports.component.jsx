@@ -26,7 +26,11 @@ export function TeamReports({ previousPeriod, currentPeriod, members }) {
             </div>
             <div className='d-flex flex-column align-items-center w-100 pb-5'>
                 <SectionLabel labelText={'IMMEDIATE TEAM'} />
-                <ExpandAll extraClasses={'w-85'} />
+                <div className='d-flex flex-nowrap w-85 justify-content-end align-items-center my-2'>
+                    <button type='button' className='btn btn-dark px-4'>
+                        Expand All
+                    </button>
+                </div>
                 <div className='row flex-nowrap bg-white w-85 align-items-center mb-2 shadow'>
                     <p className='py-2 my-2 col-lg-9'></p>
                     <p className='py-2 my-2 col-auto text-body'>Morale</p>
