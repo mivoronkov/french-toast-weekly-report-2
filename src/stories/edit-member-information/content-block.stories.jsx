@@ -3,7 +3,7 @@ import React from 'react';
 import { ContentBlockComponent } from '../../modules/edit-member-information/content-block.component';
 
 export default {
-    title: 'Content block',
+    title: 'Elements/Edit member/Content block',
     component: ContentBlockComponent,
 };
 

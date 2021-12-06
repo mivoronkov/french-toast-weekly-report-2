@@ -2,21 +2,21 @@ import React from 'react';
 import { AvatarComponent } from '../../modules/common/components/avatar/avatar.component';
 
 export default {
-    title: 'Avatar',
+    title: 'Elements/Common/Avatar',
     component: AvatarComponent,
 };
 
 const Template = (args) => <AvatarComponent {...args} />;
 export const AvatarTemplateWithoutImage = Template.bind({});
 AvatarTemplateWithoutImage.args = {
-    first_name: 'Anatoliy',
-    last_name: 'Kolodkin',
+    firstName: 'Anatoliy',
+    lastName: 'Kolodkin',
     avatar_path: null,
 };
 
 export const AvatarTemplateWithImage = Template.bind({});
 AvatarTemplateWithImage.args = {
-    first_name: 'Alexander',
-    last_name: 'Slesarenko',
-    avatar_path: 'https://avatars.githubusercontent.com/u/3900938',
+    firstName: 'Alexander',
+    lastName: 'Slesarenko',
+    avatarPath: 'https://avatars.githubusercontent.com/u/3900938',
 };
