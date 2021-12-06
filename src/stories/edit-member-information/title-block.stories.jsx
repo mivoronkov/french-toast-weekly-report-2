@@ -2,7 +2,7 @@ import React from 'react';
 import { TitleBlockComponent } from '../../modules/edit-member-information/title-block.component';
 
 export default {
-    title: 'Title block',
+    title: 'Elements/Edit member/Title block',
     component: TitleBlockComponent,
 };
 

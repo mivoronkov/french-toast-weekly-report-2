@@ -2,7 +2,7 @@ import React from 'react';
 import { AvatarComponent } from '../../modules/common/components/avatar/avatar.component';
 
 export default {
-    title: 'Avatar',
+    title: 'Elements/Common/Avatar',
     component: AvatarComponent,
 };
 
