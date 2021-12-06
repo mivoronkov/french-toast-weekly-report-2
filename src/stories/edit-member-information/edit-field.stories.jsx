@@ -19,4 +19,6 @@ EditFieldWithValue.args = {
 };
 
 export const EditFieldWithoutLabel = Template.bind({});
-EditFieldWithoutLabel.args = {};
+EditFieldWithoutLabel.args = {
+    width: '600px',
+};

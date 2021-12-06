@@ -17,7 +17,7 @@ export function EditFieldComponent({ label, width = '100%', value = '' }) {
                 className='form-control'
                 id={id}
                 value={value}
-                width={width}
+                style={{ width: width }}
             />
         </div>
     );
