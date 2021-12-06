@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 export function makeAvatarText(firstName, lastName) {
@@ -10,7 +10,18 @@ export var AvatarComponent = function ({
     lastName,
     avatarPath = '',
 }) {
-    return avatarPath ? (
+    const [currentSrc, setCurrentSrc] = useState(null);
+    useEffect(() => {
+        const image = new Image();
+        image.onload = () => {
+            setCurrentSrc(avatarPath);
+        };
+        image.onerror = () => {
+            setCurrentSrc(null);
+        };
+        image.src = avatarPath;
+    });
+    return currentSrc ? (
         <img
             className='avatar-border center-block'
             src={avatarPath}
