@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export function TeamReportsNumberAvatar({ number, colExtraClasses }) {
+export function TeamReportsNumberAvatar({ number, colStyle }) {
     return (
-        <div className={`col${colExtraClasses ? ' ' + colExtraClasses : ''}`}>
+        <div className='col' style={colStyle}>
             <div className='user-avatar-circle justify-content-center align-items-center number-circle'>
                 <h5 className='text-dark m-0'>+{number}</h5>
             </div>
@@ -13,5 +13,5 @@ export function TeamReportsNumberAvatar({ number, colExtraClasses }) {
 
 TeamReportsNumberAvatar.propTypes = {
     number: PropTypes.number.isRequired,
-    colExtraClasses: PropTypes.string,
+    colStyle: PropTypes.any,
 };

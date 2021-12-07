@@ -2,18 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { makeAvatarText } from '../common/components/avatar/avatar.component';
 
-export function TeamReportsAvatar({
-    firstName,
-    lastName,
-    colExtraClasses,
-    divExtraClasses,
-}) {
+export function TeamReportsAvatar({ firstName, lastName, colStyle }) {
     return (
-        <div className={`col${colExtraClasses ? ' ' + colExtraClasses : ''}`}>
-            <div
-                className={`user-avatar-circle justify-content-center align-items-center${
-                    divExtraClasses ? ' ' + divExtraClasses : ''
-                }`}>
+        <div className='col' style={colStyle}>
+            <div className='user-avatar-circle justify-content-center align-items-center'>
                 <h5 className='text-dark m-0'>
                     {makeAvatarText(firstName, lastName)}
                 </h5>
@@ -25,6 +17,5 @@ export function TeamReportsAvatar({
 TeamReportsAvatar.propTypes = {
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
-    colExtraClasses: PropTypes.string,
-    divExtraClasses: PropTypes.string,
+    colStyle: PropTypes.any,
 };
