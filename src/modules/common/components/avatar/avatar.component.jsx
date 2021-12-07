@@ -22,7 +22,7 @@ export var AvatarComponent = function ({
             setCurrentSrc(null);
         };
         image.src = avatarPath;
-    });
+    }, [avatarPath]);
     const avatarSizeCss =
         size === 'big' ? 'avatar-size-big' : 'avatar-size-default';
     const avatarCss = `avatar-border ${avatarSizeCss}`;
