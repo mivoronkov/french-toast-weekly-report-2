@@ -1,44 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ReportCalendar } from '../common/components/topbar/report-calendar.component';
-import { SectionLabel } from '../common/components/labels/section-label.component';
-import { TeamReportsLineItem } from './team-reports-line-item.component';
+import { TeamReportsHeader } from './team-reports-header.component';
+import { TeamReportsContent } from './team-reports-content.component';
 
 export function TeamReports({ previousPeriod, currentPeriod, members }) {
-    let membersReportsInfo = members.map((member, index) => {
-        return (
-            <TeamReportsLineItem
-                firstName={member.firstName}
-                lastName={member.lastName}
-                reportInfo={member.reportInfo}
-                key={index}
-            />
-        );
-    });
     return (
-        <div className='d-flex flex-column align-items-center w-100'>
-            <div className='d-flex flex-column align-items-center mt-3 mb-5'>
-                <ReportCalendar
-                    previousPeriod={previousPeriod}
-                    currentPeriod={currentPeriod}
-                />
-            </div>
-            <div className='d-flex flex-column align-items-center w-100 pb-5'>
-                <SectionLabel labelText={'IMMEDIATE TEAM'} />
-                <div className='d-flex flex-nowrap w-85 justify-content-end align-items-center my-2'>
-                    <button type='button' className='btn btn-dark px-4'>
-                        Expand All
-                    </button>
-                </div>
-                <div className='row flex-nowrap bg-white w-85 align-items-center mb-2 shadow'>
-                    <p className='py-2 my-2 col-lg-9'></p>
-                    <p className='py-2 my-2 col-auto text-body'>Morale</p>
-                    <p className='py-2 my-2 col-auto'>Stress</p>
-                    <p className='py-2 my-2 col-auto'>Workload</p>
-                </div>
-                {membersReportsInfo}
-            </div>
-        </div>
+        <main className='flex-grow-1 overflow-auto'>
+            <TeamReportsHeader members={members} />
+            <TeamReportsContent
+                previousPeriod={previousPeriod}
+                currentPeriod={currentPeriod}
+                members={members}
+            />
+        </main>
     );
 }
 
@@ -49,7 +23,20 @@ TeamReports.propTypes = {
         PropTypes.shape({
             firstName: PropTypes.string,
             lastName: PropTypes.string.isRequired,
-            reportInfo: PropTypes.string,
+            avatarPath: PropTypes.string,
+            weeklyInformation: PropTypes.arrayOf(
+                PropTypes.shape({
+                    stateName: PropTypes.string,
+                    stateLevel: PropTypes.number,
+                    comments: PropTypes.string,
+                })
+            ),
+            weeklyNotations: PropTypes.arrayOf(
+                PropTypes.shape({
+                    text: PropTypes.string,
+                    title: PropTypes.string,
+                })
+            ),
         })
     ),
 };
