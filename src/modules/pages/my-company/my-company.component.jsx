@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TeamMembersHeader } from '../../team-members/team-members-header.component';
-import { TitleBlockComponent } from '../../edit-member-information/title-block/title-block.component';
-import { ContentBlockComponent } from '../../edit-member-information/content-block/content-block.component';
-import { EditFieldComponent } from '../../edit-member-information/edit-field/edit-field.component';
+import { TitleBlockComponent } from '../../containers/title-block/title-block.component';
+import { ContentBlockComponent } from '../../containers/content-block/content-block.component';
+import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
 
 export function MyCompanyComponent({ companyName, joinedDate }) {
     return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getRandomId, toDashCase } from '../../../utils';
+import { getRandomId, toDashCase } from '../../../../utils';
 
 export function EditFieldComponent({ label, width = '100%', value = '' }) {
     const id = label ? toDashCase(label) : getRandomId();
