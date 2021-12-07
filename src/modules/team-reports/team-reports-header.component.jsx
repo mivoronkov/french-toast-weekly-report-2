@@ -8,30 +8,34 @@ export function TeamReportsHeader({ members, maxAvatarsDisplayed = 4 }) {
     let avatarRowElements = [];
     for (let i = 0; i < Math.min(members.length, maxAvatarsDisplayed); ++i) {
         avatarRowElements.push(
-            <TeamReportsAvatar
-                lastName={members[i].lastName}
-                firstName={members[i].firstName}
-                zIndex={maxAvatarsDisplayed - i}
-                colStyle={{
+            <div
+                className='col'
+                style={{
                     zIndex: `${maxAvatarsDisplayed - i}`,
                     transform: `translate(${
                         // TODO: This magic is not correct for values less than 4, need fix
                         100 - (100 / maxAvatarsDisplayed) * (i + 2)
                     }%)`,
-                }}
-            />
+                }}>
+                <TeamReportsAvatar
+                    lastName={members[i].lastName}
+                    firstName={members[i].firstName}
+                />
+            </div>
         );
     }
     if (members.length > maxAvatarsDisplayed) {
         avatarRowElements.push(
-            <TeamReportsNumberAvatar
-                number={members.length - maxAvatarsDisplayed}
-                zIndex={maxAvatarsDisplayed + 1}
-                colStyle={{
+            <div
+                className='col'
+                style={{
                     zIndex: `${maxAvatarsDisplayed + 1}`,
                     transform: `translate(${-200 / maxAvatarsDisplayed}%)`,
-                }}
-            />
+                }}>
+                <TeamReportsNumberAvatar
+                    number={members.length - maxAvatarsDisplayed}
+                />
+            </div>
         );
     }
     return (
