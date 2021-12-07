@@ -2,7 +2,7 @@ import React from 'react';
 import { TagRowComponent } from './tag-row.component';
 
 export default {
-    title: 'Elements/Edit member/Tag row',
+    title: 'Elements/Containers/Tag row',
     component: TagRowComponent,
 };
 

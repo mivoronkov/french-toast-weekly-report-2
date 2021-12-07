@@ -1,8 +1,8 @@
 import React from 'react';
-import { ProfileHeaderComponent } from '../../modules/headers/profile-header/profile-header.component';
+import { ProfileHeaderComponent } from './profile-header.component';
 
 export default {
-    title: 'Profile header',
+    title: 'Elements/Headers/Profile header',
     component: ProfileHeaderComponent,
 };
 
