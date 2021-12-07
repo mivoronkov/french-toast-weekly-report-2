@@ -5,6 +5,7 @@ import { TagRowComponent } from '../tag-row/tag-row.component';
 import { TitleBlockComponent } from '../title-block/title-block.component';
 import { EditFieldComponent } from '../edit-field/edit-field.component';
 import PropTypes from 'prop-types';
+import './edit-member-information.styles.scss';
 
 export function EditMemberInformation({
     firstName,
