@@ -66,7 +66,7 @@ export function TeamReportsLineItem({
     }
 
     return (
-        <div className='row flex-nowrap d-flex flex-column bg-white w-85 align-items-center mb-2 shadow'>
+        <div className='row flex-nowrap d-flex flex-column bg-white align-items-center mb-2 mx-0 shadow'>
             <div className={cardControlClasses.join(' ')}>
                 <div className='col-sm-3 row flex-nowrap justify-content-around'>
                     <div className='col px-4'>
