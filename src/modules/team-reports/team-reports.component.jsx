@@ -2,19 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ReportCalendar } from '../common/components/topbar/report-calendar.component';
 import { SectionLabel } from '../common/components/labels/section-label.component';
-import { TeamReportsLineItem } from './team-reports-line-item.component';
+import { TeamReportsExpandAllButton } from './team-reports-expand-all-button.component';
+import { LineItem } from '../my-reports/line-item.component';
 
 export function TeamReports({ previousPeriod, currentPeriod, members }) {
-    let membersReportsInfo = members.map((member, index) => {
+    /*let membersReportsInfo = members.map((member, index) => {
         return (
             <TeamReportsLineItem
                 firstName={member.firstName}
                 lastName={member.lastName}
-                reportInfo={member.reportInfo}
+                avatarPath={member.avatarPath}
+                weeklyInformation={member.weeklyInformation}
+                weeklyNotations={member.weeklyNotations}
                 key={index}
             />
         );
-    });
+    });*/
     return (
         <div className='d-flex flex-column align-items-center w-100'>
             <div className='d-flex flex-column align-items-center mt-3 mb-5'>
@@ -25,18 +28,17 @@ export function TeamReports({ previousPeriod, currentPeriod, members }) {
             </div>
             <div className='d-flex flex-column align-items-center w-100 pb-5'>
                 <SectionLabel labelText={'IMMEDIATE TEAM'} />
-                <div className='d-flex flex-nowrap w-85 justify-content-end align-items-center my-2'>
-                    <button type='button' className='btn btn-dark px-4'>
-                        Expand All
-                    </button>
-                </div>
-                <div className='row flex-nowrap bg-white w-85 align-items-center mb-2 shadow'>
-                    <p className='py-2 my-2 col-lg-9'></p>
-                    <p className='py-2 my-2 col-auto text-body'>Morale</p>
-                    <p className='py-2 my-2 col-auto'>Stress</p>
-                    <p className='py-2 my-2 col-auto'>Workload</p>
-                </div>
-                {membersReportsInfo}
+                <TeamReportsExpandAllButton data={members}>
+                    <div className='row flex-nowrap bg-white w-85 align-items-center mb-2 mx-0'>
+                        <div className='py-3 col-lg-7'></div>
+                        <div className='col-lg-5 row flex-nowrap justify-content-around p-0 m-0'>
+                            <p className='col text-center py-1 m-0'>Morale</p>
+                            <p className='col text-center py-1 m-0'>Stress</p>
+                            <p className='col text-center py-1 m-0'>Workload</p>
+                            <p className='col'></p>
+                        </div>
+                    </div>
+                </TeamReportsExpandAllButton>
             </div>
         </div>
     );
