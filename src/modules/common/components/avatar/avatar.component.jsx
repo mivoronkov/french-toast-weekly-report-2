@@ -25,7 +25,7 @@ export var AvatarComponent = function ({
     });
     const avatarSizeCss =
         size === 'big' ? 'avatar-size-big' : 'avatar-size-default';
-    const avatarCss = `avatar-border avatar-bg-gray ${avatarSizeCss}`;
+    const avatarCss = `avatar-border ${avatarSizeCss}`;
     return currentSrc ? (
         <img
             className={`${avatarCss} center-block`}
@@ -34,7 +34,7 @@ export var AvatarComponent = function ({
         />
     ) : (
         <div
-            className={`d-flex flex-column justify-content-center align-content-center ${avatarCss}`}>
+            className={`d-flex flex-column justify-content-center align-content-center avatar-bg-gray ${avatarCss}`}>
             <span className='fw-bold user-select-none'>
                 {makeAvatarText(firstName, lastName)}
             </span>
