@@ -1,40 +1,23 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
+import { ExpandAllContext } from '../common/components/buttons/expand-all-button.component';
 import { TeamReportsLineItem } from './team-reports-line-item.component';
+import PropTypes from 'prop-types';
 
-export function TeamReportsExpandAllButton(props) {
-    const [toggledState, setToggledState] = useState(false);
-    const onToggleHandler = () => {
-        setToggledState((prevState) => !prevState);
-    };
-    let membersReportsInfo = props.data.map((el, index) => (
+export function TeamReportsCards({ data }) {
+    const externalControl = useContext(ExpandAllContext);
+    return data.map((el, index) => (
         <TeamReportsLineItem
             firstName={el.firstName}
             lastName={el.lastName}
             weeklyNotations={el.weeklyNotations}
             weeklyInformation={el.weeklyInformation}
             key={index}
-            externalControl={toggledState}
+            externalControl={externalControl}
         />
     ));
-    return (
-        <>
-            <div className='d-flex flex-nowrap w-85 justify-content-end align-items-center my-2'>
-                <button
-                    type='button'
-                    className='btn btn-dark px-4'
-                    onClick={onToggleHandler}>
-                    {toggledState ? 'Collapse All' : 'Expand All'}
-                </button>
-            </div>
-            {props.children}
-            {membersReportsInfo}
-        </>
-    );
 }
 
-TeamReportsExpandAllButton.propTypes = {
-    children: PropTypes.any,
+TeamReportsCards.propTypes = {
     data: PropTypes.arrayOf(
         PropTypes.shape({
             firstName: PropTypes.string,
@@ -53,7 +36,6 @@ TeamReportsExpandAllButton.propTypes = {
                     title: PropTypes.string,
                 })
             ),
-            externalControl: PropTypes.bool,
         })
     ),
 };
