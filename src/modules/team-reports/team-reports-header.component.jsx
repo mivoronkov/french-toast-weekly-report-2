@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TeamSelector } from '../common/components/topbar/team-selector.component';
-import { TeamReportsAvatar } from './team-reports-avatar.component';
 import { TeamReportsNumberAvatar } from './team-reports-number-avatar.component';
+import { AvatarComponent } from '../common/components/avatar/avatar.component';
 
 export function TeamReportsHeader({ members, maxAvatarsDisplayed = 4 }) {
     let avatarRowElements = [];
@@ -17,9 +17,10 @@ export function TeamReportsHeader({ members, maxAvatarsDisplayed = 4 }) {
                         100 - (100 / maxAvatarsDisplayed) * (i + 2)
                     }%)`,
                 }}>
-                <TeamReportsAvatar
+                <AvatarComponent
                     lastName={members[i].lastName}
                     firstName={members[i].firstName}
+                    avatarPath={members[i].avatarPath}
                 />
             </div>
         );
@@ -54,6 +55,7 @@ TeamReportsHeader.propTypes = {
         PropTypes.shape({
             firstName: PropTypes.string,
             lastName: PropTypes.string.isRequired,
+            avatarPath: PropTypes.string,
         })
     ),
     maxAvatarsDisplayed: PropTypes.number,
