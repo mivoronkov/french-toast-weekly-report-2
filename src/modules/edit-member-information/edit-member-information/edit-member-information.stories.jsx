@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditMemberInformation } from '../../modules/edit-member-information/edit-member-information.component';
+import { EditMemberInformation } from './edit-member-information.component';
 
 export default {
     title: 'Pages/Edit member information',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { TagRowComponent } from '../../modules/edit-member-information/tag-row.component';
+import { TagRowComponent } from './tag-row.component';
 
 export default {
     title: 'Elements/Edit member/Tag row',

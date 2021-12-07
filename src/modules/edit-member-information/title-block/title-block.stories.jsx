@@ -1,5 +1,5 @@
 import React from 'react';
-import { TitleBlockComponent } from '../../modules/edit-member-information/title-block.component';
+import { TitleBlockComponent } from './title-block.component';
 
 export default {
     title: 'Elements/Edit member/Title block',
