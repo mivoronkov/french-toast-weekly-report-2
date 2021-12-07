@@ -5,6 +5,16 @@ import { TeamReportsNumberAvatar } from './team-reports-number-avatar.component'
 import { AvatarComponent } from '../common/components/avatar/avatar.component';
 
 export function TeamReportsHeader({ members, maxAvatarsDisplayed = 4 }) {
+    let hasSomeWeeklyReports = false;
+    for (let i = 0; i < members.length; i++) {
+        if (
+            members[i].weeklyInformation &&
+            members[i].weeklyInformation.length > 0
+        ) {
+            hasSomeWeeklyReports = true;
+            break;
+        }
+    }
     let avatarRowElements = [];
     for (let i = 0; i < Math.min(members.length, maxAvatarsDisplayed); ++i) {
         avatarRowElements.push(
@@ -44,7 +54,11 @@ export function TeamReportsHeader({ members, maxAvatarsDisplayed = 4 }) {
             <TeamSelector />
             <div className='row gx-0'>{avatarRowElements}</div>
             <h2 className='mt-4'>
-                Your team <strong>has not submitted reports</strong> this week.
+                Your team{' '}
+                <strong>
+                    has {hasSomeWeeklyReports ? '' : 'not '}submitted reports
+                </strong>{' '}
+                this week.
             </h2>
         </header>
     );
@@ -56,6 +70,19 @@ TeamReportsHeader.propTypes = {
             firstName: PropTypes.string,
             lastName: PropTypes.string.isRequired,
             avatarPath: PropTypes.string,
+            weeklyInformation: PropTypes.arrayOf(
+                PropTypes.shape({
+                    stateName: PropTypes.string,
+                    stateLevel: PropTypes.number,
+                    comments: PropTypes.string,
+                })
+            ),
+            weeklyNotations: PropTypes.arrayOf(
+                PropTypes.shape({
+                    text: PropTypes.string,
+                    title: PropTypes.string,
+                })
+            ),
         })
     ),
     maxAvatarsDisplayed: PropTypes.number,
