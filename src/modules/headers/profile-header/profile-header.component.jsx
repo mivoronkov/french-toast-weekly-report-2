@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AvatarComponent } from '../avatar/avatar.component';
+import { AvatarComponent } from '../../common/components/avatar/avatar.component';
 
 export function ProfileHeaderComponent({
     first_name,

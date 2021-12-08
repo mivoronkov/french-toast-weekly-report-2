@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './tag-row.styles.scss';
 
 export function TagRowComponent({ tag_names }) {
     let tags = tag_names.map((name, index) => (

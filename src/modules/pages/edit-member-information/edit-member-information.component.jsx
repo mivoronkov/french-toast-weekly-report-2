@@ -1,10 +1,11 @@
 import React from 'react';
-import { ProfileHeaderComponent } from '../common/components/profile-header/profile-header.component';
-import { ContentBlockComponent } from './content-block.component';
-import { TagRowComponent } from './tag-row.component';
-import { TitleBlockComponent } from './title-block.component';
-import { EditFieldComponent } from './edit-field.component';
+import { ProfileHeaderComponent } from '../../headers/profile-header/profile-header.component';
+import { ContentBlockComponent } from '../../containers/content-block/content-block.component';
+import { TagRowComponent } from '../../containers/tag-row/tag-row.component';
+import { TitleBlockComponent } from '../../containers/title-block/title-block.component';
+import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
 import PropTypes from 'prop-types';
+import './edit-member-information.styles.scss';
 
 export function EditMemberInformation({
     firstName,

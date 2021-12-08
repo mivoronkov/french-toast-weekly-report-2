@@ -1,5 +1,5 @@
 import React from 'react';
-import { EditFieldComponent } from '../../modules/edit-member-information/edit-field.component';
+import { EditFieldComponent } from './edit-field.component';
 
 export default {
     title: 'Elements/Common/Edit field',

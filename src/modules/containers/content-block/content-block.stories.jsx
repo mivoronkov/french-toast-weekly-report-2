@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { ContentBlockComponent } from '../../modules/edit-member-information/content-block.component';
+import { ContentBlockComponent } from './content-block.component';
 
 export default {
-    title: 'Elements/Edit member/Content block',
+    title: 'Elements/Containers/Content block',
     component: ContentBlockComponent,
 };
 
