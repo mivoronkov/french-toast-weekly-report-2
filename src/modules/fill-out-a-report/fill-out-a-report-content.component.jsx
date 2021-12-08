@@ -47,87 +47,95 @@ export function FillOutAReportContent({ firstName }) {
                 Let your leader know where you&apos;re winning and struggling
                 this week – in less than 10 minutes.
             </div>
-            <div className='mx-auto'>
-                <RadioSmileContainer
-                    mainLabel={'How was your morale this week?'}
-                    containerInputName={'moraleInput'}
-                    containerLabels={containerLabels}
-                    commentTextareaId={'moraleCommentTextarea'}
-                />
-                <RadioSmileContainer
-                    mainLabel={'How was your stress this week?'}
-                    containerInputName={'stressInput'}
-                    containerLabels={containerLabels}
-                    commentTextareaId={'stressCommentTextarea'}
-                />
-                <RadioSmileContainer
-                    mainLabel={'How was your workload this week?'}
-                    containerInputName={'workloadInput'}
-                    containerLabels={containerLabels}
-                    commentTextareaId={'workloadCommentTextarea'}
-                />
-                <TextAreaCounter
-                    labelText={'What was your high this week?'}
-                    placeholderText={
-                        "What was your personal or professional high this week? What's the one thing you accomplished at work this week?"
-                    }
-                    idText={'whats-high-textarea'}
-                    maxLength={maxTextAreaLength}
-                />
-                <TextAreaCounter
-                    labelText={'What was your low this week?'}
-                    placeholderText={'What was your personal low this week?'}
-                    idText={'whats-low-textarea'}
-                    maxLength={maxTextAreaLength}
-                />
-                <TextAreaCounter
-                    labelText={'Anything else?'}
-                    placeholderText={
-                        'Is there anything else you would like to share with your leader? *Optional'
-                    }
-                    idText={'anything-else-textarea'}
-                    maxLength={maxTextAreaLength}
-                />
-            </div>
-            <div className='mt-5 mb-5 small-block'>
-                <h2 className='content-block-title fw-bold p-4'>Date range</h2>
-                <div className='mt-3 mb-5'>
-                    <div className='text-start mb-1'>
-                        <label>Choose date</label>
-                    </div>
-                    <div className='input-group d-flex flex-row'>
-                        <input
-                            type='text'
-                            className='form-control date-range-picker-input bg-white'
-                            value={dateLabel}
-                            aria-label="Recipient's username"
-                            aria-describedby='button-addon2'
-                            readOnly={true}
-                        />
-                        <DateRangePicker
-                            initialSettings={{
-                                startDate: dateState.startDate.toDate(),
-                                endDate: dateState.endDate.toDate(),
-                            }}
-                            onCallback={handleDateCallback}>
-                            <button
-                                className='btn btn-outline-secondary'
-                                type='button'
-                                id='button-addon2'>
-                                ↕
-                            </button>
-                        </DateRangePicker>
+            <form>
+                <div className='mx-auto'>
+                    <RadioSmileContainer
+                        mainLabel={'How was your morale this week?'}
+                        containerInputName={'moraleInput'}
+                        containerLabels={containerLabels}
+                        commentTextareaId={'moraleCommentTextarea'}
+                    />
+                    <RadioSmileContainer
+                        mainLabel={'How was your stress this week?'}
+                        containerInputName={'stressInput'}
+                        containerLabels={containerLabels}
+                        commentTextareaId={'stressCommentTextarea'}
+                    />
+                    <RadioSmileContainer
+                        mainLabel={'How was your workload this week?'}
+                        containerInputName={'workloadInput'}
+                        containerLabels={containerLabels}
+                        commentTextareaId={'workloadCommentTextarea'}
+                    />
+                    <TextAreaCounter
+                        labelText={'What was your high this week?'}
+                        placeholderText={
+                            "What was your personal or professional high this week? What's the one thing you accomplished at work this week?"
+                        }
+                        idText={'whats-high-textarea'}
+                        maxLength={maxTextAreaLength}
+                    />
+                    <TextAreaCounter
+                        labelText={'What was your low this week?'}
+                        placeholderText={
+                            'What was your personal low this week?'
+                        }
+                        idText={'whats-low-textarea'}
+                        maxLength={maxTextAreaLength}
+                    />
+                    <TextAreaCounter
+                        labelText={'Anything else?'}
+                        placeholderText={
+                            'Is there anything else you would like to share with your leader? *Optional'
+                        }
+                        idText={'anything-else-textarea'}
+                        maxLength={maxTextAreaLength}
+                    />
+                </div>
+                <div className='mt-5 mb-5 small-block'>
+                    <h2 className='content-block-title fw-bold p-4'>
+                        Date range
+                    </h2>
+                    <div className='mt-3 mb-5'>
+                        <div className='text-start mb-1'>
+                            <label>Choose date</label>
+                        </div>
+                        <div className='input-group d-flex flex-row'>
+                            <input
+                                type='text'
+                                className='form-control date-range-picker-input bg-white'
+                                value={dateLabel}
+                                aria-label="Recipient's username"
+                                aria-describedby='button-addon2'
+                                readOnly={true}
+                            />
+                            <DateRangePicker
+                                initialSettings={{
+                                    startDate: dateState.startDate.toDate(),
+                                    endDate: dateState.endDate.toDate(),
+                                }}
+                                onCallback={handleDateCallback}>
+                                <button
+                                    className='btn btn-outline-secondary'
+                                    type='button'
+                                    id='button-addon2'>
+                                    ↕
+                                </button>
+                            </DateRangePicker>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className='mb-5 small-block'>
-                <p className='text-danger fw-bold'>
-                    All fields are required unless marked as optional.
-                </p>
-                <button className='btn btn-primary disabled w-100 send-report-button'>
-                    Send Weekly Report
-                </button>
-            </div>
+                <div className='mb-5 small-block'>
+                    <p className='text-danger fw-bold'>
+                        All fields are required unless marked as optional.
+                    </p>
+                    <button
+                        type={'submit'}
+                        className='btn btn-primary disabled w-100 send-report-button'>
+                        Send Weekly Report
+                    </button>
+                </div>
+            </form>
         </div>
     );
 }
