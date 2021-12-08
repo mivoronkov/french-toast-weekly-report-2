@@ -124,7 +124,9 @@ export function FillOutAReportContent({ firstName }) {
                 <p className='text-danger fw-bold'>
                     All fields are required unless marked as optional.
                 </p>
-                <button className='btn btn-primary disabled w-100 send-report-button'>
+                <button
+                    type={'submit'}
+                    className='btn btn-primary disabled w-100 send-report-button'>
                     Send Weekly Report
                 </button>
             </div>
