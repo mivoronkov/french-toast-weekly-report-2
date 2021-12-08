@@ -6,7 +6,7 @@ export function makeAvatarText(firstName, lastName) {
     return (firstName[0] + lastName[0]).toUpperCase();
 }
 
-export var AvatarComponent = function ({
+export const AvatarComponent = function ({
     firstName,
     lastName,
     avatarPath = '',
