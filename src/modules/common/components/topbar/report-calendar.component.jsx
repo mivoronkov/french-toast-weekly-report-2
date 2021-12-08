@@ -1,17 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { AnchorDarkLink } from '../buttons/anchor-dark-link.component';
 
-export function ReportCalendar ({previousPeriod, currentPeriod}) {
+export function ReportCalendar({ previousPeriod, currentPeriod }) {
     return (
-        <ul className="pagination pagination-sm my-3">
-            <li className="page-item"><a href="#" className="page-link bg-dark">Previous period:{previousPeriod}</a></li>
-            <li className="page-item"><a href="#" className="page-link bg-dark">Current period:{currentPeriod}</a></li>
-            <li className="page-item"><a href="#" className="page-link bg-dark">Older Reports</a></li>
+        <ul className='pagination pagination-sm my-3'>
+            <AnchorDarkLink>Previous period:{previousPeriod}</AnchorDarkLink>
+            <AnchorDarkLink>Current period:{currentPeriod}</AnchorDarkLink>
+            <AnchorDarkLink>Older Reports</AnchorDarkLink>
         </ul>
     );
 }
 
 ReportCalendar.propTypes = {
     previousPeriod: PropTypes.string,
-    currentPeriod: PropTypes.string
-}
+    currentPeriod: PropTypes.string,
+};

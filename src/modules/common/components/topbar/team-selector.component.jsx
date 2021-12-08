@@ -1,10 +1,13 @@
-import React from "react";
+import React from 'react';
+import { AnchorDarkLink } from '../buttons/anchor-dark-link.component';
 
-export function TeamSelector ({...props}) {
+export function TeamSelector({ ...props }) {
     return (
-        <ul className="pagination pagination-sm my-3">
-            <li className="page-item"><a href="team_reports.html" className="page-link bg-dark">Immediate Team</a></li>
-            <li className="page-item"><a href="#" className="page-link bg-dark">Extended Team</a></li>
+        <ul className='pagination pagination-sm my-3'>
+            <AnchorDarkLink anchor={'team_reports.html'}>
+                Immediate Team
+            </AnchorDarkLink>
+            <AnchorDarkLink>Extended Team</AnchorDarkLink>
         </ul>
     );
 }

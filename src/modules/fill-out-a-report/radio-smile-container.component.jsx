@@ -22,7 +22,9 @@ export function RadioSmileContainer({
 
     return (
         <div className='mt-5'>
-            <h2 className='content-block-title fw-bold p-4'>{mainLabel}</h2>
+            <h2 className='content-block-title text-center fw-bold p-4'>
+                {mainLabel}
+            </h2>
             <div className='row'>{radioButtons}</div>
         </div>
     );

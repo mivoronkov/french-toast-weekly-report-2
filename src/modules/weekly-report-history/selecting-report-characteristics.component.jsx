@@ -1,12 +1,13 @@
-import React from "react";
+import React from 'react';
+import { AnchorDarkLink } from '../common/components/buttons/anchor-dark-link.component';
 
 export function SelectingReportCharacteristics() {
     return (
-        <ul className="pagination pagination-sm my-3">
-            <li className="page-item"><a href="#" className="page-link bg-dark">Overall</a></li>
-            <li className="page-item"><a href="#" className="page-link bg-dark">Morale</a></li>
-            <li className="page-item"><a href="#" className="page-link bg-dark">Stress</a></li>
-            <li className="page-item"><a href="#" className="page-link bg-dark">Workload</a></li>
+        <ul className='pagination pagination-sm my-3'>
+            <AnchorDarkLink>Overall</AnchorDarkLink>
+            <AnchorDarkLink>Morale</AnchorDarkLink>
+            <AnchorDarkLink>Stress</AnchorDarkLink>
+            <AnchorDarkLink>Workload</AnchorDarkLink>
         </ul>
     );
 }
