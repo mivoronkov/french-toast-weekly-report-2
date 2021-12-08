@@ -1,13 +1,40 @@
 import React from 'react';
-import { AnchorDarkLink } from '../common/components/buttons/anchor-dark-link.component';
+import PropTypes from 'prop-types';
 
-export function SelectingReportCharacteristics() {
+export function SelectingReportCharacteristics({ setStateLink }) {
     return (
         <ul className='pagination pagination-sm my-3'>
-            <AnchorDarkLink>Overall</AnchorDarkLink>
-            <AnchorDarkLink>Morale</AnchorDarkLink>
-            <AnchorDarkLink>Stress</AnchorDarkLink>
-            <AnchorDarkLink>Workload</AnchorDarkLink>
+            <li className='page-item'>
+                <button
+                    className='page-link bg-dark'
+                    onClick={() => setStateLink('overall')}>
+                    Overall
+                </button>
+            </li>
+            <li className='page-item'>
+                <button
+                    className='page-link bg-dark'
+                    onClick={() => setStateLink('morale')}>
+                    Morale
+                </button>
+            </li>
+            <li className='page-item'>
+                <button
+                    className='page-link bg-dark'
+                    onClick={() => setStateLink('stress')}>
+                    Stress
+                </button>
+            </li>
+            <li className='page-item'>
+                <button
+                    className='page-link bg-dark'
+                    onClick={() => setStateLink('workload')}>
+                    Workload
+                </button>
+            </li>
         </ul>
     );
 }
+SelectingReportCharacteristics.propTypes = {
+    setStateLink: PropTypes.function,
+};
