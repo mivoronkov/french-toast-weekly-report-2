@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TeamReportsHeader } from '../../team-reports/team-reports-header.component';
-import { TeamReportsContent } from '../../team-reports/team-reports-content.component';
+import { ProfileHeaderComponent } from '../../headers/profile-header/profile-header.component';
+import { MyReportsContent } from '../../my-reports/my-reports-contetnt.component';
 
 export function MyReports() {
     return (
         <main className='flex-grow-1 overflow-auto'>
-            <TeamReportsHeader members={members} />
-            <TeamReportsContent
+            <ProfileHeaderComponent members={members} />
+            <MyReportsContent
                 previousPeriod={previousPeriod}
                 currentPeriod={currentPeriod}
                 members={members}
