@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TextWithDateHeaderComponent } from '../headers/text-with-date-header/text-with-date-header.component';
-import { TeamMembersContent } from './team-members-content.component';
+import { TextWithDateHeaderComponent } from '../../headers/text-with-date-header/text-with-date-header.component';
+import { TeamMembersContent } from '../../team-members/team-members-content.component';
 
 export function TeamMembers({ companyName, joinedDate, members }) {
     return (
