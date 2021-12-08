@@ -7,4 +7,4 @@ export default {
 };
 
 const Template = (args) => <InviteYourTeam {...args} />;
-export const LaunchGuideTemplate = Template.bind({});
+export const InviteYourTeamTemplate = Template.bind({});
