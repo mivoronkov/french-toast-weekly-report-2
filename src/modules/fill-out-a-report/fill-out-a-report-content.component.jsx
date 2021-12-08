@@ -52,16 +52,19 @@ export function FillOutAReportContent({ firstName }) {
                     mainLabel={'How was your morale this week?'}
                     containerInputName={'moraleInput'}
                     containerLabels={containerLabels}
+                    commentTextareaId={'moraleCommentTextarea'}
                 />
                 <RadioSmileContainer
                     mainLabel={'How was your stress this week?'}
                     containerInputName={'stressInput'}
                     containerLabels={containerLabels}
+                    commentTextareaId={'stressCommentTextarea'}
                 />
                 <RadioSmileContainer
                     mainLabel={'How was your workload this week?'}
                     containerInputName={'workloadInput'}
                     containerLabels={containerLabels}
+                    commentTextareaId={'workloadCommentTextarea'}
                 />
                 <TextAreaCounter
                     labelText={'What was your high this week?'}
