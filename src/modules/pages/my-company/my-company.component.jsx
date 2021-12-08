@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TeamMembersHeader } from '../../team-members/team-members-header.component';
+import { TextWithDateHeaderComponent } from '../../headers/text-with-date-header/text-with-date-header.component';
 import { TitleBlockComponent } from '../../containers/title-block/title-block.component';
 import { ContentBlockComponent } from '../../containers/content-block/content-block.component';
 import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
@@ -8,7 +8,7 @@ import { EditFieldComponent } from '../../common/components/edit-field/edit-fiel
 export function MyCompanyComponent({ companyName, joinedDate }) {
     return (
         <main className='flex-grow-1 overflow-auto'>
-            <TeamMembersHeader
+            <TextWithDateHeaderComponent
                 joinedDate={formatDate(joinedDate)}
                 companyName={companyName}
             />
