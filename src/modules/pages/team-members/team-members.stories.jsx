@@ -1,5 +1,5 @@
 import React from 'react';
-import { TeamMembers } from '../../modules/team-members/team-members.component';
+import { TeamMembers } from './team-members.component';
 
 export default {
     title: 'Pages/Team members',

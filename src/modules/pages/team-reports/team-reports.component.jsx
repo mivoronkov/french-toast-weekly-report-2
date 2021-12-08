@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TeamReportsHeader } from './team-reports-header.component';
-import { TeamReportsContent } from './team-reports-content.component';
+import { TeamReportsHeader } from '../../team-reports/team-reports-header.component';
+import { TeamReportsContent } from '../../team-reports/team-reports-content.component';
 
 export function TeamReports({ previousPeriod, currentPeriod, members }) {
     return (
