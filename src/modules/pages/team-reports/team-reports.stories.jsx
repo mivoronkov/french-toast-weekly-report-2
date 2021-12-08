@@ -1,5 +1,5 @@
 import React from 'react';
-import { TeamReports } from '../../modules/team-reports/team-reports.component';
+import { TeamReports } from './team-reports.component';
 
 export default {
     title: 'Pages/Team reports',
