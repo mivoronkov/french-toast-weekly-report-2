@@ -1,47 +1,64 @@
 import React from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import unmarked from '../../img/unmarked.svg';
+import verySad from '../../img/very-sad.svg';
+import sad from '../../img/sad.svg';
+import neutral from '../../img/neutral.svg';
+import happy from '../../img/happy.svg';
+import veryHappy from '../../img/very-happy.svg';
 
-export function WeeklyReportInformation ({stateName, stateLevel, comments}){
-    const classState = ["d-flex", "justify-content-center", "align-items-center", "bg-very-happy", "p-2", "text-light", "col-3"];
+export function WeeklyReportInformation({ stateName, stateLevel, comments }) {
+    const classState = [
+        'd-flex',
+        'justify-content-center',
+        'align-items-center',
+        'bg-very-happy',
+        'p-2',
+        'text-light',
+        'col-3',
+    ];
     let smile;
     switch (stateLevel) {
         case 0:
-            smile = 'unmarked';
-            classState.push("bg-unmarked");
+            smile = unmarked;
+            classState.push('bg-unmarked');
             break;
         case 1:
-            smile = 'very-sad';
-            classState.push("bg-very-sad");
+            smile = verySad;
+            classState.push('bg-very-sad');
             break;
         case 2:
-            smile = 'sad';
-            classState.push("bg-very-sad");
+            smile = sad;
+            classState.push('bg-very-sad');
             break;
         case 3:
-            smile = 'neutral';
-            classState.push("bg-neutral");
+            smile = neutral;
+            classState.push('bg-neutral');
             break;
         case 4:
-            smile = 'happy';
-            classState.push("bg-very-happy");
+            smile = happy;
+            classState.push('bg-very-happy');
             break;
         case 5:
-            smile = 'very-happy';
-            classState.push("bg-very-happy");
+            smile = veryHappy;
+            classState.push('bg-very-happy');
             break;
         default:
-            smile = 'unmarked';
+            smile = unmarked;
     }
-    return(
-        <div className="row flex-nowrap m-4">
-            <div
-                className={classState.join(" ")}>
-                <div className="col d-flex justify-content-center">
-                    <img src={smile+'.svg'}  alt="smile" className="smile big-smile"/>
+    return (
+        <div className='row flex-nowrap m-4'>
+            <div className={classState.join(' ')}>
+                <div className='col d-flex justify-content-center'>
+                    <img src={smile} alt='smile' className='smile big-smile' />
                 </div>
-                <p className="col text-uppercase mb-0 me-5 pl-0 fw-bold">{stateName}</p>
+                <p className='col text-uppercase mb-0 me-5 pl-0 fw-bold'>
+                    {stateName}
+                </p>
             </div>
-            <p className="text-muted col-9"><i>{comments}</i></p>
+            <p className='text-muted col-9'>
+                <i>{comments}</i>
+            </p>
         </div>
     );
 }
@@ -49,11 +66,11 @@ export function WeeklyReportInformation ({stateName, stateLevel, comments}){
 WeeklyReportInformation.propTypes = {
     stateName: PropTypes.string,
     stateLevel: PropTypes.number,
-    comments: PropTypes.string
+    comments: PropTypes.string,
 };
 
 WeeklyReportInformation.defaultProps = {
     stateName: 'Unknown',
     stateLevel: 0,
-    comments: 'There were now comments added about morale.'
+    comments: 'There were now comments added about morale.',
 };
