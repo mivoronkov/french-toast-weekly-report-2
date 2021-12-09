@@ -61,7 +61,7 @@ export function EditMembersPopupComponent({
     };
 
     return (
-        <div className='modal-content top-border-color p-4'>
+        <div className='modal-content top-border-color p-4 modal-size'>
             <div className='modal-header border-0'>
                 <button type='button' className='btn-close' onClick={onClose} />
             </div>
