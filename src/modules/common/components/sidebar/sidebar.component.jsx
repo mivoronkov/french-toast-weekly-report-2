@@ -9,16 +9,22 @@ export function SidebarComponent() {
             <div>
                 <img src={logo} alt='logo' />
                 <ul className='nav nav-pills flex-column'>
+                    <SidebarElementComponent elementName={'Launch Guide'} />
                     <SidebarElementComponent
-                        elementName={'Launch Guide'}
-                        extraLinkClasses={'active'}
+                        elementName={'Invite Your Team'}
+                        link={'/invite-your-team'}
                     />
-                    <SidebarElementComponent elementName={'Invite Your Team'} />
-                    <SidebarElementComponent elementName={'Team Reports'} />
-                    <SidebarElementComponent elementName={'My Reports'} />
+                    <SidebarElementComponent
+                        elementName={'Team Reports'}
+                        link={'/team-reports/immediate-team'}
+                    />
+                    <SidebarElementComponent
+                        elementName={'My Reports'}
+                        link={'/my-reports'}
+                    />
                     <SidebarElementComponent
                         elementName={'Fill out a Report'}
-                        extraLinkClasses={'text-warning'}
+                        link={'/fill-out-a-report'}
                     />
                 </ul>
             </div>
@@ -27,19 +33,23 @@ export function SidebarComponent() {
                     <SidebarElementComponent
                         elementName={'Back to Elite'}
                         extraClasses={'p-2 pb-3'}
+                        link={'/back-to-elite'}
                     />
                     <SidebarElementComponent
                         elementName={'My Company'}
                         extraClasses={'pt-3 pb-3'}
+                        link={'/my-company'}
                     />
                     <SidebarElementComponent
                         elementName={' My Profile'}
                         extraClasses={'pt-3 pb-3'}
                         iconClass={'bi bi-gear-fill'}
+                        link={'/my-profile'}
                     />
                     <SidebarElementComponent
                         elementName={' Sign Out'}
                         iconClass={'bi bi-arrow-left-square-fill'}
+                        link={'/sign-out'}
                     />
                 </ul>
             </div>

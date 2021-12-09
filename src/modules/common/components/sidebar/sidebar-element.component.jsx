@@ -1,23 +1,26 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 export function SidebarElementComponent({
     elementName,
     extraClasses,
-    extraLinkClasses,
     iconClass,
+    link = '/',
 }) {
     return (
-        <li className={`nav-item p-2${extraClasses ? ' ' + extraClasses : ''}`}>
-            <a
-                className={`nav-link${
-                    extraLinkClasses ? ' ' + extraLinkClasses : ''
-                }`}
-                href='#'>
-                {iconClass ? <i className={iconClass} /> : ''}
+        <li className={`nav-item p-2 ${extraClasses ? extraClasses : ''}`}>
+            <NavLink
+                className={({ isActive }) => {
+                    return isActive
+                        ? 'nav-link text-warning active'
+                        : 'nav-link';
+                }}
+                to={link}>
                 {elementName}
-            </a>
+                {iconClass ? <i className={iconClass} /> : ''}
+            </NavLink>
         </li>
     );
 }
@@ -25,6 +28,6 @@ export function SidebarElementComponent({
 SidebarElementComponent.propTypes = {
     elementName: PropTypes.string.isRequired,
     extraClasses: PropTypes.string,
-    extraLinkClasses: PropTypes.string,
     iconClass: PropTypes.string,
+    link: PropTypes.string,
 };
