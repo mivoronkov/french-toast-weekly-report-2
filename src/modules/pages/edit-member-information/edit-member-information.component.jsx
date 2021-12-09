@@ -6,6 +6,8 @@ import { TitleBlockComponent } from '../../containers/title-block/title-block.co
 import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
 import PropTypes from 'prop-types';
 import './edit-member-information.styles.scss';
+import { useModal } from 'react-hooks-use-modal';
+import { EditMembersPopupComponent } from '../../popups/edit-members/edit-members-popup.component';
 
 export function EditMemberInformation({
     firstName,
@@ -17,6 +19,36 @@ export function EditMemberInformation({
     reportingMembers = [],
     inviteLink,
 }) {
+    const [EditLeadersModal, openEditLeaders, closeEditLeaders] = useModal(
+        'root',
+        {
+            preventScroll: true,
+            closeOnOverlayClick: false,
+        }
+    );
+    function onLeadersSave() {
+        closeEditLeaders();
+    }
+
+    const [
+        EditReportingMembersModal,
+        openEditReportingMembers,
+        closeEditReportingMembers,
+    ] = useModal('root', {
+        preventScroll: true,
+        closeOnOverlayClick: false,
+    });
+    function onReportingMembersSave() {
+        closeEditReportingMembers();
+    }
+
+    const leadersTagNames = leadersToReport.map(
+        (member) => `${member.firstName} ${member.lastName}`
+    );
+    const membersTagNames = reportingMembers.map(
+        (member) => `${member.firstName} ${member.lastName}`
+    );
+
     return (
         <main className='flex-grow-1 overflow-auto'>
             <ProfileHeaderComponent
@@ -53,18 +85,22 @@ export function EditMemberInformation({
                 </ContentBlockComponent>
                 <ContentBlockComponent
                     title={`${firstName} reports to the following leaders:`}>
-                    <TagRowComponent tag_names={leadersToReport} />
+                    <TagRowComponent tag_names={leadersTagNames} />
                     <a href='#'>
                         <button
                             className='btn btn-outline-dark mt-3'
-                            type='button'>
+                            type='button'
+                            onClick={openEditLeaders}>
                             Edit Leader(s)
                         </button>
                     </a>
                 </ContentBlockComponent>
                 <ContentBlockComponent title='The following team members report to Anatoliy:'>
-                    <TagRowComponent tag_names={reportingMembers} />
-                    <button className='btn btn-outline-dark mt-3' type='button'>
+                    <TagRowComponent tag_names={membersTagNames} />
+                    <button
+                        className='btn btn-outline-dark mt-3'
+                        type='button'
+                        onClick={openEditReportingMembers}>
                         Edit Member(s)
                     </button>
                 </ContentBlockComponent>
@@ -91,6 +127,22 @@ export function EditMemberInformation({
                     </button>
                 </ContentBlockComponent>
             </div>
+            <EditLeadersModal>
+                <EditMembersPopupComponent
+                    members={leadersToReport}
+                    onSave={onLeadersSave}
+                    memberType={'Leader'}
+                    onClose={closeEditLeaders}
+                />
+            </EditLeadersModal>
+            <EditReportingMembersModal>
+                <EditMembersPopupComponent
+                    members={reportingMembers}
+                    onSave={onReportingMembersSave}
+                    memberType={'Member'}
+                    onClose={closeEditReportingMembers}
+                />
+            </EditReportingMembersModal>
         </main>
     );
 }
@@ -102,6 +154,16 @@ EditMemberInformation.propTypes = {
     email: PropTypes.string.isRequired,
     inviteLink: PropTypes.string.isRequired,
     avatar: PropTypes.string,
-    leadersToReport: PropTypes.arrayOf(PropTypes.string),
-    reportingMembers: PropTypes.arrayOf(PropTypes.string),
+    leadersToReport: PropTypes.arrayOf(
+        PropTypes.shape({
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired,
+        }).isRequired
+    ),
+    reportingMembers: PropTypes.arrayOf(
+        PropTypes.shape({
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired,
+        }).isRequired
+    ),
 };

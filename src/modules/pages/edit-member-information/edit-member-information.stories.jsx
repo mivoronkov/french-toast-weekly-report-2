@@ -16,20 +16,56 @@ Variant1.args = {
     inviteLink:
         'https://weeklyreport.entreleadership.com/accept/eyJsaWQiOiDFjaeFHjewlskdJFosdgSfjsdkHFJLGewjmds',
     leadersToReport: [
-        'Nikolai Kapustin',
-        'Nina Mammadova',
-        'Natalia Starkova',
-        'Anton Tarkhanov',
-        'Alexandr Vovchuk',
+        {
+            firstName: 'Nikolai',
+            lastName: 'Kapustin',
+        },
+        {
+            firstName: 'Nina',
+            lastName: 'Mammadova',
+        },
+        {
+            firstName: 'Natalia',
+            lastName: 'Starkova',
+        },
+        {
+            firstName: 'Anton',
+            lastName: 'Tarkhanov',
+        },
+        {
+            firstName: 'Alexandr',
+            lastName: 'Vovchuk',
+        },
     ],
     reportingMembers: [
-        'Aleksandr Evseev',
-        'Nikolai Kapustin',
-        'Anna Kotova',
-        'Nina Mammadova',
-        'Natalia Starkova',
-        'Anton Tarkhanov',
-        'Alexandr Vovchuk',
+        {
+            firstName: 'Aleksandr',
+            lastName: 'Evseev',
+        },
+        {
+            firstName: 'Nikolai',
+            lastName: 'Kapustin',
+        },
+        {
+            firstName: 'Anna',
+            lastName: 'Kotova',
+        },
+        {
+            firstName: 'Nina',
+            lastName: 'Mammadova',
+        },
+        {
+            firstName: 'Natalia',
+            lastName: 'Starkova',
+        },
+        {
+            firstName: 'Anton',
+            lastName: 'Tarkhanov',
+        },
+        {
+            firstName: 'Alexandr',
+            lastName: 'Vovchuk',
+        },
     ],
 };
 
@@ -41,5 +77,14 @@ Variant2.args = {
     email: 'dragongling@gmail.com',
     inviteLink: 'https://github.com/dragongling',
     avatar: 'https://avatars.githubusercontent.com/u/3900938',
-    leadersToReport: ['Anatoliy Kolodkin', 'Alexandr Vovchuk'],
+    leadersToReport: [
+        {
+            firstName: 'Anatoliy',
+            lastName: 'Kolodkin',
+        },
+        {
+            firstName: 'Alexandr',
+            lastName: 'Vovchuk',
+        },
+    ],
 };
