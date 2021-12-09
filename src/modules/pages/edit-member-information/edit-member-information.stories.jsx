@@ -17,52 +17,64 @@ Variant1.args = {
         'https://weeklyreport.entreleadership.com/accept/eyJsaWQiOiDFjaeFHjewlskdJFosdgSfjsdkHFJLGewjmds',
     leadersToReport: [
         {
+            id: 1,
             firstName: 'Nikolai',
             lastName: 'Kapustin',
         },
         {
+            id: 2,
             firstName: 'Nina',
             lastName: 'Mammadova',
         },
         {
+            id: 3,
             firstName: 'Natalia',
             lastName: 'Starkova',
         },
         {
+            id: 4,
             firstName: 'Anton',
             lastName: 'Tarkhanov',
         },
         {
+            id: 5,
             firstName: 'Alexandr',
             lastName: 'Vovchuk',
         },
     ],
     reportingMembers: [
         {
+            id: 6,
             firstName: 'Aleksandr',
             lastName: 'Evseev',
         },
         {
+            id: 1,
             firstName: 'Nikolai',
             lastName: 'Kapustin',
         },
         {
+            id: 8,
             firstName: 'Anna',
             lastName: 'Kotova',
         },
         {
+            id: 2,
             firstName: 'Nina',
             lastName: 'Mammadova',
         },
         {
+            id: 3,
             firstName: 'Natalia',
             lastName: 'Starkova',
         },
         {
+            id: 4,
             firstName: 'Anton',
             lastName: 'Tarkhanov',
         },
         {
+            id: 5,
             firstName: 'Alexandr',
             lastName: 'Vovchuk',
         },
@@ -79,10 +91,12 @@ Variant2.args = {
     avatar: 'https://avatars.githubusercontent.com/u/3900938',
     leadersToReport: [
         {
+            id: 1,
             firstName: 'Anatoliy',
             lastName: 'Kolodkin',
         },
         {
+            id: 2,
             firstName: 'Alexandr',
             lastName: 'Vovchuk',
         },

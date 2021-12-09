@@ -1,23 +1,62 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TitleBlockComponent } from '../../containers/title-block/title-block.component';
 import PropTypes from 'prop-types';
+import { WithContext as ReactTags } from 'react-tag-input';
 
 export function EditMembersPopupComponent({
-    members,
+    membersToEdit,
+    availableMembers,
     memberType,
     onClose,
     onSave,
 }) {
-    const memberTags = members.map((member, index) => {
-        return (
-            <button type='button' className='btn btn-dark p-1' key={index}>
-                {`${member.firstName} ${member.lastName} `}
-                <span className='badge'>
-                    <span className='text-black-50'>|</span> X
-                </span>
-            </button>
-        );
-    });
+    const KeyCodes = {
+        comma: 188,
+        enter: 13,
+    };
+
+    const [tags, setTags] = useState(
+        membersToEdit.map((member) => {
+            return {
+                id: member.id.toString(),
+                text: `${member.firstName} ${member.lastName}`,
+            };
+        })
+    );
+    //noinspection JSUnusedLocalSymbols
+    let tagParams = {
+        suggestions: availableMembers.map((member) => {
+            return {
+                id: member.id.toString(),
+                text: `${member.firstName} ${member.lastName}`,
+            };
+        }),
+        delimiters: [KeyCodes.comma, KeyCodes.enter],
+        handleDelete: (i) => {
+            setTags(tags.filter((tag, index) => index !== i));
+        },
+
+        handleDrag: (tag, currPos, newPos) => {
+            const newTags = tags.slice();
+
+            newTags.splice(currPos, 1);
+            newTags.splice(newPos, 0, tag);
+
+            // re-render
+            setTags(newTags);
+        },
+        handleTagClick: (index) => {},
+    };
+    tagParams.handleAddition = (tag) => {
+        if (
+            tagParams.suggestions.filter(function (item) {
+                return item.text === tag.text;
+            }).length !== 0
+        ) {
+            setTags([...tags, tag]);
+        }
+    };
+
     return (
         <div className='modal-content top-border-color p-4'>
             <div className='modal-header border-0'>
@@ -35,11 +74,17 @@ export function EditMembersPopupComponent({
                         profile settings.{' '}
                     </p>
                 </TitleBlockComponent>
-                <div className='d-inline'>{memberTags}</div>
-                <input
-                    className='form-control form-control-lg mt-4'
-                    type='text'
-                    aria-label='.form-control-lg example'
+                <ReactTags
+                    tags={tags}
+                    suggestions={tagParams.suggestions}
+                    delimiters={tagParams.delimiters}
+                    handleDelete={tagParams.handleDelete}
+                    handleAddition={tagParams.handleAddition}
+                    handleDrag={tagParams.handleDrag}
+                    handleTagClick={tagParams.handleTagClick}
+                    allowUnique={true}
+                    inputFieldPosition='bottom'
+                    autocomplete
                 />
             </div>
             <div className='modal-footer modal-bottom-button border-0 mt-3'>
@@ -55,8 +100,16 @@ export function EditMembersPopupComponent({
 }
 
 EditMembersPopupComponent.propTypes = {
-    members: PropTypes.arrayOf(
+    membersToEdit: PropTypes.arrayOf(
         PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            firstName: PropTypes.string,
+            lastName: PropTypes.string.isRequired,
+        })
+    ),
+    availableMembers: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
             firstName: PropTypes.string,
             lastName: PropTypes.string.isRequired,
         })

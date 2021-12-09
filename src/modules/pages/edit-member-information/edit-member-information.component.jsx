@@ -18,6 +18,7 @@ export function EditMemberInformation({
     leadersToReport = [],
     reportingMembers = [],
     inviteLink,
+    allMembers = [],
 }) {
     const [EditLeadersModal, openEditLeaders, closeEditLeaders] = useModal(
         'root',
@@ -129,18 +130,20 @@ export function EditMemberInformation({
             </div>
             <EditLeadersModal>
                 <EditMembersPopupComponent
-                    members={leadersToReport}
+                    membersToEdit={leadersToReport}
                     onSave={onLeadersSave}
                     memberType={'Leader'}
                     onClose={closeEditLeaders}
+                    availableMembers={allMembers}
                 />
             </EditLeadersModal>
             <EditReportingMembersModal>
                 <EditMembersPopupComponent
-                    members={reportingMembers}
+                    membersToEdit={reportingMembers}
                     onSave={onReportingMembersSave}
                     memberType={'Member'}
                     onClose={closeEditReportingMembers}
+                    availableMembers={allMembers}
                 />
             </EditReportingMembersModal>
         </main>
@@ -156,12 +159,21 @@ EditMemberInformation.propTypes = {
     avatar: PropTypes.string,
     leadersToReport: PropTypes.arrayOf(
         PropTypes.shape({
+            id: PropTypes.number.isRequired,
             firstName: PropTypes.string.isRequired,
             lastName: PropTypes.string.isRequired,
         }).isRequired
     ),
     reportingMembers: PropTypes.arrayOf(
         PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired,
+        }).isRequired
+    ),
+    allMembers: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
             firstName: PropTypes.string.isRequired,
             lastName: PropTypes.string.isRequired,
         }).isRequired
