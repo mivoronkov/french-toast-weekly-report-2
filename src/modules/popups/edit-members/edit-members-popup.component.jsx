@@ -49,6 +49,9 @@ export function EditMembersPopupComponent({
     };
     tagParams.handleAddition = (tag) => {
         if (
+            tags.filter(function (item) {
+                return item.text === tag.text;
+            }).length === 0 &&
             tagParams.suggestions.filter(function (item) {
                 return item.text === tag.text;
             }).length !== 0
