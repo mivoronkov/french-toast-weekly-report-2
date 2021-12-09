@@ -86,6 +86,7 @@ export function EditMembersPopupComponent({
                     handleDrag={tagParams.handleDrag}
                     handleTagClick={tagParams.handleTagClick}
                     allowUnique={true}
+                    placeholder={`Press enter to add ${memberType.toLowerCase()}`}
                     inputFieldPosition='bottom'
                     autocomplete
                 />
