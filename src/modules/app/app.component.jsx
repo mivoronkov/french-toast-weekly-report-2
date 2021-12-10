@@ -25,6 +25,7 @@ import { myCompanyStub } from '../../stub-data/myCompanyStub';
 import { weeklyReportHistory } from '../../stub-data/weeklyReportHistoryStub';
 import { teamMembersStub } from '../../stub-data/teamMembersStub';
 import { editMemberInformationStub } from '../../stub-data/editMemberInformationStub';
+import { TeamHeaderContainerComponent } from '../pages/team-reports/team-header-container.component';
 
 export function App() {
     return (
@@ -36,7 +37,9 @@ export function App() {
                         path='/invite-your-team'
                         element={<InviteYourTeam />}
                     />
-                    <Route path='/team-reports' element={<Outlet />}>
+                    <Route
+                        path='/team-reports'
+                        element={<TeamHeaderContainerComponent />}>
                         <Route
                             path='immediate-team'
                             element={<TeamReports {...teamReportsStub} />}
