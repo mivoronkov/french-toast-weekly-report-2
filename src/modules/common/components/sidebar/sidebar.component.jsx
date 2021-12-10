@@ -16,7 +16,7 @@ export function SidebarComponent() {
                     />
                     <SidebarElementComponent
                         elementName={'Team Reports'}
-                        link={'/team-reports/immediate-team'}
+                        link={'/team-reports'}
                     />
                     <SidebarElementComponent
                         elementName={'My Reports'}
