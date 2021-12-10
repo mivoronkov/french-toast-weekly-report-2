@@ -23,7 +23,7 @@ export function WeeklyReportHistory({
         />
     ));
     return (
-        <div className='main-background'>
+        <div className='main-background flex-grow-1 overflow-auto'>
             <WeeklyReportHistoryHeader />
             <div className='d-flex flex-column align-items-center w-100'>
                 <ReportCalendar

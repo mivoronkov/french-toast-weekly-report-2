@@ -18,7 +18,7 @@ export function LaunchGuideContent() {
                 imageIsFirst={false}
                 image={launch_guide_invite}
                 imageAlt={'invite'}>
-                <a href='invite_your_team.html'>
+                <a href='/invite-your-team'>
                     <button className='btn btn-warning mt-3'>
                         Invite Your Team
                     </button>

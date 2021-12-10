@@ -1,13 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { useModal } from 'react-hooks-use-modal';
 import { ProfileHeaderComponent } from '../../headers/profile-header/profile-header.component';
 import { ContentBlockComponent } from '../../containers/content-block/content-block.component';
 import { TagRowComponent } from '../../containers/tag-row/tag-row.component';
 import { TitleBlockComponent } from '../../containers/title-block/title-block.component';
 import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
-import PropTypes from 'prop-types';
-import './edit-member-information.styles.scss';
-import { useModal } from 'react-hooks-use-modal';
 import { EditMembersPopupComponent } from '../../popups/edit-members/edit-members-popup.component';
+import './edit-member-information.styles.scss';
 
 export function EditMemberInformation({
     firstName,
