@@ -47,9 +47,9 @@ export function SidebarComponent() {
                         link={'/my-profile'}
                     />
                     <SidebarElementComponent
-                        elementName={' Sign Out'}
+                        elementName={' Log in'}
                         iconClass={'bi bi-arrow-left-square-fill'}
-                        link={'/sign-out'}
+                        link={'/authorization'}
                     />
                 </ul>
             </div>
