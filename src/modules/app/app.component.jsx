@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-    BrowserRouter,
-    Route,
-    Routes,
-    Navigate,
-    Outlet,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { SidebarComponent } from '../common/components/sidebar/sidebar.component';
 import { LaunchGuide } from '../pages/launch-guide/launch-guide.component';
@@ -17,6 +11,8 @@ import { MyCompanyComponent } from '../pages/my-company/my-company.component';
 import { WeeklyReportHistory } from '../pages/weekly-report-hisory/weekly-report-hisory.component';
 import { TeamMembers } from '../pages/team-members/team-members.component';
 import { EditMemberInformation } from '../pages/edit-member-information/edit-member-information.component';
+import { TeamHeaderContainerComponent } from '../pages/team-reports/team-header-container.component';
+import { Authorization } from '../pages/authorization/authorization.component';
 
 import { teamReportsStub } from '../../stub-data/teamReportsStub';
 import { myReportStub } from '../../stub-data/myReportStub';
@@ -25,7 +21,6 @@ import { myCompanyStub } from '../../stub-data/myCompanyStub';
 import { weeklyReportHistory } from '../../stub-data/weeklyReportHistoryStub';
 import { teamMembersStub } from '../../stub-data/teamMembersStub';
 import { editMemberInformationStub } from '../../stub-data/editMemberInformationStub';
-import { TeamHeaderContainerComponent } from '../pages/team-reports/team-header-container.component';
 
 export function App() {
     return (
@@ -79,10 +74,7 @@ export function App() {
                             />
                         }
                     />
-                    <Route
-                        path='/sign-out'
-                        element={<Navigate replace to='/' />}
-                    />
+                    <Route path='/authorization' element={<Authorization />} />
                     <Route path='/' element={<LaunchGuide />} />
                 </Routes>
             </BrowserRouter>
