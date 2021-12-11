@@ -51,7 +51,8 @@ export function TeamReportsHeader({ members, maxAvatarsDisplayed = 4 }) {
     }
     return (
         <header className='d-flex flex-column justify-content-between align-items-center text-light p-4 bg-dark'>
-            <div className='row gx-0 mt-5'>{avatarRowElements}</div>
+            <TeamSelector />
+            <div className='row gx-0 mt-2'>{avatarRowElements}</div>
             <h2 className='mt-4'>
                 Your team{' '}
                 <strong>
