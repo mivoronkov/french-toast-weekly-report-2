@@ -1,15 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { AuthorizationHeader } from '../../headers/authorization-header/authorization-header.component';
 import { AuthorizationContent } from '../../authorization/authorization-content.component';
+import { TextHeaderComponent } from '../../headers/text-header/text-header.component';
 
 export function Authorization() {
     return (
         <main className='flex-grow-1 overflow-auto'>
-            <AuthorizationHeader />
+            <TextHeaderComponent title={'Please log in.'} />
             <AuthorizationContent />
         </main>
     );
 }
-
-Authorization.propTypes = {};
