@@ -21,6 +21,7 @@ import { myCompanyStub } from '../../stub-data/myCompanyStub';
 import { weeklyReportHistory } from '../../stub-data/weeklyReportHistoryStub';
 import { teamMembersStub } from '../../stub-data/teamMembersStub';
 import { editMemberInformationStub } from '../../stub-data/editMemberInformationStub';
+import { NewCompanyRegistration } from '../pages/register-new-company/register-new-company.component';
 
 export function App() {
     return (
@@ -61,6 +62,10 @@ export function App() {
                     <Route
                         path='/my-company'
                         element={<MyCompanyComponent {...myCompanyStub} />}
+                    />
+                    <Route
+                        path='/register-new-company'
+                        element={<NewCompanyRegistration />}
                     />
                     <Route
                         path='/team-members'
