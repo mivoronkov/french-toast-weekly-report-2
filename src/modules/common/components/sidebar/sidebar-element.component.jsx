@@ -18,8 +18,8 @@ export function SidebarElementComponent({
                         : 'nav-link';
                 }}
                 to={link}>
-                {elementName}
                 {iconClass ? <i className={iconClass} /> : ''}
+                {elementName}
             </NavLink>
         </li>
     );
