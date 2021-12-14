@@ -5,7 +5,7 @@ import { SidebarElementComponent } from './sidebar-element.component';
 
 export function SidebarComponent() {
     return (
-        <aside className='p-3 d-flex flex-column justify-content-between text'>
+        <aside className='p-3 d-flex flex-column justify-content-between text fixed-bottom h-100'>
             <div>
                 <img src={logo} alt='logo' />
                 <ul className='nav nav-pills flex-column'>
@@ -44,7 +44,7 @@ export function SidebarComponent() {
                         elementName={' My Profile'}
                         extraClasses={'pt-3 pb-3'}
                         iconClass={'bi bi-gear-fill'}
-                        link={'/my-profile'}
+                        link={'/edit-member-information'}
                     />
                     <SidebarElementComponent
                         elementName={' Log in'}
