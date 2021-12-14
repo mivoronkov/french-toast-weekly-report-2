@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TeamReportsHeader } from '../../team-reports/team-reports-header.component';
 import { TeamReportsContent } from '../../team-reports/team-reports-content.component';
+import { Helmet } from 'react-helmet';
 
 export function TeamReports({ previousPeriod, currentPeriod, members }) {
     return (
         <main className='flex-grow-1 overflow-auto'>
+            <Helmet>
+                <title>Team reports</title>
+            </Helmet>
             <TeamReportsHeader members={members} />
             <TeamReportsContent
                 previousPeriod={previousPeriod}

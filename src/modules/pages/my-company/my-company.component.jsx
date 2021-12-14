@@ -4,10 +4,14 @@ import { TextWithDateHeaderComponent } from '../../headers/text-with-date-header
 import { TitleBlockComponent } from '../../containers/title-block/title-block.component';
 import { ContentBlockComponent } from '../../containers/content-block/content-block.component';
 import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
+import { Helmet } from 'react-helmet';
 
 export function MyCompanyComponent({ companyName, joinedDate }) {
     return (
         <main className='flex-grow-1 overflow-auto'>
+            <Helmet>
+                <title>My company</title>
+            </Helmet>
             <TextWithDateHeaderComponent
                 joinedDate={formatDate(joinedDate)}
                 companyName={companyName}

@@ -7,6 +7,7 @@ import { SectionLabel } from '../../common/components/labels/section-label.compo
 import { WeeklyLabels } from '../../weekly-report-history/weekly-labels.component';
 import { ReportCalendar } from '../../common/components/topbar/report-calendar.component';
 import { ReportEmotionalCard } from '../../weekly-report-history/report-card.component';
+import { Helmet } from 'react-helmet';
 
 export function WeeklyReportHistory({
     previousPeriod,
@@ -24,6 +25,9 @@ export function WeeklyReportHistory({
     ));
     return (
         <div className='main-background flex-grow-1 overflow-auto'>
+            <Helmet>
+                <title>Weekly report history</title>
+            </Helmet>
             <WeeklyReportHistoryHeader />
             <div className='d-flex flex-column align-items-center w-100'>
                 <ReportCalendar

@@ -4,10 +4,14 @@ import { TitleBlockComponent } from '../../containers/title-block/title-block.co
 import { ContentBlockComponent } from '../../containers/content-block/content-block.component';
 import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
 import { TextHeaderComponent } from '../../headers/text-header/text-header.component';
+import { Helmet } from 'react-helmet';
 
 export function NewCompanyRegistration() {
     return (
         <main className='flex-grow-1 overflow-auto'>
+            <Helmet>
+                <title>Register a new company</title>
+            </Helmet>
             <TextHeaderComponent title={'Register a new company'} />
             <form action=''>
                 <div className='p-5 mx-5 d-flex flex-column'>
