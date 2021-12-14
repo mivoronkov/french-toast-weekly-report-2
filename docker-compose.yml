@@ -6,6 +6,12 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8090:80
+      - "80:80"
     environment:
       NODE_ENV: production
+    networks:
+      - back
+networks:
+  back:
+    external:
+      name: french-toast-weekly-report-2-api_back
