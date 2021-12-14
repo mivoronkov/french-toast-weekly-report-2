@@ -8,6 +8,7 @@ import { TitleBlockComponent } from '../../containers/title-block/title-block.co
 import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
 import { EditMembersPopupComponent } from '../../popups/edit-members/edit-members-popup.component';
 import './edit-member-information.styles.scss';
+import { Helmet } from 'react-helmet';
 
 export function EditMemberInformation({
     firstName,
@@ -52,6 +53,9 @@ export function EditMemberInformation({
 
     return (
         <main className='flex-grow-1 overflow-auto'>
+            <Helmet>
+                <title>Edit member information</title>
+            </Helmet>
             <ProfileHeaderComponent
                 first_name={firstName}
                 last_name={lastName}
