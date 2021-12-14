@@ -24,7 +24,7 @@ export function WeeklyReportHistory({
         />
     ));
     return (
-        <div className='main-background flex-grow-1 overflow-auto'>
+        <main className='main-background flex-grow-1 overflow-auto'>
             <Helmet>
                 <title>Weekly report history</title>
             </Helmet>
@@ -47,7 +47,7 @@ export function WeeklyReportHistory({
                 <WeeklyLabels />
                 {membersEmotionalConsist}
             </div>
-        </div>
+        </main>
     );
 }
 
