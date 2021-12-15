@@ -5,14 +5,21 @@ import { App } from './modules/app/app.component';
 import reportWebVitals from './reportWebVitals';
 import './styles/main.scss';
 import 'bootstrap';
-import { FeedbackButtonComponent } from './modules/common/components/buttons/feedback-button.component';
-import { HelpButtonComponent } from './modules/common/components/buttons/help-button.component';
+import { BrowserRouter } from 'react-router-dom';
+import { Auth0Provider } from '@auth0/auth0-react';
 
 ReactDOM.render(
     <React.StrictMode>
-        <FeedbackButtonComponent />
-        <HelpButtonComponent />
-        <App />
+        <BrowserRouter>
+            <Auth0Provider
+                domain={process.env.REACT_APP_AUTH0_DOMAIN}
+                clientId={process.env.REACT_APP_AUTH0_CLIENT_ID}
+                redirectUri={window.location.origin}
+                cacheLocation='localstorage'
+                useRefreshTokens={true}>
+                <App />
+            </Auth0Provider>
+        </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')
 );

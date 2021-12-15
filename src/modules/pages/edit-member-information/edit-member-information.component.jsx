@@ -9,6 +9,7 @@ import { EditFieldComponent } from '../../common/components/edit-field/edit-fiel
 import { EditMembersPopupComponent } from '../../popups/edit-members/edit-members-popup.component';
 import './edit-member-information.styles.scss';
 import { Helmet } from 'react-helmet';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export function EditMemberInformation({
     firstName,
@@ -51,16 +52,18 @@ export function EditMemberInformation({
         (member) => `${member.firstName} ${member.lastName}`
     );
 
+    const { user } = useAuth0();
+
     return (
         <main className='flex-grow-1 overflow-auto'>
             <Helmet>
                 <title>Edit member information</title>
             </Helmet>
             <ProfileHeaderComponent
-                first_name={firstName}
-                last_name={lastName}
-                email={email}
-                avatar_path={avatar}
+                first_name={user.given_name}
+                last_name={user.family_name}
+                email={user.email}
+                avatar_path={user.picture}
             />
             <div className='p-5 mx-5 d-flex flex-column'>
                 <TitleBlockComponent title={`Edit ${firstName}'s information`}>

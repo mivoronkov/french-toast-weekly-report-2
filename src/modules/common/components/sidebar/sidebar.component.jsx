@@ -2,6 +2,7 @@ import React from 'react';
 
 import logo from '../../../../img/logo.png';
 import { SidebarElementComponent } from './sidebar-element.component';
+import { AuthenticationButtonComponent } from '../buttons/authentication-button.component';
 
 export function SidebarComponent() {
     return (
@@ -46,11 +47,7 @@ export function SidebarComponent() {
                         iconClass={'bi bi-gear-fill'}
                         link={'/edit-member-information'}
                     />
-                    <SidebarElementComponent
-                        elementName={' Log in'}
-                        iconClass={'bi bi-arrow-left-square-fill'}
-                        link={'/authorization'}
-                    />
+                    <AuthenticationButtonComponent />
                 </ul>
             </div>
         </aside>
