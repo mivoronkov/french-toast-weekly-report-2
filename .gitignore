@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# GitToolBox plugin config
+/.idea/git_toolbox_prj.xml
