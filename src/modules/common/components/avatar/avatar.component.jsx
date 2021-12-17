@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import './avatar.styles.scss';
 
 export function makeAvatarText(firstName, lastName) {
-    return (firstName[0] + lastName[0]).toUpperCase();
+    if (firstName) {
+        return (firstName[0] + lastName[0]).toUpperCase();
+    } else {
+        return lastName.substring(0, 2).toUpperCase();
+    }
 }
 
 export const AvatarComponent = function ({
@@ -43,7 +47,7 @@ export const AvatarComponent = function ({
 };
 
 AvatarComponent.propTypes = {
-    firstName: PropTypes.string.isRequired,
+    firstName: PropTypes.string,
     lastName: PropTypes.string.isRequired,
     avatarPath: PropTypes.string,
     size: PropTypes.string,
