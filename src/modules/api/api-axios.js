@@ -2,8 +2,9 @@ import axios from 'axios';
 import { tokenStore } from './auth-jwt-store';
 
 const tokenHeader = (config) => {
-    if (tokenStore.getState() !== '') {
-        config.headers.Authorization = tokenStore;
+    const token = tokenStore.getState();
+    if (token !== '') {
+        config.headers.Authorization = token;
     }
     return config;
 };
