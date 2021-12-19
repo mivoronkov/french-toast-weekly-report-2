@@ -1,14 +1,11 @@
 import axios from 'axios';
+import { useAuth0 } from '@auth0/auth0-react';
 
-const tokenHeader = (config) => {
-    let token = localStorage.getItem('french-toast');
-    if (token.exp < Date.now()) {
-        localStorage.removeItem('french-toast');
-        //TODO logout
-        token = '';
-    }
+const tokenHeader = async (config) => {
+    const { getAccessTokenSilently } = useAuth0();
+    let token = await getAccessTokenSilently();
     if (token !== '') {
-        config.headers.Authorization = token;
+        config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
 };
