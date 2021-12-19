@@ -2,8 +2,11 @@ import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const tokenHeader = async (config) => {
-    const { getAccessTokenSilently } = useAuth0();
-    let token = await getAccessTokenSilently();
+    //TODO fix token
+    /* const { getAccessTokenSilently } = useAuth0();
+   /*  let token = await getAccessTokenSilently();*/
+    let tokenJSON = localStorage.getItem(localStorage.key(0));
+    let token = JSON.parse(tokenJSON)?.body?.access_token;
     if (token !== '') {
         config.headers.Authorization = `Bearer ${token}`;
     }
@@ -18,7 +21,8 @@ const authError = (err) => {
 };
 
 export const instanceAPI = axios.create({
-    baseURL: 'https://api/',
+    //TODO create env_variable
+    baseURL: 'https://localhost:5001/api/',
 });
 
 instanceAPI.interceptors.request.use(tokenHeader);

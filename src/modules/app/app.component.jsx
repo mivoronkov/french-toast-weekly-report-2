@@ -31,7 +31,6 @@ import { Login } from '../common/components/login/login.component';
 
 export function App() {
     const { user, isLoading } = useAuth0();
-
     if (isLoading) {
         return <Loading />;
     }
