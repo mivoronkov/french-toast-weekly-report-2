@@ -17,4 +17,9 @@ export const editMemberInformationStub = {
             lastName: 'Vovchuk',
         },
     ],
+    companyList: [
+        { companyId: 1, companyName: 'Sony' },
+        { companyId: 5, companyName: 'Pony' },
+        { companyId: 9, companyName: 'Kony' },
+    ],
 };

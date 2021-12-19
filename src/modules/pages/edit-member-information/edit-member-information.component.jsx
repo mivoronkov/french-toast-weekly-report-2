@@ -10,6 +10,7 @@ import { EditMembersPopupComponent } from '../../popups/edit-members/edit-member
 import './edit-member-information.styles.scss';
 import { Helmet } from 'react-helmet';
 import { useAuth0 } from '@auth0/auth0-react';
+import { SelectCompany } from '../../common/components/select-input/select-company.component';
 
 export function EditMemberInformation({
     firstName,
@@ -21,6 +22,7 @@ export function EditMemberInformation({
     reportingMembers = [],
     inviteLink,
     allMembers = [],
+    companyList,
 }) {
     const [EditLeadersModal, openEditLeaders, closeEditLeaders] = useModal(
         'root',
@@ -87,6 +89,7 @@ export function EditMemberInformation({
                         width='400px'
                         value={title}
                     />
+                    <SelectCompany companyList={companyList} />
                     <button className='btn btn-warning mt-2' type='submit'>
                         Save
                     </button>
@@ -184,5 +187,11 @@ EditMemberInformation.propTypes = {
             firstName: PropTypes.string.isRequired,
             lastName: PropTypes.string.isRequired,
         }).isRequired
+    ),
+    companyList: PropTypes.arrayOf(
+        PropTypes.shape({
+            companyId: PropTypes.number,
+            companyName: PropTypes.string,
+        })
     ),
 };
