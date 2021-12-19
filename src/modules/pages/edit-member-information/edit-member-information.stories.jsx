@@ -105,6 +105,11 @@ Variant1.args = {
         testMembers[4],
     ],
     allMembers: testMembers,
+    companyList: [
+        { companyId: 1, companyName: 'Sony' },
+        { companyId: 5, companyName: 'Pony' },
+        { companyId: 9, companyName: 'Kony' },
+    ],
 };
 
 export const Variant2 = Template.bind({});
@@ -126,5 +131,10 @@ Variant2.args = {
             firstName: 'Alexandr',
             lastName: 'Vovchuk',
         },
+    ],
+    companyList: [
+        { companyId: 1, companyName: 'Sony' },
+        { companyId: 5, companyName: 'Pony' },
+        { companyId: 9, companyName: 'Kony' },
     ],
 };
