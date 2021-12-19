@@ -1,8 +1,12 @@
 import axios from 'axios';
-import { tokenStore } from './auth-jwt-store';
 
 const tokenHeader = (config) => {
-    const token = tokenStore.getState();
+    let token = localStorage.getItem('french-toast');
+    if (token.exp < Date.now()) {
+        localStorage.removeItem('french-toast');
+        //TODO logout
+        token = '';
+    }
     if (token !== '') {
         config.headers.Authorization = token;
     }
