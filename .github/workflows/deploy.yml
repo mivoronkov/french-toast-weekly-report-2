@@ -16,6 +16,6 @@ jobs:
       - name: Check if SSL certificate keys exist
         run: test -f /root/ssl/data/certbot/conf/live/weekly-report-02.digitalocean.ankocorp.com/fullchain.pem
       - name: Copy SSL certificate keys
-        run: cp -r /root/ssl/data/ ${{ GITHUB_WORKSPACE }}
+        run: cp -r /root/ssl/data/ ${{ github.workspace }}
       - name: Run docker-compose
         run: docker-compose up -d --build
