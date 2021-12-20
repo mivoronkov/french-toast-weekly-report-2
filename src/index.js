@@ -7,7 +7,7 @@ import './styles/main.scss';
 import 'bootstrap';
 import { BrowserRouter } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
-import { APISetup } from './modules/api/api-axios';
+import { Initialisation } from './modules/app/setup.component';
 
 ReactDOM.render(
     <React.StrictMode>
@@ -19,7 +19,7 @@ ReactDOM.render(
                 cacheLocation='localstorage'
                 useRefreshTokens={true}
                 audience={process.env.REACT_APP_AUTH0_AUDIENCE}>
-                <APISetup />
+                <Initialisation />
                 <App />
             </Auth0Provider>
         </BrowserRouter>
