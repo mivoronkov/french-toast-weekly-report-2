@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { TextWithDateHeaderComponent } from '../../headers/text-with-date-header/text-with-date-header.component';
 import { TitleBlockComponent } from '../../containers/title-block/title-block.component';
@@ -6,21 +7,30 @@ import { ContentBlockComponent } from '../../containers/content-block/content-bl
 import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
 import { Helmet } from 'react-helmet';
 import { Form, Formik } from 'formik';
-import { formikSubmitPlaceholder } from '../../../utils';
+import { getUser, userStore } from '../../store/user-store';
+import { useStore } from 'effector-react';
+import { apiInvoker } from '../../api/api-axios';
 
-export function MyCompanyComponent({ companyName, joinedDate }) {
+export function MyCompanyComponent() {
+    useEffect(() => {
+        getUser();
+    }, []);
+    const { companyName, joinedDate, companyId } = useStore(userStore);
+
     const formInitValues = { companyName: '' };
-    const onSubmit = (values, { setSubmitting }) => {
-        //TODO: replace with API call
-        formikSubmitPlaceholder(values, { setSubmitting });
+    const onSubmit = async (values, { setSubmitting }) => {
+        await apiInvoker.companies.update(companyId, values.companyName);
+        await getUser();
+        setSubmitting(false);
     };
+
     return (
         <main className='flex-grow-1 overflow-auto'>
             <Helmet>
                 <title>My company</title>
             </Helmet>
             <TextWithDateHeaderComponent
-                joinedDate={formatDate(joinedDate)}
+                joinedDate={joinedDate}
                 companyName={companyName}
             />
             <div className='p-5 mx-5 d-flex flex-column'>
@@ -58,24 +68,13 @@ export function MyCompanyComponent({ companyName, joinedDate }) {
                             weekly report.
                         </b>
                     </p>
-                    <button className='btn btn-outline-dark mt-2'>
-                        See All Team Members
-                    </button>
+                    <Link to='/team-members'>
+                        <button className='btn btn-outline-dark mt-2'>
+                            See All Team Members
+                        </button>
+                    </Link>
                 </ContentBlockComponent>
             </div>
         </main>
     );
 }
-
-function formatDate(joinedDate) {
-    let dateStringParts = new Intl.DateTimeFormat('en', {
-        month: 'long',
-        year: 'numeric',
-    }).formatToParts(joinedDate);
-    return dateStringParts.map((part) => part.value).join(' ');
-}
-
-MyCompanyComponent.propTypes = {
-    companyName: PropTypes.string.isRequired,
-    joinedDate: PropTypes.instanceOf(Date),
-};

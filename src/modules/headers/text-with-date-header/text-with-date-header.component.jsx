@@ -7,7 +7,7 @@ export function TextWithDateHeaderComponent({ companyName, joinedDate }) {
             <h1>
                 <b>{companyName}</b>
             </h1>
-            <p>Joined {joinedDate}</p>
+            <p>Joined {formatDate(joinedDate)}</p>
         </header>
     );
 }
@@ -16,3 +16,10 @@ TextWithDateHeaderComponent.propTypes = {
     companyName: PropTypes.string.isRequired,
     joinedDate: PropTypes.string.isRequired,
 };
+function formatDate(joinedDate) {
+    let dateStringParts = new Intl.DateTimeFormat('en', {
+        month: 'long',
+        year: 'numeric',
+    }).formatToParts(joinedDate);
+    return dateStringParts.map((part) => part.value).join(' ');
+}

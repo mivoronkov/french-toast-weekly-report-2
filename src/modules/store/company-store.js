@@ -2,11 +2,11 @@ import { createStore, createEffect } from 'effector';
 import { apiInvoker } from '../api/api-axios';
 
 export const getCompanies = createEffect(async () => {
-    const resp = await apiInvoker.companies.getCompanies();
+    const resp = await apiInvoker.companies.getAll();
     return resp.data;
 });
 export const createCompany = createEffect(async (companyName) => {
-    const resp = await apiInvoker.companies.createCompany(companyName);
+    const resp = await apiInvoker.companies.create(companyName);
     await getCompanies();
     return resp.data;
 });
