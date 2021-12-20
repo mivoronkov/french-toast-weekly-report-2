@@ -51,5 +51,5 @@ RadioSmileContainer.propTypes = {
     mainLabel: PropTypes.string,
     containerInputName: PropTypes.string,
     containerLabels: PropTypes.arrayOf(PropTypes.string),
-    commentTextareaId: PropTypes.number.isRequired,
+    commentTextareaId: PropTypes.string.isRequired,
 };

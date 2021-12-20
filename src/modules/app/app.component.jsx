@@ -28,6 +28,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { RequireAuth } from '../common/components/auth/require-auth.component';
 import { LoginButtonComponent } from '../common/components/buttons/login-button.component';
 import { Login } from '../common/components/login/login.component';
+import { AcceptInviteComponent } from '../pages/accept-invite/accept-invite.component';
 
 export function App() {
     const { user, isLoading } = useAuth0();
@@ -96,6 +97,15 @@ export function App() {
                     element={<LoginButtonComponent />}
                 />
                 <Route path='/' element={<LaunchGuide />} />
+                <Route
+                    path='/accept-invite'
+                    element={
+                        <AcceptInviteComponent
+                            company={'Company'}
+                            inviterName={'Name'}
+                        />
+                    }
+                />
             </Routes>
         </div>
     );

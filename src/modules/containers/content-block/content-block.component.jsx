@@ -13,6 +13,9 @@ export function ContentBlockComponent({ title, children, className = '' }) {
 
 ContentBlockComponent.propTypes = {
     title: PropTypes.string.isRequired,
-    children: PropTypes.element,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node,
+    ]),
     className: PropTypes.string,
 };
