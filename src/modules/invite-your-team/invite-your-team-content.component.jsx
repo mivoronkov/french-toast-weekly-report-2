@@ -1,11 +1,21 @@
 import React, { useState } from 'react';
 import { InviteYourTeamSuccessMessageComponent } from './invite-your-team-success-message.component';
 import { EditFieldComponent } from '../common/components/edit-field/edit-field.component';
+import { Form, Formik } from 'formik';
+import { formikSubmitPlaceholder } from '../../utils';
 
 export function InviteYourTeamContent() {
     const [showSuccess, setShowSuccess] = useState(false);
-    const onClick = () => setShowSuccess(true);
-
+    const formInitValues = {
+        firstName: '',
+        lastName: '',
+        email: '',
+    };
+    const onSubmit = (values, { setSubmitting }) => {
+        //TODO: replace with API call
+        formikSubmitPlaceholder(values, { setSubmitting });
+        setShowSuccess(true);
+    };
     return (
         <div>
             {showSuccess ? <InviteYourTeamSuccessMessageComponent /> : null}
@@ -23,16 +33,18 @@ export function InviteYourTeamContent() {
                                 Don&apos;t Worry! You&apos;ll be able to add
                                 more team members later.
                             </div>
-                            <EditFieldComponent label={'First Name'} />
-                            <EditFieldComponent label={'Last Name'} />
-                            <EditFieldComponent label={'Email'} />
-                            <a>
-                                <button
-                                    className='btn btn-warning mt-3'
-                                    onClick={onClick}>
-                                    Invite
-                                </button>
-                            </a>
+                            <Formik
+                                initialValues={formInitValues}
+                                onSubmit={onSubmit}>
+                                <Form>
+                                    <EditFieldComponent label={'First Name'} />
+                                    <EditFieldComponent label={'Last Name'} />
+                                    <EditFieldComponent label={'Email'} />
+                                    <button className='btn btn-warning mt-3'>
+                                        Invite
+                                    </button>
+                                </Form>
+                            </Formik>
                         </div>
                     </div>
                 </div>

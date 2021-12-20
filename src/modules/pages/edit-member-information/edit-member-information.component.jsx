@@ -10,7 +10,8 @@ import { EditMembersPopupComponent } from '../../popups/edit-members/edit-member
 import './edit-member-information.styles.scss';
 import { Helmet } from 'react-helmet';
 import { useAuth0 } from '@auth0/auth0-react';
-import { SelectCompany } from '../../common/components/select-input/select-company.component';
+import { Form, Formik } from 'formik';
+import { formikSubmitPlaceholder } from '../../../utils';
 
 export function EditMemberInformation({
     firstName,
@@ -22,7 +23,6 @@ export function EditMemberInformation({
     reportingMembers = [],
     inviteLink,
     allMembers = [],
-    companyList,
 }) {
     const [EditLeadersModal, openEditLeaders, closeEditLeaders] = useModal(
         'root',
@@ -54,7 +54,27 @@ export function EditMemberInformation({
         (member) => `${member.firstName} ${member.lastName}`
     );
 
-    const { user } = useAuth0();
+    let { user } = useAuth0();
+
+    // Fix for storybook:
+    if (!user) {
+        user = {
+            given_name: firstName,
+            family_name: lastName,
+            email: email,
+            picture: avatar,
+        };
+    }
+
+    const formInitValues = {
+        firstName: firstName,
+        lastName: lastName,
+        title: title,
+    };
+    const onSubmit = (values, { setSubmitting }) => {
+        //TODO: replace with API call
+        formikSubmitPlaceholder(values, { setSubmitting });
+    };
 
     return (
         <main className='flex-grow-1 overflow-auto'>
@@ -74,25 +94,30 @@ export function EditMemberInformation({
                     your organization.
                 </TitleBlockComponent>
                 <ContentBlockComponent title='Basic profile information'>
-                    <EditFieldComponent
-                        label='First Name'
-                        width='280px'
-                        value={firstName}
-                    />
-                    <EditFieldComponent
-                        label='Last Name'
-                        width='340px'
-                        value={lastName}
-                    />
-                    <EditFieldComponent
-                        label='Title'
-                        width='400px'
-                        value={title}
-                    />
-                    <SelectCompany companyList={companyList} />
-                    <button className='btn btn-warning mt-2' type='submit'>
-                        Save
-                    </button>
+                    <Formik initialValues={formInitValues} onSubmit={onSubmit}>
+                        <Form>
+                            <EditFieldComponent
+                                label='First Name'
+                                width='280px'
+                                value={firstName}
+                            />
+                            <EditFieldComponent
+                                label='Last Name'
+                                width='340px'
+                                value={lastName}
+                            />
+                            <EditFieldComponent
+                                label='Title'
+                                width='400px'
+                                value={title}
+                            />
+                            <button
+                                className='btn btn-warning mt-2'
+                                type='submit'>
+                                Save
+                            </button>
+                        </Form>
+                    </Formik>
                 </ContentBlockComponent>
                 <ContentBlockComponent
                     title={`${firstName} reports to the following leaders:`}>
@@ -187,11 +212,5 @@ EditMemberInformation.propTypes = {
             firstName: PropTypes.string.isRequired,
             lastName: PropTypes.string.isRequired,
         }).isRequired
-    ),
-    companyList: PropTypes.arrayOf(
-        PropTypes.shape({
-            companyId: PropTypes.number,
-            companyName: PropTypes.string,
-        })
     ),
 };

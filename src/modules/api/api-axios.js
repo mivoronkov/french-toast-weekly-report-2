@@ -44,5 +44,21 @@ const authError = (err) => {
     }
     return Promise.reject(err);
 };
+
+const instanceAPI = axios.create({
+    //TODO create env_variable
+    baseURL: 'https://localhost:5001/api/',
+});
 instanceAPI.interceptors.request.use(tokenHeader);
 instanceAPI.interceptors.response.use((response) => response, authError);
+
+export const apiInvoker = {
+    companies: {
+        async getCompanies() {
+            return await instanceAPI.get('companies');
+        },
+        async createCompany(companyName) {
+            return await instanceAPI.post('companies', { name: companyName });
+        },
+    },
+};
