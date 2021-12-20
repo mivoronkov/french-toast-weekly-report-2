@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { TextWithDateHeaderComponent } from '../../headers/text-with-date-header/text-with-date-header.component';
 import { TitleBlockComponent } from '../../containers/title-block/title-block.component';
@@ -29,7 +30,7 @@ export function MyCompanyComponent() {
                 <title>My company</title>
             </Helmet>
             <TextWithDateHeaderComponent
-                joinedDate={formatDate(joinedDate)}
+                joinedDate={joinedDate}
                 companyName={companyName}
             />
             <div className='p-5 mx-5 d-flex flex-column'>
@@ -67,19 +68,13 @@ export function MyCompanyComponent() {
                             weekly report.
                         </b>
                     </p>
-                    <button className='btn btn-outline-dark mt-2'>
-                        See All Team Members
-                    </button>
+                    <Link to='/team-members'>
+                        <button className='btn btn-outline-dark mt-2'>
+                            See All Team Members
+                        </button>
+                    </Link>
                 </ContentBlockComponent>
             </div>
         </main>
     );
-}
-
-function formatDate(joinedDate) {
-    let dateStringParts = new Intl.DateTimeFormat('en', {
-        month: 'long',
-        year: 'numeric',
-    }).formatToParts(joinedDate);
-    return dateStringParts.map((part) => part.value).join(' ');
 }
