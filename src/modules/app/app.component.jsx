@@ -31,11 +31,25 @@ import { Login } from '../common/components/login/login.component';
 import { AcceptInviteComponent } from '../pages/accept-invite/accept-invite.component';
 
 export function App() {
-    const { user, isLoading } = useAuth0();
+    const { user, isLoading, getAccessTokenSilently } = useAuth0();
+
     if (isLoading) {
         return <Loading />;
     }
 
+    if (!user) {
+        // Пользователь не авторизован через Auth0, показываем ему Login через Auth0
+        return <Login />;
+    }
+
+    /*// Пользователь авторизован через Auth0, проверяем, что он есть в таблице TeamMembers
+    let userInDB = api.getUser(getAccessTokenSilently());
+    if (!userInDB) {
+        // Пользователь авторизован через Auth0, но в БД его нет, показываем страницу Complete Registration
+        return <CompleteRegistration />;
+    }*/
+
+    // Пользователь авторизован через Auth0 и есть в БД, показываем обычную страницу
     return (
         <div className='d-flex h-100'>
             <FeedbackButtonComponent />
