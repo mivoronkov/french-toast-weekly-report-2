@@ -29,10 +29,12 @@ instanceAPI.interceptors.request.use(tokenHeader);
 instanceAPI.interceptors.response.use((response) => response, authError);
 
 export const apiInvoker = {
-    async getCompanies() {
-        return await instanceAPI.get('companies');
-    },
-    async createCompany(companyName) {
-        return await instanceAPI.post('companies', { name: companyName });
+    companies: {
+        async getCompanies() {
+            return await instanceAPI.get('companies');
+        },
+        async createCompany(companyName) {
+            return await instanceAPI.post('companies', { name: companyName });
+        },
     },
 };
