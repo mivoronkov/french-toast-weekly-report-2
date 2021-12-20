@@ -12,9 +12,6 @@ import { useStore } from 'effector-react';
 import { apiInvoker } from '../../api/api-axios';
 
 export function MyCompanyComponent() {
-    useEffect(() => {
-        getUser();
-    }, []);
     const { companyName, joinedDate, companyId } = useStore(userStore);
 
     const formInitValues = { companyName: '' };

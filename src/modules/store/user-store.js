@@ -2,8 +2,12 @@ import { createStore, createEffect } from 'effector';
 import { apiInvoker } from '../api/api-axios';
 
 export const getUser = createEffect(async () => {
-    const resp = await apiInvoker.user.get();
-    return resp.data;
+    try {
+        const resp = await apiInvoker.user.get();
+        return resp.data;
+    } catch (error) {
+        return error;
+    }
 });
 
 export const userStore = createStore({
@@ -15,6 +19,9 @@ export const userStore = createStore({
     companyId: '',
     joinedDate: '',
 });
-userStore.on(getUser.doneData, (_, data) => {
+userStore.on(getUser.doneData, (state, data) => {
+    if (data instanceof Error) {
+        return state;
+    }
     return data;
 });

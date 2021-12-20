@@ -26,9 +26,6 @@ export function EditMemberInformation({
     inviteLink,
     allMembers = [],
 }) {
-    useEffect(() => {
-        getUser();
-    }, []);
     const userInDB = useStore(userStore);
 
     const [EditLeadersModal, openEditLeaders, closeEditLeaders] = useModal(
