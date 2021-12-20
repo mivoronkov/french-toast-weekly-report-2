@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { TitleBlockComponent } from '../../containers/title-block/title-block.component';
 import { ContentBlockComponent } from '../../containers/content-block/content-block.component';
 import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
@@ -11,16 +10,16 @@ import {
     getCompanies,
     createCompany,
 } from '../../app/company-store';
+import { Form, Formik } from 'formik';
 
 export function NewCompanyRegistration() {
     const companies = useStore(companyStore);
     useEffect(() => {
         getCompanies();
     }, []);
-    const submitHandler = (event) => {
-        event.preventDefault();
-        //TODO fix input value
-        createCompany(event.target[0].value);
+    const formInitValues = { companyName: '' };
+    const onSubmit = (values) => {
+        createCompany(values.companyName);
     };
     return (
         <main className='flex-grow-1 overflow-auto'>
@@ -28,24 +27,27 @@ export function NewCompanyRegistration() {
                 <title>Register a new company</title>
             </Helmet>
             <TextHeaderComponent title={'Register a new company'} />
-            <form onSubmit={submitHandler}>
-                <div className='p-5 mx-5 d-flex flex-column'>
-                    <TitleBlockComponent title={`Edit information`}>
-                        You can register a new company.
-                    </TitleBlockComponent>
-                    <ContentBlockComponent title={`Company name`}>
-                        <EditFieldComponent
-                            label='Enter company name.'
-                            width='450px'
-                        />
-                        <button
-                            className='btn btn-outline-dark mt-2'
-                            type='submit'>
-                            Create a company
-                        </button>
-                    </ContentBlockComponent>
-                </div>
-            </form>
+            <Formik initialValues={formInitValues} onSubmit={onSubmit}>
+                <Form>
+                    <div className='p-5 mx-5 d-flex flex-column'>
+                        <TitleBlockComponent title={`Edit information`}>
+                            You can register a new company.
+                        </TitleBlockComponent>
+                        <ContentBlockComponent title={`Company name`}>
+                            <EditFieldComponent
+                                label='Enter company name.'
+                                name='companyName'
+                                width='450px'
+                            />
+                            <button
+                                className='btn btn-outline-dark mt-2'
+                                type='submit'>
+                                Create a company
+                            </button>
+                        </ContentBlockComponent>
+                    </div>
+                </Form>
+            </Formik>
             <ul className='p-5 mx-5 d-flex flex-column'>
                 {companies.map((el) => {
                     return (

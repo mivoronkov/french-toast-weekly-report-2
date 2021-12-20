@@ -5,8 +5,15 @@ import { TitleBlockComponent } from '../../containers/title-block/title-block.co
 import { ContentBlockComponent } from '../../containers/content-block/content-block.component';
 import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
 import { Helmet } from 'react-helmet';
+import { Form, Formik } from 'formik';
+import { formikSubmitPlaceholder } from '../../../utils';
 
 export function MyCompanyComponent({ companyName, joinedDate }) {
+    const formInitValues = { companyName: '' };
+    const onSubmit = (values, { setSubmitting }) => {
+        //TODO: replace with API call
+        formikSubmitPlaceholder(values, { setSubmitting });
+    };
     return (
         <main className='flex-grow-1 overflow-auto'>
             <Helmet>
@@ -25,13 +32,20 @@ export function MyCompanyComponent({ companyName, joinedDate }) {
                     access that information by seeing the list of team members.
                 </TitleBlockComponent>
                 <ContentBlockComponent title={`Rename ${companyName}`}>
-                    <EditFieldComponent
-                        label='Change company name.'
-                        width='450px'
-                    />
-                    <button className='btn btn-outline-dark mt-2' type='submit'>
-                        Save name change
-                    </button>
+                    <Formik initialValues={formInitValues} onSubmit={onSubmit}>
+                        <Form>
+                            <EditFieldComponent
+                                label='Change company name.'
+                                name='companyName'
+                                width='450px'
+                            />
+                            <button
+                                className='btn btn-outline-dark mt-2'
+                                type='submit'>
+                                Save name change
+                            </button>
+                        </Form>
+                    </Formik>
                 </ContentBlockComponent>
                 <ContentBlockComponent
                     title={`See list of ${companyName}'s members`}>
