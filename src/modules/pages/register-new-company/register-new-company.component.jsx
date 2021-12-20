@@ -9,7 +9,7 @@ import {
     companyStore,
     getCompanies,
     createCompany,
-} from '../../app/company-store';
+} from '../../store/company-store';
 import { Form, Formik } from 'formik';
 
 export function NewCompanyRegistration() {

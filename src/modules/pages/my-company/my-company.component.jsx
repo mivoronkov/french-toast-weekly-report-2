@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TextWithDateHeaderComponent } from '../../headers/text-with-date-header/text-with-date-header.component';
 import { TitleBlockComponent } from '../../containers/title-block/title-block.component';
@@ -6,14 +6,23 @@ import { ContentBlockComponent } from '../../containers/content-block/content-bl
 import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
 import { Helmet } from 'react-helmet';
 import { Form, Formik } from 'formik';
-import { formikSubmitPlaceholder } from '../../../utils';
+import { getUser, userStore } from '../../store/user-store';
+import { useStore } from 'effector-react';
+import { apiInvoker } from '../../api/api-axios';
 
-export function MyCompanyComponent({ companyName, joinedDate }) {
+export function MyCompanyComponent() {
+    useEffect(() => {
+        getUser();
+    }, []);
+    const { companyName, joinedDate, companyId } = useStore(userStore);
+
     const formInitValues = { companyName: '' };
-    const onSubmit = (values, { setSubmitting }) => {
-        //TODO: replace with API call
-        formikSubmitPlaceholder(values, { setSubmitting });
+    const onSubmit = async (values, { setSubmitting }) => {
+        await apiInvoker.companies.update(companyId, values.companyName);
+        await getUser();
+        setSubmitting(false);
     };
+
     return (
         <main className='flex-grow-1 overflow-auto'>
             <Helmet>
@@ -74,8 +83,3 @@ function formatDate(joinedDate) {
     }).formatToParts(joinedDate);
     return dateStringParts.map((part) => part.value).join(' ');
 }
-
-MyCompanyComponent.propTypes = {
-    companyName: PropTypes.string.isRequired,
-    joinedDate: PropTypes.instanceOf(Date),
-};

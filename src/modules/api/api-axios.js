@@ -48,11 +48,21 @@ instanceAPI.interceptors.response.use((response) => response, authError);
 
 export const apiInvoker = {
     companies: {
-        async getCompanies() {
+        async getAll() {
             return await instanceAPI.get('companies');
         },
-        async createCompany(companyName) {
+        async create(companyName) {
             return await instanceAPI.post('companies', { name: companyName });
+        },
+        async update(companyId, companyName) {
+            return await instanceAPI.put(`companies/${companyId}`, {
+                name: companyName,
+            });
+        },
+    },
+    user: {
+        async get() {
+            return await instanceAPI.get('user');
         },
     },
 };
