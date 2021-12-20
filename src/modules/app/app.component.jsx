@@ -28,6 +28,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { RequireAuth } from '../common/components/auth/require-auth.component';
 import { LoginButtonComponent } from '../common/components/buttons/login-button.component';
 import { Login } from '../common/components/login/login.component';
+import { APISetup } from '../api/api-axios';
 
 export function App() {
     const { user, isLoading } = useAuth0();
@@ -37,6 +38,7 @@ export function App() {
 
     return (
         <div className='d-flex h-100'>
+            <APISetup />
             <FeedbackButtonComponent />
             <HelpButtonComponent />
             <SidebarComponent />
