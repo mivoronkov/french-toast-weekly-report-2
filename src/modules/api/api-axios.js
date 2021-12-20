@@ -13,6 +13,7 @@ const tokenHeader = async (config) => {
     return config;
 };
 const authError = (err) => {
+    console.log(err);
     const { status } = err.response;
     if (status === 401) {
         //TODO something
@@ -20,10 +21,20 @@ const authError = (err) => {
     return Promise.reject(err);
 };
 
-export const instanceAPI = axios.create({
+const instanceAPI = axios.create({
     //TODO create env_variable
     baseURL: 'https://localhost:5001/api/',
 });
-
 instanceAPI.interceptors.request.use(tokenHeader);
 instanceAPI.interceptors.response.use((response) => response, authError);
+
+export const apiInvoker = {
+    companies: {
+        async getCompanies() {
+            return await instanceAPI.get('companies');
+        },
+        async createCompany(companyName) {
+            return await instanceAPI.post('companies', { name: companyName });
+        },
+    },
+};
