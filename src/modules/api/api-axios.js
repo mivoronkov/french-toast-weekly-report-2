@@ -1,20 +1,38 @@
 import axios from 'axios';
 import { useAuth0 } from '@auth0/auth0-react';
+import React, { useEffect } from 'react';
+import { createStore, createEvent } from 'effector';
 
-const tokenHeader = async (config) => {
-    //TODO fix token
-    /* const { getAccessTokenSilently } = useAuth0();
-   /*  let token = await getAccessTokenSilently();*/
-    let tokenJSON = localStorage.getItem(localStorage.key(0));
-    let token = JSON.parse(tokenJSON)?.body?.access_token;
+const setTokenTOStore = createEvent();
+const tokenFromStore = createStore('').on(
+    setTokenTOStore,
+    (_, newToken) => newToken
+);
+
+export function APISetup() {
+    const { getAccessTokenSilently } = useAuth0();
+    useEffect(() => {
+        (async () => {
+            try {
+                const token = await getAccessTokenSilently();
+                setTokenTOStore(token);
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    }, [getAccessTokenSilently]);
+    return null;
+}
+
+const tokenHeader = (config) => {
+    const token = tokenFromStore.getState();
     if (token !== '') {
         config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
 };
 const authError = (err) => {
-    console.log(err);
-    const { status } = err.response;
+    const status = err?.response?.status;
     if (status === 401) {
         //TODO something
     }
