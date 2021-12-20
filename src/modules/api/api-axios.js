@@ -8,10 +8,6 @@ const tokenFromStore = createStore('').on(
     setTokenTOStore,
     (_, newToken) => newToken
 );
-export const instanceAPI = axios.create({
-    //TODO create env_variable
-    baseURL: 'https://localhost:5001/api/',
-});
 
 export function APISetup() {
     const { getAccessTokenSilently } = useAuth0();
@@ -43,6 +39,10 @@ const authError = (err) => {
     return Promise.reject(err);
 };
 
+const instanceAPI = axios.create({
+    //TODO create env_variable
+    baseURL: 'https://localhost:5001/api/',
+});
 instanceAPI.interceptors.request.use(tokenHeader);
 instanceAPI.interceptors.response.use((response) => response, authError);
 
