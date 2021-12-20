@@ -7,6 +7,6 @@ export function Login() {
     const { loginWithRedirect } = useAuth0();
     const state = useLocation();
     loginWithRedirect().then(() => {
-        navigate(state?.path || '/');
+        navigate(state?.pathname || '/');
     });
 }
