@@ -13,9 +13,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Run docker-compose
-        run: docker-compose up -d --build
       - name: Check if SSL certificate keys exist
         run: test -f /root/ssl/data/certbot/conf/live/weekly-report-02.digitalocean.ankocorp.com/fullchain.pem
       - name: Copy SSL certificate keys
         run: cp -r /root/ssl/data/ ${{ GITHUB_WORKSPACE }}
+      - name: Run docker-compose
+        run: docker-compose up -d --build
