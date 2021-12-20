@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { SidebarComponent } from '../common/components/sidebar/sidebar.component';
@@ -29,6 +29,9 @@ import { RequireAuth } from '../common/components/auth/require-auth.component';
 import { Login } from '../common/components/login/login.component';
 import { AcceptInviteComponent } from '../pages/accept-invite/accept-invite.component';
 import { CompleteRegistration } from '../pages/complete-registration/complete-registration.component';
+import { useStore } from 'effector-react';
+import { apiInvoker } from '../api/api-axios';
+import { getUser, userStore } from '../store/user-store';
 
 export function App() {
     const { user, isLoading, getAccessTokenSilently } = useAuth0();
@@ -42,12 +45,19 @@ export function App() {
         return <Login />;
     }
 
-    /*// Пользователь авторизован через Auth0, проверяем, что он есть в таблице TeamMembers
-    let userInDB = api.getUser(getAccessTokenSilently());
-    if (!userInDB) {
+    // Пользователь авторизован через Auth0, проверяем, что он есть в таблице TeamMembers
+    useEffect(() => {
+        getUser();
+    }, []);
+    const userInDB = useStore(userStore);
+    if (userInDB.companyId === '') {
         // Пользователь авторизован через Auth0, но в БД его нет, показываем страницу Complete Registration
-        return <CompleteRegistration />;
-    }*/
+        return (
+            <div className='d-flex h-100'>
+                <CompleteRegistration />;
+            </div>
+        );
+    }
 
     // Пользователь авторизован через Auth0 и есть в БД, показываем обычную страницу
     return (

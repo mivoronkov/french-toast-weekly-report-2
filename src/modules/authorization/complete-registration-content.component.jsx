@@ -1,17 +1,34 @@
 import React from 'react';
 import { EditFieldComponent } from '../common/components/edit-field/edit-field.component';
 import { Form, Formik } from 'formik';
-import { formikSubmitPlaceholder } from '../../utils';
+import { createCompany } from '../store/company-store';
+import { createMember } from '../store/team-member-store';
+import { useAuth0 } from '@auth0/auth0-react';
 
 export function CompleteRegistrationContent() {
     const initFormValues = {
         firstName: '',
         lastName: '',
         companyName: '',
+        title: '',
     };
-    const onSubmit = (values, { setSubmitting }) => {
-        //TODO: add corresponding API call
-        formikSubmitPlaceholder(values, { setSubmitting });
+    const { user } = useAuth0();
+    const onSubmit = async (values, { setSubmitting }) => {
+        let createdCompany = await createCompany(values.companyName);
+
+        let createdMember = await createMember({
+            companyId: createdCompany.id,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            title: values.title,
+            email: user.email,
+            sub: user.sub,
+            companyName: createdCompany.name,
+            //TODO: add invite link generation
+            inviteLink: 'example.com',
+        });
+
+        window.location.reload();
     };
     return (
         <div>
@@ -33,6 +50,7 @@ export function CompleteRegistrationContent() {
                                         label='New company name'
                                         name='companyName'
                                     />
+                                    <EditFieldComponent label='Title' />
                                     <button
                                         type='submit'
                                         className='btn btn-warning mt-3'>

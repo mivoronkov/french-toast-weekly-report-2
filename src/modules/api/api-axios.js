@@ -55,4 +55,36 @@ export const apiInvoker = {
             return await instanceAPI.post('companies', { name: companyName });
         },
     },
+    teamMember: {
+        async getAll(companyId) {
+            return await instanceAPI.get(`companies/${companyId}/members`);
+        },
+        async createMember(
+            companyId,
+            firstName,
+            lastName,
+            title,
+            email,
+            sub,
+            companyName,
+            inviteLink
+        ) {
+            return await instanceAPI.post(`companies/${companyId}/members`, {
+                id: 0,
+                firstName: firstName,
+                lastName: lastName,
+                title: title,
+                email: email,
+                sub: sub,
+                companyName: companyName,
+                companyId: companyId,
+                inviteLink: inviteLink,
+            });
+        },
+    },
+    user: {
+        async get() {
+            return await instanceAPI.get('user');
+        },
+    },
 };
