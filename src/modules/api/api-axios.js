@@ -65,4 +65,9 @@ export const apiInvoker = {
             return await instanceAPI.get('user');
         },
     },
+    teamMember: {
+        async getAll(companyId) {
+            return await instanceAPI.get(`companies/${companyId}/members`);
+        },
+    },
 };
