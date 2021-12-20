@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { SidebarComponent } from '../common/components/sidebar/sidebar.component';
@@ -30,12 +30,13 @@ import { Login } from '../common/components/login/login.component';
 import { AcceptInviteComponent } from '../pages/accept-invite/accept-invite.component';
 import { CompleteRegistration } from '../pages/complete-registration/complete-registration.component';
 import { useStore } from 'effector-react';
-import { apiInvoker } from '../api/api-axios';
-import { getUser, userStore } from '../store/user-store';
+import { userStore } from '../store/user-store';
+import { isWaitingResponse } from '../store/user-request-store';
 
 export function App() {
     const { user, isLoading, getAccessTokenSilently } = useAuth0();
-
+    const userInDB = useStore(userStore);
+    const isWaitingLoad = useStore(isWaitingResponse);
     if (isLoading) {
         return <Loading />;
     }
@@ -46,15 +47,12 @@ export function App() {
     }
 
     // Пользователь авторизован через Auth0, проверяем, что он есть в таблице TeamMembers
-    useEffect(() => {
-        getUser();
-    }, []);
-    const userInDB = useStore(userStore);
     if (userInDB.companyId === '') {
         // Пользователь авторизован через Auth0, но в БД его нет, показываем страницу Complete Registration
+        //TODO проверка на ошибку сети
         return (
-            <div className='d-flex h-100'>
-                <CompleteRegistration />;
+            <div className='d-flex h-100 justify-content-center'>
+                {isWaitingLoad ? <Loading /> : <CompleteRegistration />}
             </div>
         );
     }
