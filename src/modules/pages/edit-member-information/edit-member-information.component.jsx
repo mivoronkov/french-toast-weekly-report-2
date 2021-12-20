@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useModal } from 'react-hooks-use-modal';
 import { ProfileHeaderComponent } from '../../headers/profile-header/profile-header.component';
@@ -12,6 +12,8 @@ import { Helmet } from 'react-helmet';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Form, Formik } from 'formik';
 import { formikSubmitPlaceholder } from '../../../utils';
+import { useStore } from 'effector-react';
+import { getUser, userStore } from '../../store/user-store';
 
 export function EditMemberInformation({
     firstName,
@@ -24,6 +26,11 @@ export function EditMemberInformation({
     inviteLink,
     allMembers = [],
 }) {
+    useEffect(() => {
+        getUser();
+    }, []);
+    const userInDB = useStore(userStore);
+
     const [EditLeadersModal, openEditLeaders, closeEditLeaders] = useModal(
         'root',
         {
@@ -67,9 +74,9 @@ export function EditMemberInformation({
     }
 
     const formInitValues = {
-        firstName: firstName,
-        lastName: lastName,
-        title: title,
+        firstName: userInDB.firstName,
+        lastName: userInDB.lastName,
+        title: userInDB.title,
     };
     const onSubmit = (values, { setSubmitting }) => {
         //TODO: replace with API call
@@ -82,13 +89,14 @@ export function EditMemberInformation({
                 <title>Edit member information</title>
             </Helmet>
             <ProfileHeaderComponent
-                first_name={user.given_name}
-                last_name={user.family_name}
-                email={user.email}
+                first_name={userInDB.firstName}
+                last_name={userInDB.lastName}
+                email={userInDB.email}
                 avatar_path={user.picture}
             />
             <div className='p-5 mx-5 d-flex flex-column'>
-                <TitleBlockComponent title={`Edit ${firstName}'s information`}>
+                <TitleBlockComponent
+                    title={`Edit ${userInDB.firstName}'s information`}>
                     You may assign leaders or team members to this person, as
                     well as deactivate their account if they no longer work for
                     your organization.
@@ -99,17 +107,17 @@ export function EditMemberInformation({
                             <EditFieldComponent
                                 label='First Name'
                                 width='280px'
-                                value={firstName}
+                                value={userInDB.firstName}
                             />
                             <EditFieldComponent
                                 label='Last Name'
                                 width='340px'
-                                value={lastName}
+                                value={userInDB.lastName}
                             />
                             <EditFieldComponent
                                 label='Title'
                                 width='400px'
-                                value={title}
+                                value={userInDB.title}
                             />
                             <button
                                 className='btn btn-warning mt-2'
@@ -120,7 +128,7 @@ export function EditMemberInformation({
                     </Formik>
                 </ContentBlockComponent>
                 <ContentBlockComponent
-                    title={`${firstName} reports to the following leaders:`}>
+                    title={`${userInDB.firstName} reports to the following leaders:`}>
                     <TagRowComponent tag_names={leadersTagNames} />
                     <a href='#'>
                         <button
@@ -131,7 +139,8 @@ export function EditMemberInformation({
                         </button>
                     </a>
                 </ContentBlockComponent>
-                <ContentBlockComponent title='The following team members report to Anatoliy:'>
+                <ContentBlockComponent
+                    title={`The following team members report to ${userInDB.firstName}:`}>
                     <TagRowComponent tag_names={membersTagNames} />
                     <button
                         className='btn btn-outline-dark mt-3'
@@ -141,11 +150,11 @@ export function EditMemberInformation({
                     </button>
                 </ContentBlockComponent>
                 <ContentBlockComponent
-                    title={`${firstName}'s invite link`}
+                    title={`${userInDB.firstName}'s invite link`}
                     className='d-flex flex-column justify-content-center'>
                     <p>
                         Share the following link to invite team members on{' '}
-                        {firstName}&apos;s behalf.
+                        {userInDB.firstName}&apos;s behalf.
                     </p>
                     <label className='d-none' htmlFor='link-for-invite'>
                         Link to invite team members

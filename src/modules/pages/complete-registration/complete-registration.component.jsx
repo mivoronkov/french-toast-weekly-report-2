@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 
 export function CompleteRegistration() {
     return (
-        <main className='flex-grow-1 overflow-auto'>
+        <main className='flex-grow-1 overflow-auto mx-0'>
             <Helmet>
                 <title>Complete registration</title>
             </Helmet>

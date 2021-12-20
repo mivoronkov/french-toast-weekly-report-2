@@ -7,6 +7,10 @@ export const getUser = createEffect(async () => {
 });
 
 export const userStore = createStore({
+    firstName: '',
+    lastName: '',
+    email: '',
+    title: '',
     companyName: '',
     companyId: '',
     joinedDate: '',
