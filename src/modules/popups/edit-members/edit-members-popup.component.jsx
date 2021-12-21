@@ -59,7 +59,6 @@ export function EditMembersPopupComponent({
             setTags([...tags, tag]);
         }
     };
-
     return (
         <div className='modal-content top-border-color p-4 modal-size'>
             <div className='modal-header border-0'>
@@ -95,7 +94,7 @@ export function EditMembersPopupComponent({
                 <button
                     type='button'
                     className='btn save-button'
-                    onClick={onSave}>
+                    onClick={() => onSave(tags)}>
                     Save changes
                 </button>
             </div>
