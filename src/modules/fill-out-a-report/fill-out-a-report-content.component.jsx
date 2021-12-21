@@ -8,6 +8,7 @@ import 'bootstrap-daterangepicker/daterangepicker.css';
 import { Form, Formik, Field, useFormikContext } from 'formik';
 import { useStore } from 'effector-react';
 import { userStore } from '../store/user-store';
+import { createReport } from '../store/weekly-report-store';
 
 export function FillOutAReportContent({ firstName }) {
     const userInDB = useStore(userStore);
@@ -56,7 +57,22 @@ export function FillOutAReportContent({ firstName }) {
     };
 
     const onSubmit = async (values) => {
-        /* TODO: make API call to send weekly report */
+        let createdReport = await createReport({
+            companyId: userInDB.companyId,
+            memberId: userInDB.id,
+            moraleLevel: values.moraleInput,
+            moraleCommentary: values.moraleCommentTextarea,
+            stressLevel: values.stressInput,
+            stressCommentary: values.stressCommentTextarea,
+            workloadLevel: values.workloadInput,
+            workloadCommentary: values.workloadCommentTextarea,
+            highThisWeek: values.highTextarea,
+            lowThisWeek: values.lowTextarea,
+            anythingElse: values.elseTextarea,
+            weekStartDate: dateState.startDate,
+            weekEndDate: dateState.endDate,
+        });
+        window.location.reload();
     };
 
     return (
