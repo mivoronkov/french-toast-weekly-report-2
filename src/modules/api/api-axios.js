@@ -102,4 +102,16 @@ export const apiInvoker = {
             return await instanceAPI.get('user');
         },
     },
+    links: {
+        async updateLeaders(teamMemberId, leadersIdList) {
+            return await instanceAPI.put(`links/${teamMemberId}/leaders`, {
+                leaders: leadersIdList,
+            });
+        },
+        async updateFollowers(teamMemberId, followersIdList) {
+            return await instanceAPI.put(`links/${teamMemberId}/followers`, {
+                followers: followersIdList,
+            });
+        },
+    },
 };
