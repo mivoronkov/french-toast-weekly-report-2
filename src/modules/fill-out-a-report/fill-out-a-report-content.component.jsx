@@ -80,7 +80,7 @@ export function FillOutAReportContent({ firstName }) {
             <h1 className='big-title brush-bg fw-bold w-100'>
                 Welcome back,
                 <br />
-                {firstName}.
+                {userInDB.firstName}.
             </h1>
             <div className='p-4'>
                 Let your leader know where you&apos;re winning and struggling
@@ -156,21 +156,6 @@ export function FillOutAReportContent({ firstName }) {
                                     aria-label="Recipient's username"
                                     aria-describedby='button-addon2'
                                 />
-                                {/*<Field
-                                    type='text'
-                                    name='date'
-                                    className='form-control date-range-picker-input bg-white'
-                                    value={dateLabel}
-                                    readOnly={true}
-                                />*/}
-                                {/*<input
-                                    type='text'
-                                    className='form-control date-range-picker-input bg-white'
-                                    value={dateLabel}
-                                    aria-label="Recipient's username"
-                                    aria-describedby='button-addon2'
-                                    readOnly={true}
-                                />*/}
                                 <DateRangePicker
                                     initialSettings={{
                                         startDate: dateState.startDate.toDate(),
