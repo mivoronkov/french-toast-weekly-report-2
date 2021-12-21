@@ -114,4 +114,58 @@ export const apiInvoker = {
             });
         },
     },
+    weeklyReport: {
+        async getAll(companyId, memberId) {
+            return await instanceAPI.get(
+                `companies/${companyId}/members/${memberId}/reports`
+            );
+        },
+        async createReport(
+            companyId,
+            memberId,
+            moraleLevel,
+            moraleCommentary,
+            stressLevel,
+            stressCommentary,
+            workloadLevel,
+            workloadCommentary,
+            highThisWeek,
+            lowThisWeek,
+            anythingElse,
+            weekStartDate,
+            weekEndDate
+        ) {
+            return await instanceAPI.post(
+                `companies/${companyId}/members/${memberId}/reports`,
+                {
+                    id: 0,
+                    authorId: memberId,
+                    moraleGradeId: 0,
+                    moraleGrade: {
+                        level: parseInt(moraleLevel, 10),
+                        commentary: moraleCommentary,
+                        id: 0,
+                    },
+                    stressGradeId: 0,
+                    stressGrade: {
+                        level: parseInt(stressLevel, 10),
+                        commentary: stressCommentary,
+                        id: 0,
+                    },
+                    workloadGradeId: 0,
+                    workloadGrade: {
+                        level: parseInt(workloadLevel, 10),
+                        commentary: workloadCommentary,
+                        id: 0,
+                    },
+                    highThisWeek: highThisWeek,
+                    lowThisWeek: lowThisWeek,
+                    anythingElse: anythingElse,
+                    date: weekStartDate,
+                    weekStartDate: weekStartDate,
+                    weekEndDate: weekEndDate,
+                }
+            );
+        },
+    },
 };
