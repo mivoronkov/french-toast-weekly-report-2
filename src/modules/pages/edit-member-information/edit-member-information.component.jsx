@@ -11,9 +11,9 @@ import './edit-member-information.styles.scss';
 import { Helmet } from 'react-helmet';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Form, Formik } from 'formik';
-import { formikSubmitPlaceholder } from '../../../utils';
 import { useStore } from 'effector-react';
 import { getUser, userStore } from '../../store/user-store';
+import { apiInvoker } from '../../api/api-axios';
 
 export function EditMemberInformation({
     firstName,
@@ -75,9 +75,16 @@ export function EditMemberInformation({
         lastName: userInDB.lastName,
         title: userInDB.title,
     };
-    const onSubmit = (values, { setSubmitting }) => {
-        //TODO: replace with API call
-        formikSubmitPlaceholder(values, { setSubmitting });
+    const onSubmit = async (values, { setSubmitting }) => {
+        await apiInvoker.teamMember.updateMember(
+            userInDB.companyId,
+            userInDB.id,
+            values.firstName,
+            values.lastName,
+            values.title
+        );
+        await getUser();
+        setSubmitting(false);
     };
 
     return (
@@ -89,7 +96,6 @@ export function EditMemberInformation({
                 first_name={userInDB.firstName}
                 last_name={userInDB.lastName}
                 email={userInDB.email}
-                avatar_path={user.picture}
             />
             <div className='p-5 mx-5 d-flex flex-column'>
                 <TitleBlockComponent
