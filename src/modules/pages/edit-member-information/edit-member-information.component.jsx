@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useModal } from 'react-hooks-use-modal';
 import { ProfileHeaderComponent } from '../../headers/profile-header/profile-header.component';
@@ -14,6 +14,7 @@ import { Form, Formik } from 'formik';
 import { useStore } from 'effector-react';
 import { getUser, userStore } from '../../store/user-store';
 import { apiInvoker } from '../../api/api-axios';
+import { getAllTeammates, teammatesStore } from '../../store/teammates-store';
 
 export function EditMemberInformation({
     firstName,
@@ -27,6 +28,7 @@ export function EditMemberInformation({
     allMembers = [],
 }) {
     const userInDB = useStore(userStore);
+    const allTeammates = useStore(teammatesStore);
 
     const [EditLeadersModal, openEditLeaders, closeEditLeaders] = useModal(
         'root',
@@ -35,10 +37,16 @@ export function EditMemberInformation({
             closeOnOverlayClick: false,
         }
     );
-    function onLeadersSave() {
+    useEffect(() => {
+        getAllTeammates(userInDB.companyId);
+    }, [userInDB.companyId]);
+
+    async function onLeadersSave(leaders) {
+        const leadersId = leaders.map((el) => el.id);
+        await apiInvoker.links.updateLeaders(userInDB.id, leadersId);
+        getUser();
         closeEditLeaders();
     }
-
     const [
         EditReportingMembersModal,
         openEditReportingMembers,
@@ -47,7 +55,10 @@ export function EditMemberInformation({
         preventScroll: true,
         closeOnOverlayClick: false,
     });
-    function onReportingMembersSave() {
+    async function onReportingMembersSave(followers) {
+        const followersId = followers.map((el) => el.id);
+        await apiInvoker.links.updateFollowers(userInDB.id, followersId);
+        getUser();
         closeEditReportingMembers();
     }
 
@@ -177,20 +188,20 @@ export function EditMemberInformation({
             </div>
             <EditLeadersModal>
                 <EditMembersPopupComponent
-                    membersToEdit={leadersToReport}
+                    membersToEdit={userInDB.leaders}
                     onSave={onLeadersSave}
                     memberType={'Leader'}
                     onClose={closeEditLeaders}
-                    availableMembers={allMembers}
+                    availableMembers={allTeammates}
                 />
             </EditLeadersModal>
             <EditReportingMembersModal>
                 <EditMembersPopupComponent
-                    membersToEdit={reportingMembers}
+                    membersToEdit={userInDB.teammates}
                     onSave={onReportingMembersSave}
                     memberType={'Member'}
                     onClose={closeEditReportingMembers}
-                    availableMembers={allMembers}
+                    availableMembers={allTeammates}
                 />
             </EditReportingMembersModal>
         </main>
