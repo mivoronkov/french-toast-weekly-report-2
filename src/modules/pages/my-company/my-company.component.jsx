@@ -7,17 +7,25 @@ import { ContentBlockComponent } from '../../containers/content-block/content-bl
 import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
 import { Helmet } from 'react-helmet';
 import { Form, Formik } from 'formik';
-import { getUser, userStore } from '../../store/user-store';
 import { useStore } from 'effector-react';
 import { apiInvoker } from '../../api/api-axios';
+import { companyStore, getCompany } from '../../store/company-store';
+import { userStore } from '../../store/user-store';
 
 export function MyCompanyComponent() {
-    const { companyName, joinedDate, companyId } = useStore(userStore);
+    const { name: companyName, joinedDate, companyId } = useStore(companyStore);
+    const userInDB = useStore(userStore);
+    useEffect(() => {
+        getCompany(userInDB.companyId);
+    }, []);
 
     const formInitValues = { companyName: '' };
     const onSubmit = async (values, { setSubmitting }) => {
-        await apiInvoker.companies.update(companyId, values.companyName);
-        await getUser();
+        await apiInvoker.companies.update(
+            userInDB.companyId,
+            values.companyName
+        );
+        await getCompany(userInDB.companyId);
         setSubmitting(false);
     };
 

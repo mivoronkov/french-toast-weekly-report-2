@@ -1,7 +1,7 @@
 import React from 'react';
 import { EditFieldComponent } from '../common/components/edit-field/edit-field.component';
 import { Form, Formik } from 'formik';
-import { createCompany } from '../store/company-store';
+import { createCompany } from '../store/all-companies-store';
 import { createMember } from '../store/team-member-store';
 import { useAuth0 } from '@auth0/auth0-react';
 import { userStore } from '../store/user-store';
