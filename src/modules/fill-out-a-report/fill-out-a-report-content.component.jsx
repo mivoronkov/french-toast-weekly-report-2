@@ -14,8 +14,11 @@ export function FillOutAReportContent({ firstName }) {
     const userInDB = useStore(userStore);
 
     const [dateState, setDateState] = useState({
-        startDate: moment().subtract(7, 'days'),
-        endDate: moment(),
+        startDate: moment()
+            .subtract(7, 'days')
+            .set('hour', 12)
+            .set('minute', 0),
+        endDate: moment().set('hour', 12).set('minute', 0),
     });
 
     const [dateLabel, setDateLabel] = useState(
@@ -26,8 +29,8 @@ export function FillOutAReportContent({ firstName }) {
 
     const handleDateCallback = (startDate, endDate) => {
         let newDateState = {
-            startDate: startDate,
-            endDate: endDate,
+            startDate: startDate.set('hour', 12).set('minute', 0),
+            endDate: endDate.set('hour', 12).set('minute', 0),
         };
         setDateState(newDateState);
     };
