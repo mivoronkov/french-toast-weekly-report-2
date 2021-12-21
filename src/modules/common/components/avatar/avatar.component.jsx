@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import './avatar.styles.scss';
 
 export function makeAvatarText(firstName, lastName) {
-    if (firstName) {
+    if (firstName && firstName.length > 0) {
         return (firstName[0] + lastName[0]).toUpperCase();
-    } else {
+    } else if (lastName && lastName.length > 0) {
         return lastName.substring(0, 2).toUpperCase();
+    } else {
+        return '';
     }
 }
 

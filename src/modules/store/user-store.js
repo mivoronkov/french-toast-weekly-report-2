@@ -11,6 +11,7 @@ export const getUser = createEffect(async () => {
 });
 
 export const userStore = createStore({
+    id: 0,
     firstName: '',
     lastName: '',
     email: '',

@@ -1,6 +1,5 @@
 import axios from 'axios';
-import { useAuth0 } from '@auth0/auth0-react';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createStore, createEvent } from 'effector';
 
 export const setTokenTOStore = createEvent();
@@ -71,6 +70,28 @@ export const apiInvoker = {
                 companyId: companyId,
                 inviteLink: inviteLink,
             });
+        },
+        async updateMember(
+            companyId,
+            teamMemberId,
+            firstName,
+            lastName,
+            title
+        ) {
+            return await instanceAPI.put(
+                `companies/${companyId}/members/${teamMemberId}`,
+                {
+                    id: 0,
+                    firstName: firstName,
+                    lastName: lastName,
+                    title: title,
+                    email: '',
+                    sub: '',
+                    companyName: '',
+                    companyId: 0,
+                    inviteLink: '',
+                }
+            );
         },
     },
     user: {
