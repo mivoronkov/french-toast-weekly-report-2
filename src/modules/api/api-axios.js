@@ -149,7 +149,6 @@ export const apiInvoker = {
                     highThisWeek: highThisWeek,
                     lowThisWeek: lowThisWeek,
                     anythingElse: anythingElse,
-                    // TODO: remove 'date' field?
                     date: weekStartDate,
                     weekStartDate: weekStartDate,
                     weekEndDate: weekEndDate,
