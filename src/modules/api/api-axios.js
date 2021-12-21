@@ -36,6 +36,9 @@ export const apiInvoker = {
         async getAll() {
             return await instanceAPI.get('companies');
         },
+        async get(companyId) {
+            return await instanceAPI.get(`companies/${companyId}`);
+        },
         async create(companyName) {
             return await instanceAPI.post('companies', { name: companyName });
         },

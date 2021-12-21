@@ -51,10 +51,10 @@ export function EditMemberInformation({
         closeEditReportingMembers();
     }
 
-    const leadersTagNames = leadersToReport.map(
+    const leadersTagNames = userInDB.leaders.map(
         (member) => `${member.firstName} ${member.lastName}`
     );
-    const membersTagNames = reportingMembers.map(
+    const membersTagNames = userInDB.teammates.map(
         (member) => `${member.firstName} ${member.lastName}`
     );
 

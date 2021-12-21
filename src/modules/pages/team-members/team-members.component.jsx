@@ -8,9 +8,6 @@ import { useStore } from 'effector-react';
 import { getMembers, membersStore } from '../../store/team-member-store';
 
 export function TeamMembers() {
-    useEffect(() => {
-        getUser();
-    }, []);
     const { companyName, joinedDate, companyId } = useStore(userStore);
     const members = useStore(membersStore);
     useEffect(() => {

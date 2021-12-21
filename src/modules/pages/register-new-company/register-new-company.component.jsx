@@ -6,14 +6,14 @@ import { TextHeaderComponent } from '../../headers/text-header/text-header.compo
 import { Helmet } from 'react-helmet';
 import { useStore } from 'effector-react';
 import {
-    companyStore,
+    allCompaniesStore,
     getCompanies,
     createCompany,
-} from '../../store/company-store';
+} from '../../store/all-companies-store';
 import { Form, Formik } from 'formik';
 
 export function NewCompanyRegistration() {
-    const companies = useStore(companyStore);
+    const companies = useStore(allCompaniesStore);
     useEffect(() => {
         getCompanies();
     }, []);
@@ -52,8 +52,9 @@ export function NewCompanyRegistration() {
                 {companies.map((el) => {
                     return (
                         <li key={el.id}>
-                            <p>{el.id}</p>
-                            <p>{el.name}</p>
+                            <p>
+                                {el.id} {el.name}
+                            </p>
                         </li>
                     );
                 })}
