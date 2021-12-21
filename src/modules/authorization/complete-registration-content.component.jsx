@@ -4,6 +4,7 @@ import { Form, Formik } from 'formik';
 import { createCompany } from '../store/company-store';
 import { createMember } from '../store/team-member-store';
 import { useAuth0 } from '@auth0/auth0-react';
+import { userStore } from '../store/user-store';
 
 export function CompleteRegistrationContent() {
     const initFormValues = {
@@ -12,8 +13,8 @@ export function CompleteRegistrationContent() {
         companyName: '',
         title: '',
     };
-    const { user } = useAuth0();
-    const onSubmit = async (values, { setSubmitting }) => {
+    const { user, logout } = useAuth0();
+    const onSubmit = async (values) => {
         let createdCompany = await createCompany(values.companyName);
 
         let createdMember = await createMember({
@@ -30,6 +31,7 @@ export function CompleteRegistrationContent() {
 
         window.location.reload();
     };
+
     return (
         <div>
             <div className='p-2 container-fluid'>
@@ -55,6 +57,17 @@ export function CompleteRegistrationContent() {
                                         type='submit'
                                         className='btn btn-warning mt-3'>
                                         Complete registration
+                                    </button>
+                                    <button
+                                        className='btn btn-warning mt-3 mx-3'
+                                        onClick={() => {
+                                            userStore.reset();
+                                            logout({
+                                                returnTo:
+                                                    window.location.origin,
+                                            });
+                                        }}>
+                                        Logout
                                     </button>
                                 </Form>
                             </Formik>

@@ -34,14 +34,14 @@ import { userStore } from '../store/user-store';
 import { isWaitingResponse } from '../store/user-request-store';
 
 export function App() {
-    const { user, isLoading, getAccessTokenSilently } = useAuth0();
+    const { isLoading, isAuthenticated } = useAuth0();
     const userInDB = useStore(userStore);
     const isWaitingLoad = useStore(isWaitingResponse);
     if (isLoading) {
         return <Loading />;
     }
 
-    if (!user) {
+    if (!isAuthenticated) {
         // Пользователь не авторизован через Auth0, показываем ему Login через Auth0
         return <Login />;
     }
