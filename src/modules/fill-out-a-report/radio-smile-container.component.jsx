@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import { RadioSmile } from './smile-radio.component';
+import { Field } from 'formik';
 
 export function RadioSmileContainer({
     mainLabel,
@@ -36,8 +36,9 @@ export function RadioSmileContainer({
             </div>
             {showCommentTextarea ? (
                 <div className='textarea-with-counter mt-5 '>
-                    <textarea
-                        id={commentTextareaId}
+                    <Field
+                        name={commentTextareaId}
+                        component='textarea'
                         className='form-control fill-out-textarea'
                         placeholder='Leave a comment'
                     />
