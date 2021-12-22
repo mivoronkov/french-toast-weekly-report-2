@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 
 import { WeeklyReportHistoryHeader } from '../../headers/weekly-report-hisory-header/weekly-report-hisory-header.component';
@@ -8,7 +8,10 @@ import { WeeklyLabels } from '../../weekly-report-history/weekly-labels.componen
 import { ReportCalendar } from '../../common/components/topbar/report-calendar.component';
 import { ReportEmotionalCard } from '../../weekly-report-history/report-card.component';
 import { Helmet } from 'react-helmet';
-import {getWeek, slashedDate, slashedWeek, weeklyLabel} from "../../common/utils/get-week";
+import {weeklyLabel} from "../../common/utils/get-week";
+import {getOldExtendReports} from "../../store/extended-reports-store";
+import {  userStore } from '../../store/user-store';
+import {useStore} from "effector-react";
 
 export function WeeklyReportHistory({
     previousPeriod,
@@ -17,6 +20,12 @@ export function WeeklyReportHistory({
     membersMood,
 }) {
     const [showingTotalMood, setShowingTotalMood] = useState('overall');
+    const userInDB = useStore(userStore);
+    useEffect(()=>{
+        let currentDate = new Date();
+        //TODO use records for report
+        getOldExtendReports({companyId:userInDB.companyId, memberId:userInDB.id, currentDate: +currentDate});
+        },[]);
     let membersEmotionalConsist = membersMood.map((member, index) => (
         <ReportEmotionalCard
             memberName={member.memberName}

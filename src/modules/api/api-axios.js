@@ -120,6 +120,16 @@ export const apiInvoker = {
                 `companies/${companyId}/members/${memberId}/reports`
             );
         },
+        async getInInterval(companyId, memberId, start, end,){
+            return await instanceAPI.get(
+                `companies/${companyId}/members/${memberId}/reports/extended/${start}/${end}`
+            );
+        },
+        async getOld(companyId, memberId, currentDate){
+            return await instanceAPI.get(
+                `companies/${companyId}/members/${memberId}/reports/extended/old/${currentDate}`
+            );
+        },
         async createReport(
             companyId,
             memberId,
