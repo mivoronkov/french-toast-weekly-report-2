@@ -8,6 +8,7 @@ import { WeeklyLabels } from '../../weekly-report-history/weekly-labels.componen
 import { ReportCalendar } from '../../common/components/topbar/report-calendar.component';
 import { ReportEmotionalCard } from '../../weekly-report-history/report-card.component';
 import { Helmet } from 'react-helmet';
+import {getWeek, slashedDate, slashedWeek, weeklyLabel} from "../../common/utils/get-week";
 
 export function WeeklyReportHistory({
     previousPeriod,
@@ -23,6 +24,8 @@ export function WeeklyReportHistory({
             key={index}
         />
     ));
+    const weeks = weeklyLabel(new Date());
+
     return (
         <main className='main-background flex-grow-1 overflow-auto'>
             <Helmet>
@@ -31,8 +34,8 @@ export function WeeklyReportHistory({
             <WeeklyReportHistoryHeader />
             <div className='d-flex flex-column align-items-center w-100'>
                 <ReportCalendar
-                    currentPeriod={previousPeriod}
-                    previousPeriod={currentPeriod}
+                    currentPeriod={weeks.currentWeek}
+                    previousPeriod={weeks.previousWeek}
                 />
                 <SelectingReportCharacteristics
                     setStateLink={setShowingTotalMood}
