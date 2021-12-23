@@ -59,7 +59,7 @@ export function FillOutAReportContent({ firstName }) {
         date: '',
     };
 
-    const onSubmit = async (values) => {
+    const onSubmit = async (values, { resetForm }) => {
         let createdReport = await createReport({
             companyId: userInDB.companyId,
             memberId: userInDB.id,
@@ -75,7 +75,16 @@ export function FillOutAReportContent({ firstName }) {
             weekStartDate: dateState.startDate,
             weekEndDate: dateState.endDate,
         });
-        window.location.reload();
+        alert('Report was successfully sent');
+        // Reset Formik form
+        resetForm();
+        setDateState({
+            startDate: moment()
+                .subtract(7, 'days')
+                .set('hour', 12)
+                .set('minute', 0),
+            endDate: moment().set('hour', 12).set('minute', 0),
+        });
     };
 
     return (
