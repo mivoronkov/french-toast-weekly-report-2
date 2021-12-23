@@ -19,7 +19,7 @@ ReactDOM.render(
                 cacheLocation='localstorage'
                 useRefreshTokens={true}
                 audience={process.env.REACT_APP_AUTH0_AUDIENCE}>
-                <Initialisation />
+                {/*<Initialisation />*/}
                 <App />
             </Auth0Provider>
         </BrowserRouter>

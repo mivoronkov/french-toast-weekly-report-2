@@ -32,27 +32,46 @@ import { CompleteRegistration } from '../pages/complete-registration/complete-re
 import { useStore } from 'effector-react';
 import { userStore } from '../store/user-store';
 import { isWaitingResponse } from '../store/user-request-store';
+import { LoginPage } from '../pages/login/login-page.component';
+import { errorStore } from '../store/error-store';
+import { ErrorPage } from '../pages/error/error-page.component';
+import { LoadingUserFromDB } from '../common/components/loading/loading-user-from-db.component';
+import { triedGetUserFromDBStore } from '../store/tride-to-get-user-from-db-store';
 
 export function App() {
-    const { isLoading, isAuthenticated } = useAuth0();
-    const userInDB = useStore(userStore);
     const isWaitingLoad = useStore(isWaitingResponse);
-    if (isLoading) {
+    const { isLoading, isAuthenticated, loginWithPopup } = useAuth0();
+    const userInDB = useStore(userStore);
+    const innerError = useStore(errorStore);
+    const triedToGetUserFromDB = useStore(triedGetUserFromDBStore);
+
+    if (innerError) {
+        return <ErrorPage error={innerError} />;
+    }
+
+    if (isLoading || isWaitingLoad) {
         return <Loading />;
     }
 
     if (!isAuthenticated) {
-        // Пользователь не авторизован через Auth0, показываем ему Login через Auth0
-        return <Login />;
+        return <LoginPage />;
+    } else if (!triedToGetUserFromDB) {
+        return <LoadingUserFromDB />;
     }
 
-    // Пользователь авторизован через Auth0, проверяем, что он есть в таблице TeamMembers
+    if (isLoading || isWaitingLoad) {
+        return <Loading />;
+    }
+
     if (userInDB.companyId === '') {
         // Пользователь авторизован через Auth0, но в БД его нет, показываем страницу Complete Registration
-        //TODO проверка на ошибку сети
         return (
             <div className='d-flex h-100 justify-content-center'>
-                {isWaitingLoad ? <Loading /> : <CompleteRegistration />}
+                {isWaitingLoad || isLoading ? (
+                    <Loading />
+                ) : (
+                    <CompleteRegistration />
+                )}
             </div>
         );
     }

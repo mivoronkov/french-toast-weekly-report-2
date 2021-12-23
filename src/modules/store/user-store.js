@@ -1,4 +1,4 @@
-import { createStore, createEffect } from 'effector';
+import { createStore, createEffect, createEvent } from 'effector';
 import { apiInvoker } from '../api/api-axios';
 
 export const getUser = createEffect(async () => {
@@ -10,6 +10,7 @@ export const getUser = createEffect(async () => {
     }
 });
 
+export const setUserToStore = createEvent();
 export const userStore = createStore({
     id: 0,
     firstName: '',
@@ -19,7 +20,8 @@ export const userStore = createStore({
     companyName: '',
     companyId: '',
     joinedDate: '',
-});
+}).on(setUserToStore, (_, newUser) => newUser);
+
 userStore.on(getUser.doneData, (state, data) => {
     if (data instanceof Error) {
         return state;
