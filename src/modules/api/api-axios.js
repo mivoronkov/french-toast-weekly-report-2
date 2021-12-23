@@ -3,12 +3,12 @@ import React from 'react';
 import { createStore, createEvent } from 'effector';
 
 export const setTokenTOStore = createEvent();
-const tokenFromStore = createStore('').on(
+export const tokenFromStore = createStore('').on(
     setTokenTOStore,
     (_, newToken) => newToken
 );
 
-const tokenHeader = (config) => {
+const tokenHeader = async (config) => {
     const token = tokenFromStore.getState();
     if (token !== '') {
         config.headers.Authorization = `Bearer ${token}`;

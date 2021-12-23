@@ -24,3 +24,34 @@ export function formikSubmitPlaceholder(values, { setSubmitting }) {
         setSubmitting(false);
     }, 400);
 }
+
+export async function getUserWithFetch(token) {
+    try {
+        const response = await fetch(
+            //TODO: change to server address
+            `https://localhost:5001/api/user`,
+            {
+                headers: { Authorization: `Bearer ${token}` },
+            }
+        );
+        if (!response.ok) {
+            return {
+                user: null,
+                error: {
+                    message: `got response status ${response.status} on get user from DB request`,
+                },
+                responseStatus: response.status,
+            };
+        }
+        return { user: await response.json(), error: null };
+    } catch (error) {
+        return {
+            user: null,
+            error: {
+                message: error.message,
+                extraMessage: 'Check if database is active',
+                stack: error.stack,
+            },
+        };
+    }
+}
