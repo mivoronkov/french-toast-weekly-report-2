@@ -6,7 +6,7 @@ export const getOldExtendReports = createEffect(async ({companyId, memberId, cur
     return resp.data;
 });
 
-export const ExtendReports = createStore([]);
-ExtendReports.on(getOldExtendReports.doneData, (_, data) => {
+export const extendReports = createStore([]);
+extendReports.on(getOldExtendReports.doneData, (_, data) => {
     return data;
 });
