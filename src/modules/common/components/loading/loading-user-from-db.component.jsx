@@ -13,7 +13,6 @@ export function LoadingUserFromDB() {
         try {
             const token = await getAccessTokenSilently();
             setTokenTOStore(token);
-            debugger;
             const { user, error, responseStatus } = await getUserWithFetch(
                 token
             );
@@ -23,18 +22,14 @@ export function LoadingUserFromDB() {
                 return;
             }
             if (error !== null) {
-                debugger;
                 setErrorToStore(error);
             } else {
                 setUserToStore(user);
-                debugger;
             }
-            debugger;
         } catch (error) {
             console.error(error);
             return error;
         } finally {
-            debugger;
             setTriedGetUserFromDBToStore(true);
         }
     };

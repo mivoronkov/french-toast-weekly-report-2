@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { WeeklyReportHistoryHeader } from '../../headers/weekly-report-hisory-header/weekly-report-hisory-header.component';
@@ -8,10 +8,13 @@ import { WeeklyLabels } from '../../weekly-report-history/weekly-labels.componen
 import { ReportCalendar } from '../../common/components/topbar/report-calendar.component';
 import { ReportEmotionalCard } from '../../weekly-report-history/report-card.component';
 import { Helmet } from 'react-helmet';
-import {weeklyLabel} from "../../common/utils/get-week";
-import {extendReports, getOldExtendReports} from "../../store/extended-reports-store";
-import {  userStore } from '../../store/user-store';
-import {useStore} from "effector-react";
+import { weeklyLabel } from '../../common/utils/get-week';
+import {
+    extendReports,
+    getOldExtendReports,
+} from '../../store/extended-reports-store';
+import { userStore } from '../../store/user-store';
+import { useStore } from 'effector-react';
 
 export function WeeklyReportHistory({
     previousPeriod,
@@ -22,84 +25,38 @@ export function WeeklyReportHistory({
     const [showingTotalMood, setShowingTotalMood] = useState('overall');
     const userInDB = useStore(userStore);
     const oldReports = useStore(extendReports);
-    useEffect(()=>{
-        let currentDate = new Date();
-        //TODO use records for report
-        getOldExtendReports({companyId:userInDB.companyId, memberId:userInDB.id, currentDate: +currentDate});
-        },[]);
-
-    const allGradeLevels =[];
-    const average = (arr, index) =>{
-        const tags = ['moraleLevel', 'stressLevel','workloadLevel'];
-        let divider =0;
-        let sum =tags.reduce((res,key)=>{
-            divider = arr[key][index]!==0 ?divider+1:divider;
-            return res+arr[key][index]
-        }, 0);
-        return divider>0?Math.round(sum/divider):0;
-    };
-    let membersEmotionalConsist = oldReports.map((oldReport, index) => {
-        let moods;
-        switch(showingTotalMood){
-           case 'morale': moods = oldReport.moraleLevel;
-                break;
-            case 'stress': moods = oldReport.stressLevel;
-                break;
-            case 'workload': moods = oldReport.workloadLevel;
-                break;
-            case 'overall': moods = oldReport.moraleLevel.map((el, idx)=>{
-                return average(oldReport,idx);
-            });
-                break;
-        };
-        allGradeLevels.push(moods);
-        return (<ReportEmotionalCard
-            memberName={`${oldReport.firstName} ${oldReport.firstName}`}
-            mood={moods}
-            key={index}
-        />)
-    });
-
-    let totalmood;
-    if( oldReports.length>0){
-        let mood;
-        switch(showingTotalMood){
-            case 'morale': mood = 'moraleLevel';
-                break;
-            case 'stress': mood = 'stressLevel';
-                break;
-            case 'workload': mood = 'workloadLevel';
-                break;
-            case 'overall': mood = 'overall';
-                break;
-        };
-
-        let averageMood = new Array(10);
-        averageMood.fill(0);
-        oldReports.forEach(oldReport => {
-            if(allGradeLevels.length>0){
-                for(let i=0;i<10;i++){
-                    let sum =0;
-                    let div =0;
-                    for(let k=0;k<oldReports.length;k++){
-                        div = (allGradeLevels[k])[i] !==0? div+1:div;
-                        sum += (allGradeLevels[k])[i];
-                    }
-                    averageMood[i]= div !==0 ? Math.round(sum/div) : 0;
-                }
-            }
+    useEffect(() => {
+        getOldExtendReports({
+            companyId: userInDB.companyId,
+            memberId: userInDB.id,
+            team: 'extended',
+            filter: 'overall',
         });
-
-        totalmood = (<ReportEmotionalCard
-                memberName={totalMood[showingTotalMood].memberName}
-                mood={averageMood}
-            />);
-    }
-
+    }, []);
+    let membersEmotionalConsist = oldReports?.overviewReportsDtos?.map(
+        (oldReport) => {
+            return (
+                <ReportEmotionalCard
+                    memberName={`${oldReport.firstName} ${oldReport.lastName}`}
+                    mood={oldReport.statusLevel}
+                    key={oldReport.authorId}
+                />
+            );
+        }
+    );
     const weeks = weeklyLabel(new Date());
-
+    let averageReport = null;
+    if (oldReports !== null) {
+        averageReport = (
+            <ReportEmotionalCard
+                memberName={oldReports.averageOldReportDto.filterName}
+                mood={oldReports.averageOldReportDto.statusLevel}
+                key={'averageBar'}
+            />
+        );
+    }
     return (
-        <main className='main-background flex-grow-1 overflow-auto'>
+        <main className='flex-grow-1 overflow-auto'>
             <Helmet>
                 <title>Weekly report history</title>
             </Helmet>
@@ -109,12 +66,10 @@ export function WeeklyReportHistory({
                     currentPeriod={weeks.currentWeek}
                     previousPeriod={weeks.previousWeek}
                 />
-                <SelectingReportCharacteristics
-                    setStateLink={setShowingTotalMood}
-                />
+                <SelectingReportCharacteristics team={'extended'} />
                 <SectionLabel labelText={'extended team average'} />
                 <WeeklyLabels />
-                {totalmood}
+                {averageReport}
                 <SectionLabel labelText={'extended team'} />
                 <WeeklyLabels />
                 {membersEmotionalConsist}
