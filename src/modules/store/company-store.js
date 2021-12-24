@@ -7,7 +7,7 @@ export const getCompany = createEffect(async (companyId) => {
 });
 
 export const companyStore = createStore({
-    companyName: '',
+    name: '',
     joinedDate: '',
     companyId: '',
 });
