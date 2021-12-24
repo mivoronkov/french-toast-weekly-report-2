@@ -1,7 +1,7 @@
 import { createStore, createEffect } from 'effector';
 import { apiInvoker } from '../api/api-axios';
 
-export const getOldExtendReports = createEffect(
+export const getOldTeamReports = createEffect(
     async ({ companyId, memberId, team, filter }) => {
         const resp = await apiInvoker.weeklyReport.getOldExtended(
             companyId,
@@ -13,7 +13,7 @@ export const getOldExtendReports = createEffect(
     }
 );
 
-export const extendReports = createStore(null);
-extendReports.on(getOldExtendReports.doneData, (_, data) => {
+export const OldPeriodReports = createStore(null);
+OldPeriodReports.on(getOldTeamReports.doneData, (_, data) => {
     return data;
 });

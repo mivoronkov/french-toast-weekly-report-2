@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useStore } from 'effector-react';
 import { userStore } from '../store/user-store';
-import { getOldExtendReports } from '../store/extended-reports-store';
+import { getOldTeamReports } from '../store/extended-reports-store';
 
 export function SelectingReportCharacteristics({ team }) {
     const userInDB = useStore(userStore);
@@ -17,7 +17,7 @@ export function SelectingReportCharacteristics({ team }) {
                 <button
                     className='page-link bg-dark'
                     onClick={() =>
-                        getOldExtendReports({
+                        getOldTeamReports({
                             ...apiParameters,
                             filter: 'overall',
                         })
@@ -29,7 +29,7 @@ export function SelectingReportCharacteristics({ team }) {
                 <button
                     className='page-link bg-dark'
                     onClick={() =>
-                        getOldExtendReports({
+                        getOldTeamReports({
                             ...apiParameters,
                             filter: 'morale',
                         })
@@ -41,7 +41,7 @@ export function SelectingReportCharacteristics({ team }) {
                 <button
                     className='page-link bg-dark'
                     onClick={() =>
-                        getOldExtendReports({
+                        getOldTeamReports({
                             ...apiParameters,
                             filter: 'stress',
                         })
@@ -53,7 +53,7 @@ export function SelectingReportCharacteristics({ team }) {
                 <button
                     className='page-link bg-dark'
                     onClick={() =>
-                        getOldExtendReports({
+                        getOldTeamReports({
                             ...apiParameters,
                             filter: 'workload',
                         })

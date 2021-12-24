@@ -37,6 +37,8 @@ import { errorStore } from '../store/error-store';
 import { ErrorPage } from '../pages/error/error-page.component';
 import { LoadingUserFromDB } from '../common/components/loading/loading-user-from-db.component';
 import { triedGetUserFromDBStore } from '../store/tride-to-get-user-from-db-store';
+import { OldReports } from '../weekly-report-history/old-extended-report.component';
+import { CurrentReports } from '../weekly-report-history/current-report.componen';
 
 export function App() {
     const isWaitingLoad = useStore(isWaitingResponse);
@@ -95,8 +97,30 @@ export function App() {
                         path='extended-team'
                         element={
                             <WeeklyReportHistory {...weeklyReportHistory} />
-                        }
-                    />
+                        }>
+                        <Route
+                            path='older'
+                            element={<OldReports team={'extended'} />}
+                        />
+                        <Route
+                            path='current'
+                            element={
+                                <CurrentReports
+                                    team={'extended'}
+                                    week={'current'}
+                                />
+                            }
+                        />
+                        <Route
+                            path='previous'
+                            element={
+                                <CurrentReports
+                                    team={'extended'}
+                                    week={'previous'}
+                                />
+                            }
+                        />
+                    </Route>
                 </Route>
                 <Route
                     path='/my-reports'
