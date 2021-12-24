@@ -3,7 +3,6 @@ import { TextHeaderComponent } from '../../headers/text-header/text-header.compo
 import { Helmet } from 'react-helmet';
 import { useStore } from 'effector-react';
 import { userStore } from '../../store/user-store';
-import { companyStore } from '../../store/company-store';
 import { apiInvoker } from '../../api/api-axios';
 import { inviteLinks } from '../../../utils';
 import { InviteYourTeamSuccessMessageComponent } from '../../invite-your-team/invite-your-team-success-message.component';
@@ -18,12 +17,9 @@ export function InviteYourTeam() {
         email: '',
     };
     const userInDb = useStore(userStore);
-    const company = useStore(companyStore);
 
     const onSubmit = async (values, { setSubmitting }) => {
         let resp = await apiInvoker.companies.get(userInDb.companyId);
-        console.log(resp.data.name);
-        console.log(company.name);
         alert(
             `This link should be sent to ${values.email} with the title "Accept invite":\n` +
                 `${inviteLinks.generateLink(userInDb, resp.data.name, values)}`
