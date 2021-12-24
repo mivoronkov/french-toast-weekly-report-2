@@ -25,6 +25,53 @@ export function formikSubmitPlaceholder(values, { setSubmitting }) {
     }, 400);
 }
 
+export const inviteLinks = {
+    parseLinkParams: (base64linkPart) => {
+        console.log(base64linkPart);
+        const json = atob(base64linkPart);
+
+        console.log(json);
+        const unescaped = unescape(json);
+        console.log(unescaped);
+        const linkParams = JSON.parse(unescaped);
+        // Idk how to validate objects with PropTypes
+        // Don't wanna to add dependencies like ajv
+        if (
+            !(
+                linkParams !== undefined &&
+                'company' in linkParams &&
+                'id' in linkParams.company &&
+                'name' in linkParams.company &&
+                'inviter' in linkParams &&
+                'id' in linkParams.inviter &&
+                'name' in linkParams.inviter
+            )
+        ) {
+            throw new Error();
+        }
+        return linkParams;
+    },
+    generateLink: (user, companyName, params = null) => {
+        const base64 = btoa(
+            escape(
+                JSON.stringify({
+                    inviter: {
+                        id: user.id,
+                        name: `${user.firstName} ${user.lastName}`,
+                    },
+                    company: {
+                        id: user.companyId,
+                        name: companyName,
+                    },
+                })
+            )
+        );
+        return `${window.location.hostname}/accept-invite/${base64}${
+            params ? '?' + new URLSearchParams(params).toString() : ''
+        }`;
+    },
+};
+
 export async function getUserWithFetch(token) {
     try {
         const response = await fetch(
