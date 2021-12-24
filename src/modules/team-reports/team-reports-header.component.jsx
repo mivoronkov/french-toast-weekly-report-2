@@ -3,18 +3,22 @@ import PropTypes from 'prop-types';
 import { TeamSelector } from '../common/components/topbar/team-selector.component';
 import { TeamReportsNumberAvatar } from './team-reports-number-avatar.component';
 import { AvatarComponent } from '../common/components/avatar/avatar.component';
+import { useStore } from 'effector-react';
+import { reportsStore } from '../store/weekly-report-store';
+import { OldPeriodReports } from '../store/extended-reports-store';
+import { matchPath, useLocation } from 'react-router-dom';
 
-export function TeamReportsHeader({ members, maxAvatarsDisplayed = 4 }) {
-    let hasSomeWeeklyReports = false;
-    for (let i = 0; i < members.length; i++) {
-        if (
-            members[i].weeklyInformation &&
-            members[i].weeklyInformation.length > 0
-        ) {
-            hasSomeWeeklyReports = true;
-            break;
-        }
-    }
+export function TeamReportsHeader({ maxAvatarsDisplayed = 4 }) {
+    const reports = useStore(reportsStore);
+    const oldReports = useStore(OldPeriodReports);
+    const { pathname } = useLocation();
+    //check page for header displaying
+    let match = matchPath(pathname, '/team-reports/immediate-team/older');
+    const members = match?.pattern.end
+        ? oldReports?.overviewReportsDtos
+        : reports;
+
+    let hasSomeWeeklyReports = members.length > 0;
     let avatarRowElements = [];
     for (let i = 0; i < Math.min(members.length, maxAvatarsDisplayed); ++i) {
         avatarRowElements.push(

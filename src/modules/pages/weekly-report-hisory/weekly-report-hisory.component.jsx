@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { WeeklyReportHistoryHeader } from '../../headers/weekly-report-hisory-header/weekly-report-hisory-header.component';
 import { ReportCalendar } from '../../common/components/topbar/report-calendar.component';
 import { Helmet } from 'react-helmet';
@@ -13,6 +13,11 @@ export function WeeklyReportHistory({
     totalMood,
     membersMood,
 }) {
+    let navigate = useNavigate();
+    useEffect(() => {
+        navigate('current');
+    }, []);
+
     const weeks = weeklyLabel(new Date());
 
     return (

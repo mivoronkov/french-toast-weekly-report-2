@@ -57,7 +57,5 @@ reportsStore
         return data;
     })
     .on(getClosesReport.doneData, (_, data) => {
-        console.log(data);
-
         return data;
     });

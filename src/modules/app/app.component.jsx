@@ -91,8 +91,30 @@ export function App() {
                     element={<TeamHeaderContainerComponent />}>
                     <Route
                         path='immediate-team'
-                        element={<TeamReports {...teamReportsStub} />}
-                    />
+                        element={<TeamReports {...teamReportsStub} />}>
+                        <Route
+                            path='older'
+                            element={<OldReports team={'immediate'} />}
+                        />
+                        <Route
+                            path='current'
+                            element={
+                                <CurrentReports
+                                    team={'immediate'}
+                                    week={'current'}
+                                />
+                            }
+                        />
+                        <Route
+                            path='previous'
+                            element={
+                                <CurrentReports
+                                    team={'immediate'}
+                                    week={'previous'}
+                                />
+                            }
+                        />
+                    </Route>
                     <Route
                         path='extended-team'
                         element={
