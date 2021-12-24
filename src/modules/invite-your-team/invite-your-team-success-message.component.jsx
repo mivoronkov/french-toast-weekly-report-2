@@ -2,7 +2,7 @@ import React from 'react';
 
 export function InviteYourTeamSuccessMessageComponent() {
     return (
-        <div className='px-2 pt-3 container-fluid' id='success-info-div'>
+        <>
             <div className='form mx-auto card shadow-sm card-body'>
                 <div className='pb-2 fw-bold'>
                     Success! Your team member has been invited to the Weekly
@@ -17,6 +17,6 @@ export function InviteYourTeamSuccessMessageComponent() {
                 <i className='bi bi-caret-right-fill' /> The team member
                 didn&apos;t receive your invite?
             </p>
-        </div>
+        </>
     );
 }

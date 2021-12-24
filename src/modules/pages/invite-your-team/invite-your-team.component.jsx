@@ -34,8 +34,8 @@ export function InviteYourTeam() {
                 <title>Invite your team</title>
             </Helmet>
             <TextHeaderComponent title={'Invite Your Team'} />
-            {showSuccess ? <InviteYourTeamSuccessMessageComponent /> : null}
             <div className='p-2 container-fluid'>
+                {showSuccess ? <InviteYourTeamSuccessMessageComponent /> : null}
                 <div className='form mx-auto card shadow-sm card-body'>
                     <div className='pb-2 fw-bold'>
                         Enter the team member you would like to invite.
