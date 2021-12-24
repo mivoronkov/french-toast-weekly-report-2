@@ -7,7 +7,7 @@ import { ReportEmotionalCard } from './report-card.component';
 import {
     OldPeriodReports,
     getOldTeamReports,
-} from '../store/extended-reports-store';
+} from '../store/old-reports-store';
 import { useStore } from 'effector-react';
 import { userStore } from '../store/user-store';
 import { CurrentReports } from './current-report.componen';

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useStore } from 'effector-react';
 import { userStore } from '../store/user-store';
-import { getOldTeamReports } from '../store/extended-reports-store';
+import { getOldTeamReports } from '../store/old-reports-store';
 
 export function SelectingReportCharacteristics({ team }) {
     const userInDB = useStore(userStore);
