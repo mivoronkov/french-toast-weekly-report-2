@@ -15,6 +15,8 @@ import { useStore } from 'effector-react';
 import { getUser, userStore } from '../../store/user-store';
 import { apiInvoker } from '../../api/api-axios';
 import { getAllTeammates, teammatesStore } from '../../store/teammates-store';
+import { inviteLinks } from '../../../utils';
+import { companyStore, getCompany } from '../../store/company-store';
 
 export function EditMemberInformation({
     firstName,
@@ -28,6 +30,7 @@ export function EditMemberInformation({
     allMembers = [],
 }) {
     const userInDB = useStore(userStore);
+    const company = useStore(companyStore);
     const allTeammates = useStore(teammatesStore);
 
     const [EditLeadersModal, openEditLeaders, closeEditLeaders] = useModal(
@@ -97,6 +100,8 @@ export function EditMemberInformation({
         await getUser();
         setSubmitting(false);
     };
+    getCompany();
+    inviteLink = inviteLinks.generateLink(userInDB, company.name);
 
     return (
         <main className='flex-grow-1 overflow-auto'>

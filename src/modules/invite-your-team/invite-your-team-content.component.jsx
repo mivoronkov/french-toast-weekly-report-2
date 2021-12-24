@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { InviteYourTeamSuccessMessageComponent } from './invite-your-team-success-message.component';
 import { EditFieldComponent } from '../common/components/edit-field/edit-field.component';
 import { Form, Formik } from 'formik';
-import { formikSubmitPlaceholder } from '../../utils';
+import { inviteLinks } from '../../utils';
+import { userStore } from '../store/user-store';
+import { useStore } from 'effector-react';
+import { companyStore, getCompany } from '../store/company-store';
+import { apiInvoker } from '../api/api-axios';
 
 export function InviteYourTeamContent() {
     const [showSuccess, setShowSuccess] = useState(false);
@@ -11,10 +15,23 @@ export function InviteYourTeamContent() {
         lastName: '',
         email: '',
     };
-    const onSubmit = (values, { setSubmitting }) => {
-        //TODO: replace with API call
-        formikSubmitPlaceholder(values, { setSubmitting });
-        setShowSuccess(true);
+    const userInDb = useStore(userStore);
+    const company = useStore(companyStore);
+    const onSubmit = async (values, { setSubmitting }) => {
+        setTimeout(async () => {
+            let resp = await apiInvoker.companies.get(userInDb.companyId);
+            console.log(resp.data.name);
+            console.log(company.name);
+            alert(
+                `This link should be sent to ${values.email} with the title "Accept invite":\n` +
+                    `${inviteLinks.generateLink(
+                        userInDb,
+                        resp.data.name,
+                        values
+                    )}`
+            );
+            setSubmitting(false);
+        }, 400);
     };
     return (
         <div>

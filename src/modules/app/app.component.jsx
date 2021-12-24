@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { SidebarComponent } from '../common/components/sidebar/sidebar.component';
@@ -31,7 +31,10 @@ import { AcceptInviteComponent } from '../pages/accept-invite/accept-invite.comp
 import { CompleteRegistration } from '../pages/complete-registration/complete-registration.component';
 import { useStore } from 'effector-react';
 import { userStore } from '../store/user-store';
-import { isWaitingResponse } from '../store/user-request-store';
+import {
+    isWaitingResponse,
+    waitingResponse,
+} from '../store/user-request-store';
 import { LoginPage } from '../pages/login/login-page.component';
 import { errorStore } from '../store/error-store';
 import { ErrorPage } from '../pages/error/error-page.component';
@@ -39,13 +42,31 @@ import { LoadingUserFromDB } from '../common/components/loading/loading-user-fro
 import { triedGetUserFromDBStore } from '../store/tride-to-get-user-from-db-store';
 import { OldReports } from '../weekly-report-history/old-extended-report.component';
 import { CurrentReports } from '../weekly-report-history/current-report.componen';
+import { setTokenTOStore } from '../api/api-axios';
 
 export function App() {
     const isWaitingLoad = useStore(isWaitingResponse);
-    const { isLoading, isAuthenticated, loginWithPopup } = useAuth0();
+    const {
+        isLoading,
+        isAuthenticated,
+        loginWithPopup,
+        getAccessTokenSilently,
+    } = useAuth0();
     const userInDB = useStore(userStore);
     const innerError = useStore(errorStore);
     const triedToGetUserFromDB = useStore(triedGetUserFromDBStore);
+
+    useEffect(async () => {
+        if (isAuthenticated) {
+            try {
+                const token = await getAccessTokenSilently();
+                await setTokenTOStore(token);
+            } catch (error) {
+                console.error(error);
+                return error;
+            }
+        }
+    }, [isAuthenticated]);
 
     if (innerError) {
         return <ErrorPage error={innerError} />;
@@ -55,7 +76,22 @@ export function App() {
         return <Loading />;
     }
 
-    if (!isAuthenticated) {
+    // Idk how to make it right with routing:
+    if (window.location.pathname.startsWith('/accept-invite/')) {
+        return (
+            <Routes>
+                <Route
+                    path='/accept-invite/:hashedParams'
+                    element={
+                        <AcceptInviteComponent
+                            company={'Company'}
+                            inviterName={'Name'}
+                        />
+                    }
+                />
+            </Routes>
+        );
+    } else if (!isAuthenticated) {
         return <LoginPage />;
     } else if (!triedToGetUserFromDB) {
         return <LoadingUserFromDB />;
@@ -185,7 +221,7 @@ export function App() {
                 />
                 <Route path='/' element={<LaunchGuide />} />
                 <Route
-                    path='/accept-invite'
+                    path='/accept-invite/:hashedParams'
                     element={
                         <AcceptInviteComponent
                             company={'Company'}
