@@ -22,7 +22,7 @@ export function EditFieldComponent({ label, name, width = '100%' }) {
         </label>
     ) : null;
     return (
-        <div className='form-group mt-2 mb-2'>
+        <div className='form-group my-2'>
             {label_tag}
             <Field
                 type={type}
