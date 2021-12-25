@@ -120,14 +120,26 @@ export const apiInvoker = {
                 `companies/${companyId}/members/${memberId}/reports`
             );
         },
-        async getInInterval(companyId, memberId, start, end,){
+        async getInInterval(companyId, memberId, team, week) {
             return await instanceAPI.get(
-                `companies/${companyId}/members/${memberId}/reports/extended/${start}/${end}`
+                `companies/${companyId}/members/${memberId}/reports/current-reports`,
+                {
+                    params: {
+                        week: week,
+                        team: team,
+                    },
+                }
             );
         },
-        async getOld(companyId, memberId, currentDate){
+        async getOldExtended(companyId, memberId, team, filter) {
             return await instanceAPI.get(
-                `companies/${companyId}/members/${memberId}/reports/extended/old/${currentDate}`
+                `companies/${companyId}/members/${memberId}/reports/old-reports/`,
+                {
+                    params: {
+                        filter: filter,
+                        team: team,
+                    },
+                }
             );
         },
         async createReport(

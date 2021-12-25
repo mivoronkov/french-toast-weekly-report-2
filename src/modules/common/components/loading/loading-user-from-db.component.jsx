@@ -22,7 +22,6 @@ export function LoadingUserFromDB() {
                 return;
             }
             if (error !== null) {
-                debugger;
                 setErrorToStore(error);
             } else {
                 setUserToStore(user);

@@ -5,13 +5,13 @@ import { AnchorDarkLink } from '../buttons/anchor-dark-link.component';
 export function ReportCalendar({ previousPeriod, currentPeriod }) {
     return (
         <ul className='pagination pagination-sm my-3'>
-            <AnchorDarkLink anchor={'/'}>
+            <AnchorDarkLink anchor={'previous'}>
                 Previous period:{previousPeriod}
             </AnchorDarkLink>
-            <AnchorDarkLink anchor={'/'}>
+            <AnchorDarkLink anchor={'current'}>
                 Current period:{currentPeriod}
             </AnchorDarkLink>
-            <AnchorDarkLink anchor={'/'}>Older Reports</AnchorDarkLink>
+            <AnchorDarkLink anchor={'older'}>Older Reports</AnchorDarkLink>
         </ul>
     );
 }
