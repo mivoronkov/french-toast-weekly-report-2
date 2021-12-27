@@ -12,7 +12,7 @@ import { Helmet } from 'react-helmet';
 import { useAuth0 } from '@auth0/auth0-react';
 import { Form, Formik } from 'formik';
 import { useStore } from 'effector-react';
-import { getUser, userStore } from '../../store/user-store';
+import { getUserFromDB, userInDBStore } from '../../store/user-in-d-b-store';
 import { apiInvoker } from '../../api/api-axios';
 import { getAllTeammates, teammatesStore } from '../../store/teammates-store';
 import { inviteLinks } from '../../../utils';
@@ -29,7 +29,7 @@ export function EditMemberInformation({
     inviteLink,
     allMembers = [],
 }) {
-    const userInDB = useStore(userStore);
+    const userInDB = useStore(userInDBStore);
     const company = useStore(companyStore);
     const allTeammates = useStore(teammatesStore);
 
@@ -47,7 +47,7 @@ export function EditMemberInformation({
     async function onLeadersSave(leaders) {
         const leadersId = leaders.map((el) => el.id);
         await apiInvoker.links.updateLeaders(userInDB.id, leadersId);
-        getUser();
+        getUserFromDB();
         closeEditLeaders();
     }
     const [
@@ -61,7 +61,7 @@ export function EditMemberInformation({
     async function onReportingMembersSave(followers) {
         const followersId = followers.map((el) => el.id);
         await apiInvoker.links.updateFollowers(userInDB.id, followersId);
-        getUser();
+        getUserFromDB();
         closeEditReportingMembers();
     }
 
@@ -97,10 +97,9 @@ export function EditMemberInformation({
             values.lastName,
             values.title
         );
-        await getUser();
+        await getUserFromDB();
         setSubmitting(false);
     };
-    getCompany();
     inviteLink = inviteLinks.generateLink(userInDB, company.name);
 
     return (

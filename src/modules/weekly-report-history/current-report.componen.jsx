@@ -6,10 +6,10 @@ import { LineItem } from '../my-reports/line-item.component';
 import { TeamReportsCards } from '../team-reports/team-reports-cards.component';
 import { getClosesReport, reportsStore } from '../store/weekly-report-store';
 import { useStore } from 'effector-react';
-import { userStore } from '../store/user-store';
+import { userInDBStore } from '../store/user-in-d-b-store';
 
 export function CurrentReports({ team, week }) {
-    const userInDB = useStore(userStore);
+    const userInDB = useStore(userInDBStore);
     const closesReport = useStore(reportsStore);
 
     useEffect(() => {

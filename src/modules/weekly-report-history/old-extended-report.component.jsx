@@ -9,11 +9,11 @@ import {
     getOldTeamReports,
 } from '../store/old-reports-store';
 import { useStore } from 'effector-react';
-import { userStore } from '../store/user-store';
+import { userInDBStore } from '../store/user-in-d-b-store';
 import { CurrentReports } from './current-report.componen';
 
 export function OldReports({ team }) {
-    const userInDB = useStore(userStore);
+    const userInDB = useStore(userInDBStore);
     const oldReports = useStore(OldPeriodReports);
     useEffect(() => {
         getOldTeamReports({
