@@ -24,8 +24,7 @@ const authError = (err) => {
 };
 
 const instanceAPI = axios.create({
-    //TODO create env_variable
-    baseURL: 'https://localhost:5001/api/',
+    baseURL: process.env.REACT_APP_API_ENDPOINT + '/',
     timeout: 9000,
 });
 instanceAPI.interceptors.request.use(tokenHeader);
