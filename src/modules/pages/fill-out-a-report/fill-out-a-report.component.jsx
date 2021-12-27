@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet';
 
 export function FillOutAReport({ firstName }) {
     return (
-        <main className='p-5 flex-grow-1 overflow-auto'>
+        <main className='p-5 flex-grow-1'>
             <Helmet>
                 <title>Fill out a report</title>
             </Helmet>
