@@ -112,7 +112,10 @@ export function FillOutAReportContent({ firstName }) {
                 {({ errors, touched }) => (
                     <Form>
                         <div className='mx-auto'>
-                            <ErrorShadow isError={errors.moraleInput}>
+                            <ErrorShadow
+                                isError={
+                                    errors.moraleInput && touched.moraleInput
+                                }>
                                 <RadioSmileContainer
                                     mainLabel={'How was your morale this week?'}
                                     containerInputName={'moraleInput'}
@@ -120,7 +123,10 @@ export function FillOutAReportContent({ firstName }) {
                                     commentTextareaId={'moraleCommentTextarea'}
                                 />
                             </ErrorShadow>
-                            <ErrorShadow isError={errors.stressInput}>
+                            <ErrorShadow
+                                isError={
+                                    errors.stressInput && touched.moraleInput
+                                }>
                                 <RadioSmileContainer
                                     mainLabel={'How was your stress this week?'}
                                     containerInputName={'stressInput'}
@@ -128,7 +134,10 @@ export function FillOutAReportContent({ firstName }) {
                                     commentTextareaId={'stressCommentTextarea'}
                                 />
                             </ErrorShadow>
-                            <ErrorShadow isError={errors.workloadInput}>
+                            <ErrorShadow
+                                isError={
+                                    errors.workloadInput && touched.moraleInput
+                                }>
                                 <RadioSmileContainer
                                     mainLabel={
                                         'How was your workload this week?'
@@ -204,9 +213,10 @@ export function FillOutAReportContent({ firstName }) {
                             </div>
                         </div>
                         <div className='mb-5 small-block'>
-                            {(errors.moraleInput ||
-                                errors.stressInput ||
-                                errors.workloadInput) && (
+                            {((errors.moraleInput && touched.moraleInput) ||
+                                (errors.stressInput && touched.stressInput) ||
+                                (errors.workloadInput &&
+                                    touched.moraleInput)) && (
                                 <p className='text-danger fw-bold'>
                                     All fields are required unless marked as
                                     optional.
