@@ -41,6 +41,7 @@ import { ErrorPage } from '../pages/error/error-page.component';
 import { LoadingUserFromDB } from '../common/components/loading/loading-user-from-db.component';
 import { triedGetUserFromDBStore } from '../store/tride-to-get-user-from-db-store';
 import { setTokenTOStore } from '../api/api-axios';
+import { env } from 'custom-env';
 
 export function App() {
     const isWaitingLoad = useStore(isWaitingResponse);

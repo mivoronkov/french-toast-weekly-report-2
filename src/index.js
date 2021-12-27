@@ -7,7 +7,6 @@ import './styles/main.scss';
 import 'bootstrap';
 import { BrowserRouter } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
-import { Initialisation } from './modules/app/setup.component';
 
 ReactDOM.render(
     <React.StrictMode>

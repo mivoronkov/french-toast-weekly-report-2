@@ -24,8 +24,7 @@ const authError = (err) => {
 };
 
 const instanceAPI = axios.create({
-    //TODO create env_variable
-    baseURL: 'https://localhost:5001/api/',
+    baseURL: process.env.REACT_APP_API_ENDPOINT + '/',
     timeout: 9000,
 });
 instanceAPI.interceptors.request.use(tokenHeader);
@@ -120,12 +119,12 @@ export const apiInvoker = {
                 `companies/${companyId}/members/${memberId}/reports`
             );
         },
-        async getInInterval(companyId, memberId, start, end,){
+        async getInInterval(companyId, memberId, start, end) {
             return await instanceAPI.get(
                 `companies/${companyId}/members/${memberId}/reports/extended/${start}/${end}`
             );
         },
-        async getOld(companyId, memberId, currentDate){
+        async getOld(companyId, memberId, currentDate) {
             return await instanceAPI.get(
                 `companies/${companyId}/members/${memberId}/reports/extended/old/${currentDate}`
             );

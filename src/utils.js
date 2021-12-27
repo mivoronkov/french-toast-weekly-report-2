@@ -76,7 +76,7 @@ export async function getUserWithFetch(token) {
     try {
         const response = await fetch(
             //TODO: change to server address
-            `https://localhost:5001/api/user`,
+            `${process.env.REACT_APP_API_ENDPOINT}/user`,
             {
                 headers: { Authorization: `Bearer ${token}` },
             }
