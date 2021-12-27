@@ -8,12 +8,12 @@ import DateRangePicker from 'react-bootstrap-daterangepicker';
 import 'bootstrap-daterangepicker/daterangepicker.css';
 import { Form, Formik, Field, useFormikContext } from 'formik';
 import { useStore } from 'effector-react';
-import { userStore } from '../store/user-store';
+import { userInDBStore } from '../store/user-in-d-b-store';
 import { createReport } from '../store/weekly-report-store';
 import { ErrorShadow } from '../containers/error-block/error-shadow.component';
 
 export function FillOutAReportContent({ firstName }) {
-    const userInDB = useStore(userStore);
+    const userInDB = useStore(userInDBStore);
 
     const [dateState, setDateState] = useState({
         startDate: moment()

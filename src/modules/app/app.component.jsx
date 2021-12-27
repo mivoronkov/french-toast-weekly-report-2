@@ -30,19 +30,19 @@ import { Login } from '../common/components/login/login.component';
 import { AcceptInviteComponent } from '../pages/accept-invite/accept-invite.component';
 import { CompleteRegistration } from '../pages/complete-registration/complete-registration.component';
 import { useStore } from 'effector-react';
-import { userStore } from '../store/user-store';
+import { userInDBStore } from '../store/user-in-d-b-store';
 import {
     isWaitingResponse,
-    waitingResponse,
+    setIsWaitingResponse,
 } from '../store/user-request-store';
 import { LoginPage } from '../pages/login/login-page.component';
 import { errorStore } from '../store/error-store';
 import { ErrorPage } from '../pages/error/error-page.component';
 import { LoadingUserFromDB } from '../common/components/loading/loading-user-from-db.component';
-import { triedGetUserFromDBStore } from '../store/tride-to-get-user-from-db-store';
+import { triedToGetUserFromDBStore } from '../store/tried-to-get-user-from-db-store';
 import { OldReports } from '../weekly-report-history/old-extended-report.component';
 import { CurrentReports } from '../weekly-report-history/current-report.componen';
-import { setTokenTOStore } from '../api/api-axios';
+import { setTokenToStore } from '../api/api-axios';
 
 export function App() {
     const isWaitingLoad = useStore(isWaitingResponse);
@@ -52,15 +52,15 @@ export function App() {
         loginWithPopup,
         getAccessTokenSilently,
     } = useAuth0();
-    const userInDB = useStore(userStore);
+    const userInDB = useStore(userInDBStore);
     const innerError = useStore(errorStore);
-    const triedToGetUserFromDB = useStore(triedGetUserFromDBStore);
+    const triedToGetUserFromDB = useStore(triedToGetUserFromDBStore);
 
     useEffect(async () => {
         if (isAuthenticated) {
             try {
                 const token = await getAccessTokenSilently();
-                await setTokenTOStore(token);
+                await setTokenToStore(token);
             } catch (error) {
                 console.error(error);
                 return error;
@@ -76,10 +76,10 @@ export function App() {
         return <Loading />;
     }
 
-    // Idk how to make it right with routing:
     if (window.location.pathname.startsWith('/accept-invite/')) {
         return (
             <Routes>
+                <Route path='/' element={<App />} />
                 <Route
                     path='/accept-invite/:hashedParams'
                     element={
@@ -101,17 +101,9 @@ export function App() {
         return <Loading />;
     }
 
-    if (userInDB.companyId === '') {
+    if (!userInDB.id) {
         // Пользователь авторизован через Auth0, но в БД его нет, показываем страницу Complete Registration
-        return (
-            <div className='d-flex h-100 justify-content-center'>
-                {isWaitingLoad || isLoading ? (
-                    <Loading />
-                ) : (
-                    <CompleteRegistration />
-                )}
-            </div>
-        );
+        return <CompleteRegistration />;
     }
 
     // Пользователь авторизован через Auth0 и есть в БД, показываем обычную страницу

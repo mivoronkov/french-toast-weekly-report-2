@@ -6,15 +6,15 @@ import PropTypes from 'prop-types';
 import { Form, Formik } from 'formik';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useStore } from 'effector-react';
-import { getUser, userStore } from '../../store/user-store';
+import { getUserFromDB, userInDBStore } from '../../store/user-in-d-b-store';
 import { createMember } from '../../store/team-member-store';
 import { useAuth0 } from '@auth0/auth0-react';
 import { inviteLinks } from '../../../utils';
-import { apiInvoker, setTokenTOStore } from '../../api/api-axios';
-import { waitingResponse } from '../../store/user-request-store';
+import { apiInvoker, setTokenToStore } from '../../api/api-axios';
+import { setIsWaitingResponse } from '../../store/user-request-store';
 
 export function AcceptInviteComponent({ inviterName, company }) {
-    const userInDB = useStore(userStore);
+    const userInDB = useStore(userInDBStore);
     let { hashedParams } = useParams();
     const {
         user,
@@ -24,7 +24,7 @@ export function AcceptInviteComponent({ inviterName, company }) {
         loginWithPopup,
     } = useAuth0();
     const navigate = useNavigate();
-    let isRegistered = userInDB.companyId !== '';
+    let isRegistered = userInDB.id !== null;
 
     let linkIsValid = true;
     let linkParams;
@@ -40,6 +40,7 @@ export function AcceptInviteComponent({ inviterName, company }) {
         lastName: searchParams.get('lastName'),
         title: searchParams.get('title'),
     };
+
     const onSubmit = async (values, { setSubmitting }) => {
         await createMember({
             companyId: linkParams.company.id,
@@ -51,13 +52,11 @@ export function AcceptInviteComponent({ inviterName, company }) {
             companyName: linkParams.company.name,
             inviteLink: 'example.com',
         });
-        await getUser();
-        await apiInvoker.links.updateLeaders(
-            userInDB.id,
+        const createdUser = await getUserFromDB();
+        const createdLink = await apiInvoker.links.postLeader(
+            createdUser.id,
             linkParams.inviter.id
         );
-        window.location.pathname = '/';
-        window.location.search = '';
         navigate('/');
     };
 
@@ -65,15 +64,15 @@ export function AcceptInviteComponent({ inviterName, company }) {
 
     const login = async () => {
         await loginWithPopup();
-        waitingResponse(true);
+        setIsWaitingResponse(true);
         try {
             const token = await getAccessTokenSilently();
-            await setTokenTOStore(token);
+            await setTokenToStore(token);
         } catch (error) {
             console.error(error);
             return error;
         } finally {
-            waitingResponse(false);
+            setIsWaitingResponse(false);
         }
     };
 
@@ -83,11 +82,11 @@ export function AcceptInviteComponent({ inviterName, company }) {
                 <p className='mx-auto'>
                     You should login or sign up to accept invite
                 </p>
-                <button
-                    className='btn btn-lg btn-warning mt-3 mx-3 d-flex'
-                    onClick={login}>
-                    Log In
-                </button>
+                <div className='mt-3 mx-3 d-inline-flex justify-content-center'>
+                    <button className='btn btn-lg btn-warning ' onClick={login}>
+                        Log In
+                    </button>
+                </div>
             </>
         );
     } else if (!linkIsValid) {
@@ -132,7 +131,7 @@ export function AcceptInviteComponent({ inviterName, company }) {
         );
     }
     return (
-        <main className='flex-grow-1 overflow-auto'>
+        <main className='flex-grow-1 overflow-auto mx-0'>
             <Helmet>
                 <title>Accept invite</title>
             </Helmet>
