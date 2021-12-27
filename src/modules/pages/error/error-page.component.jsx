@@ -12,9 +12,9 @@ export function ErrorPage({ error }) {
     return (
         <main className='flex-grow-1 overflow-auto mx-0'>
             <Helmet>
-                <title>Inner Error</title>
+                <title>Server Error</title>
             </Helmet>
-            <TextHeaderComponent title={'Inner Error'} />
+            <TextHeaderComponent title={'Server Error'} />
             <div className='py-1'>
                 <div className='d-flex justify-content-center'>
                     <img
@@ -23,6 +23,18 @@ export function ErrorPage({ error }) {
                         alt={'inner-error'}
                     />
                 </div>
+            </div>
+            <div className='py-2 d-flex justify-content-center text-center'>
+                <p>
+                    Something is broken and the server doesn&apos;t run
+                    correctly.
+                    <br />
+                    Please contact website administrators and try again when the
+                    issue is resolved.
+                </p>
+            </div>
+            <div className='py-2 d-flex justify-content-center'>
+                <p>The following messages may help to resolve a problem:</p>
             </div>
             <div className='py-2'>
                 <div className='d-flex flex-column justify-content-center text-danger'>
@@ -37,11 +49,6 @@ export function ErrorPage({ error }) {
                 </div>
                 <div className='d-flex justify-content-center py-4'>
                     Error stack: {error.stack}
-                </div>
-            </div>
-            <div className='py-2'>
-                <div className='d-flex justify-content-center'>
-                    To try again refresh the page
                 </div>
             </div>
             {isAuthenticated ? (
