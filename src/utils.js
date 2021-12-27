@@ -96,7 +96,8 @@ export async function getUserWithFetch(token) {
             user: null,
             error: {
                 message: error.message,
-                extraMessage: 'Check if database is active',
+                extraMessage:
+                    'Check if the server is up and endpoint is configured properly.',
                 stack: error.stack,
             },
         };
