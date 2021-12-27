@@ -117,6 +117,11 @@ export const apiInvoker = {
         },
     },
     links: {
+        async postLeader(teamMemberId, leaderId) {
+            return await instanceAPI.post(`links/${teamMemberId}`, leaderId, {
+                headers: { 'Content-Type': 'application/json' },
+            });
+        },
         async updateLeaders(teamMemberId, leadersIdList) {
             return await instanceAPI.put(`links/${teamMemberId}/leaders`, {
                 leaders: leadersIdList,

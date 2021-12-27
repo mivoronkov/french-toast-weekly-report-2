@@ -52,13 +52,11 @@ export function AcceptInviteComponent({ inviterName, company }) {
             companyName: linkParams.company.name,
             inviteLink: 'example.com',
         });
-        await getUserFromDB();
-        debugger;
-        await apiInvoker.links.updateLeaders(
-            userInDB.id,
+        const createdUser = await getUserFromDB();
+        const createdLink = await apiInvoker.links.postLeader(
+            createdUser.id,
             linkParams.inviter.id
         );
-        debugger;
         navigate('/');
     };
 
@@ -84,11 +82,11 @@ export function AcceptInviteComponent({ inviterName, company }) {
                 <p className='mx-auto'>
                     You should login or sign up to accept invite
                 </p>
-                <button
-                    className='btn btn-lg btn-warning mt-3 mx-3 d-flex'
-                    onClick={login}>
-                    Log In
-                </button>
+                <div className='mt-3 mx-3 d-inline-flex justify-content-center'>
+                    <button className='btn btn-lg btn-warning ' onClick={login}>
+                        Log In
+                    </button>
+                </div>
             </>
         );
     } else if (!linkIsValid) {
