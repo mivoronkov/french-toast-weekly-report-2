@@ -62,7 +62,6 @@ export function FillOutAReportContent({ firstName }) {
     };
 
     const onSubmit = async (values, { resetForm }) => {
-        debugger;
         let createdReport = await createReport({
             companyId: userInDB.companyId,
             memberId: userInDB.id,
