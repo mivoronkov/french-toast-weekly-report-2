@@ -11,6 +11,8 @@ import { useStore } from 'effector-react';
 import { apiInvoker } from '../../api/api-axios';
 import { companyStore, getCompany } from '../../store/company-store';
 import { userInDBStore } from '../../store/user-in-d-b-store';
+import * as Yup from 'yup';
+import { ErrorShadow } from '../../containers/error-block/error-shadow.component';
 
 export function MyCompanyComponent() {
     const { name: companyName, joinedDate, companyId } = useStore(companyStore);
@@ -28,7 +30,9 @@ export function MyCompanyComponent() {
         await getCompany(userInDB.companyId);
         setSubmitting(false);
     };
-
+    const validateName = Yup.object().shape({
+        companyName: Yup.string().min(1).required('Enter company name.'),
+    });
     return (
         <main className='flex-grow-1 overflow-auto'>
             <Helmet>
@@ -47,19 +51,35 @@ export function MyCompanyComponent() {
                     access that information by seeing the list of team members.
                 </TitleBlockComponent>
                 <ContentBlockComponent title={`Rename ${companyName}`}>
-                    <Formik initialValues={formInitValues} onSubmit={onSubmit}>
-                        <Form>
-                            <EditFieldComponent
-                                label='Change company name.'
-                                name='companyName'
-                                width='450px'
-                            />
-                            <button
-                                className='btn btn-outline-dark mt-2'
-                                type='submit'>
-                                Save name change
-                            </button>
-                        </Form>
+                    <Formik
+                        initialValues={formInitValues}
+                        onSubmit={onSubmit}
+                        validationSchema={validateName}>
+                        {({ errors, touched }) => (
+                            <Form>
+                                <ErrorShadow
+                                    isError={
+                                        errors.companyName &&
+                                        touched.companyName
+                                    }>
+                                    <EditFieldComponent
+                                        label='Change company name.'
+                                        name='companyName'
+                                        width='450px'
+                                    />
+                                </ErrorShadow>
+                                {errors.companyName && touched.companyName ? (
+                                    <div className='my-4 fw-bold text-uppercase'>
+                                        {errors.companyName}
+                                    </div>
+                                ) : null}
+                                <button
+                                    className='btn btn-outline-dark mt-2'
+                                    type='submit'>
+                                    Save name change
+                                </button>
+                            </Form>
+                        )}
                     </Formik>
                 </ContentBlockComponent>
                 <ContentBlockComponent

@@ -88,7 +88,7 @@ export function FillOutAReportContent({ firstName }) {
             endDate: moment().set('hour', 12).set('minute', 0),
         });
     };
-    const signupSchema = Yup.object().shape({
+    const sighupSchema = Yup.object().shape({
         moraleInput: Yup.number().min(1).max(5).required('Required'),
         stressInput: Yup.number().min(1).max(5).required('Required'),
         workloadInput: Yup.number().min(1).max(5).required('Required'),
@@ -106,7 +106,7 @@ export function FillOutAReportContent({ firstName }) {
             </div>
             <Formik
                 initialValues={initFormValues}
-                validationSchema={signupSchema}
+                validationSchema={sighupSchema}
                 onSubmit={onSubmit}
                 enableReinitialize={true}>
                 {({ errors, touched }) => (
