@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MyReportsContent } from '../../modules/my-reports/my-reports-contetnt.component';
+import { MyReportsContent } from '../../modules/my-reports/my-reports-content.component';
 
 export default {
     title: 'My reports',

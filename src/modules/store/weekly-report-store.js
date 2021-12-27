@@ -5,6 +5,15 @@ export const getAllReports = createEffect(async ({ companyId, memberId }) => {
     const resp = await apiInvoker.weeklyReport.getAll(companyId, memberId);
     return resp.data;
 });
+export const getAllReportsFormatted = createEffect(
+    async ({ companyId, memberId }) => {
+        const resp = await apiInvoker.weeklyReport.getAllFormatted(
+            companyId,
+            memberId
+        );
+        return resp.data;
+    }
+);
 export const getClosesReport = createEffect(
     async ({ companyId, memberId, team, week }) => {
         const resp = await apiInvoker.weeklyReport.getInInterval(
@@ -57,5 +66,8 @@ reportsStore
         return data;
     })
     .on(getClosesReport.doneData, (_, data) => {
+        return data;
+    })
+    .on(getAllReportsFormatted.doneData, (_, data) => {
         return data;
     });

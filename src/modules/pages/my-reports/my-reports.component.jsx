@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ProfileHeaderComponent } from '../../headers/profile-header/profile-header.component';
-import { MyReportsContent } from '../../my-reports/my-reports-contetnt.component';
+import { MyReportsContent } from '../../my-reports/my-reports-content.component';
 import { Helmet } from 'react-helmet';
 
 export function MyReports({ first_name, last_name, email, avatar_path, data }) {
