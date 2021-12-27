@@ -6,15 +6,16 @@ describe('Avatar tests', () => {
     it('Renders properly', () => {
         render(<AvatarComponent lastName='LastName' />);
     });
-    it('Shows an image if link is valid', () => {
-        render(
-            <AvatarComponent
-                firstName='Alexander'
-                lastName='Slesarenko'
-                avatarPath='https://avatars.githubusercontent.com/u/3900938'
-            />
-        );
-    });
+    // I don't know how to test if <img> exists properly
+    // it('Shows an image if link is valid', () => {
+    //     render(
+    //         <AvatarComponent
+    //             firstName='Alexander'
+    //             lastName='Slesarenko'
+    //             avatarPath='https://avatars.githubusercontent.com/u/3900938'
+    //         />
+    //     );
+    // });
     it('Shows right letters', () => {
         render(<AvatarComponent lastName='LastName' />);
         expect(screen.getByText('LA')).toBeInTheDocument();
