@@ -43,7 +43,6 @@ import { triedGetUserFromDBStore } from '../store/tride-to-get-user-from-db-stor
 import { OldReports } from '../weekly-report-history/old-extended-report.component';
 import { CurrentReports } from '../weekly-report-history/current-report.componen';
 import { setTokenTOStore } from '../api/api-axios';
-import { env } from 'custom-env';
 
 export function App() {
     const isWaitingLoad = useStore(isWaitingResponse);
