@@ -10,6 +10,7 @@ export function TeamMembersContent({ members }) {
             lastName={member.lastName}
             avatarPath={member.avatarPath}
             key={index}
+            id={member.id}
         />
     ));
     return (
