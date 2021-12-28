@@ -29,6 +29,8 @@ export function weeklyLabel(d) {
     return { currentWeek, previousWeek };
 }
 
+// Example of work:
+// 2021-12-21 => "20/12 - 26/12, 2021"
 export function getFormattedWeek(dateStart) {
     const { monday, sunday } = getWeek(dateStart);
     const weekSlashed = slashedWeek({ monday: monday, sunday: sunday });

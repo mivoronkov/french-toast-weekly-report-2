@@ -8,6 +8,7 @@ import { inviteLinks } from '../../../utils';
 import { InviteYourTeamSuccessMessageComponent } from '../../invite-your-team/invite-your-team-success-message.component';
 import { Form, Formik } from 'formik';
 import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
+import { setInviteSuccessMessageLinkToStore } from '../../store/invite-success-message-link-store';
 
 export function InviteYourTeam() {
     const [showSuccess, setShowSuccess] = useState(false);
@@ -20,10 +21,12 @@ export function InviteYourTeam() {
 
     const onSubmit = async (values, { setSubmitting }) => {
         let resp = await apiInvoker.companies.get(userInDb.companyId);
-        alert(
-            `This link should be sent to ${values.email} with the title "Accept invite":\n` +
-                `${inviteLinks.generateLink(userInDb, resp.data.name, values)}`
+        const generatedLink = inviteLinks.generateLink(
+            userInDb,
+            resp.data.name,
+            values
         );
+        setInviteSuccessMessageLinkToStore(generatedLink);
         setShowSuccess(true);
         setSubmitting(false);
     };
