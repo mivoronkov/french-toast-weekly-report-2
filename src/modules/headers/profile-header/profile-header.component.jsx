@@ -17,13 +17,14 @@ export function ProfileHeaderComponent({
         <header className='d-flex flex-column bg-dark p-5 text-center text-light'>
             <div className='mx-auto'>
                 <AvatarComponent
-                    lastName={userInDB.lastName}
-                    firstName={userInDB.firstName}
+                    lastName={last_name}
+                    firstName={first_name}
+                    avatarPath={avatar_path}
                     size='big'
                 />
             </div>
-            <h1 className='big-title fw-bold'>{`${userInDB.firstName} ${userInDB.lastName}`}</h1>
-            <p>{userInDB.email}</p>
+            <h1 className='big-title fw-bold'>{`${first_name} ${last_name}`}</h1>
+            <p>{email}</p>
         </header>
     );
 }

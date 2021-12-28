@@ -42,7 +42,6 @@ const instanceAPI = axios.create({
 });
 
 instanceAPI.interceptors.request.use(tokenHeader);
-//instanceAPI.interceptors.request.use((request) => request, requestErrors);
 instanceAPI.interceptors.response.use((response) => response, responseErrors);
 
 export const apiInvoker = {
@@ -122,6 +121,16 @@ export const apiInvoker = {
         },
     },
     links: {
+        async getLeaders(teamMemberId) {
+            const resp = await instanceAPI.get(`links/${teamMemberId}/leaders`);
+            return resp.data;
+        },
+        async getFollowers(teamMemberId) {
+            const resp = await instanceAPI.get(
+                `links/${teamMemberId}/followers`
+            );
+            return resp.data;
+        },
         async postLeader(teamMemberId, leaderId) {
             return await instanceAPI.post(`links/${teamMemberId}`, leaderId, {
                 headers: { 'Content-Type': 'application/json' },
