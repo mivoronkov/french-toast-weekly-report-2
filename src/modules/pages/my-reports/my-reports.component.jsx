@@ -3,8 +3,16 @@ import PropTypes from 'prop-types';
 import { ProfileHeaderComponent } from '../../headers/profile-header/profile-header.component';
 import { MyReportsContent } from '../../my-reports/my-reports-content.component';
 import { Helmet } from 'react-helmet';
+import { userInDBStore } from '../../store/user-in-d-b-store';
+import { useStore } from 'effector-react';
 
 export function MyReports({ first_name, last_name, email, avatar_path, data }) {
+    const userInDB = useStore(userInDBStore);
+    if (userInDB) {
+        first_name = userInDB.firstName;
+        last_name = userInDB.lastName;
+        email = userInDB.email;
+    }
     return (
         <main className='flex-grow-1 overflow-auto'>
             <Helmet>
