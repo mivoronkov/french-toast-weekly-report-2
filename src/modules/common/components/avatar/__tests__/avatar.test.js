@@ -3,7 +3,7 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 jest.mock('../../../../../utils', () => {
     return {
-        getImageIfSrcValid: () => {
+        getImageSrcIfValid: () => {
             return Promise.resolve();
         },
     };
