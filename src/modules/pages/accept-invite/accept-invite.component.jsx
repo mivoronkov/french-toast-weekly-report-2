@@ -50,7 +50,7 @@ export function AcceptInviteComponent({ inviterName, company }) {
             email: user.email,
             sub: user.sub,
             companyName: linkParams.company.name,
-            inviteLink: 'example.com',
+            inviteLink: '',
         });
         const createdUser = await getUserFromDB();
         const createdLink = await apiInvoker.links.postLeader(

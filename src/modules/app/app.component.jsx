@@ -30,7 +30,7 @@ import { Login } from '../common/components/login/login.component';
 import { AcceptInviteComponent } from '../pages/accept-invite/accept-invite.component';
 import { CompleteRegistration } from '../pages/complete-registration/complete-registration.component';
 import { useStore } from 'effector-react';
-import { userInDBStore } from '../store/user-in-d-b-store';
+import { getUserFromDB, userInDBStore } from '../store/user-in-d-b-store';
 import {
     isWaitingResponse,
     setIsWaitingResponse,
@@ -38,24 +38,23 @@ import {
 import { LoginPage } from '../pages/login/login-page.component';
 import { errorStore } from '../store/error-store';
 import { ErrorPage } from '../pages/error/error-page.component';
-import { LoadingUserFromDB } from '../common/components/loading/loading-user-from-db.component';
-import { triedToGetUserFromDBStore } from '../store/tried-to-get-user-from-db-store';
+import {
+    setTriedToGetUserFromDBToStore,
+    triedToGetUserFromDBStore,
+} from '../store/tried-to-get-user-from-db-store';
 import { OldReports } from '../weekly-report-history/old-extended-report.component';
 import { CurrentReports } from '../weekly-report-history/current-report.componen';
-import { setTokenToStore } from '../api/api-axios';
+import { setTokenToStore, tokenFromStore } from '../api/api-axios';
 
 export function App() {
     const isWaitingLoad = useStore(isWaitingResponse);
-    const {
-        isLoading,
-        isAuthenticated,
-        loginWithPopup,
-        getAccessTokenSilently,
-    } = useAuth0();
+    const { isLoading, isAuthenticated, getAccessTokenSilently } = useAuth0();
     const userInDB = useStore(userInDBStore);
     const innerError = useStore(errorStore);
     const triedToGetUserFromDB = useStore(triedToGetUserFromDBStore);
+    const storeToken = useStore(tokenFromStore);
 
+    // Эффект, кладущий токен в store после авторизации через Auth0
     useEffect(async () => {
         if (isAuthenticated) {
             try {
@@ -67,6 +66,22 @@ export function App() {
             }
         }
     }, [isAuthenticated]);
+
+    // Эффект, делающий запрос на пользователя в БД и кладущий его в store в случае успеха
+    useEffect(async () => {
+        if (isAuthenticated && storeToken) {
+            setIsWaitingResponse(true);
+            try {
+                await getUserFromDB();
+            } catch (error) {
+                console.error(error);
+                return error;
+            } finally {
+                setIsWaitingResponse(false);
+                setTriedToGetUserFromDBToStore(true);
+            }
+        }
+    }, [isAuthenticated, storeToken]);
 
     if (innerError) {
         return <ErrorPage error={innerError} />;
@@ -93,15 +108,13 @@ export function App() {
         );
     } else if (!isAuthenticated) {
         return <LoginPage />;
-    } else if (!triedToGetUserFromDB) {
-        return <LoadingUserFromDB />;
     }
 
-    if (isLoading || isWaitingLoad) {
+    if (!triedToGetUserFromDB) {
         return <Loading />;
     }
 
-    if (!userInDB.id) {
+    if (triedToGetUserFromDB && !userInDB.id) {
         // Пользователь авторизован через Auth0, но в БД его нет, показываем страницу Complete Registration
         return <CompleteRegistration />;
     }
