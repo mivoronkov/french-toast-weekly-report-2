@@ -17,15 +17,6 @@ const tokenHeader = async (config) => {
     return config;
 };
 
-/*const requestErrors = (error) => {
-    const status = error?.request?.status;
-    // Если получили 404 при запросе пользователя, значит ему надо пройти Complete registration,
-    // ошибку возвращать не надо
-    if (status !== 404) {
-        setErrorToStore(error);
-    }
-};*/
-
 const responseErrors = (error) => {
     const status = error?.response?.status;
     // Если получили 404 при запросе пользователя, значит ему надо пройти Complete registration,
@@ -77,8 +68,7 @@ export const apiInvoker = {
             title,
             email,
             sub,
-            companyName,
-            inviteLink
+            companyName
         ) {
             return await instanceAPI.post(`companies/${companyId}/members`, {
                 id: 0,
@@ -89,7 +79,7 @@ export const apiInvoker = {
                 sub: sub,
                 companyName: companyName,
                 companyId: companyId,
-                inviteLink: inviteLink,
+                inviteLink: '',
             });
         },
         async updateMember(

@@ -14,29 +14,45 @@ import {
     reportsStore,
 } from '../store/weekly-report-store';
 import { Loading } from '../common/components/loading/loading.component';
+import { setErrorToStore } from '../store/error-store';
 
 export function MyReportsContent({ data }) {
     const userInDB = useStore(userInDBStore);
     const myReports = useStore(reportsStore);
     const [isInitialized, setIsInitialized] = useState(false);
 
+    // Эффект, запрашивающий отчёты пользователя из БД
     useEffect(async () => {
         setIsInitialized(false);
-        const reports = await getAllReportsFormatted({
-            companyId: userInDB.companyId,
-            memberId: userInDB.id,
-        });
-        setIsInitialized(true);
+        try {
+            const reports = await getAllReportsFormatted({
+                companyId: userInDB.companyId,
+                memberId: userInDB.id,
+            });
+            setIsInitialized(true);
+        } catch (error) {
+            if (error?.response?.status === 404) {
+                // Если получили 404, значит у пользователя ещё нет отчётов
+                setIsInitialized(true);
+            } else {
+                setErrorToStore(error);
+            }
+        }
     }, [userInDB.id, userInDB.companyId]);
+
     return (
         <>
             {isInitialized ? (
                 <div className='d-flex flex-column align-items-center w-100'>
                     <SectionLabel labelText={'past weekly reports'} />
-                    <ExpandAllButton>
-                        <LineItem />
-                        <ExpandCards data={myReports} />
-                    </ExpandAllButton>
+                    {myReports.length === 0 ? (
+                        <h1>You have no weekly reports</h1>
+                    ) : (
+                        <ExpandAllButton>
+                            <LineItem />
+                            <ExpandCards data={myReports} />
+                        </ExpandAllButton>
+                    )}
                 </div>
             ) : (
                 <Loading />

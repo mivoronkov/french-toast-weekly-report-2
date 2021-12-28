@@ -15,7 +15,6 @@ export const createMember = createEffect(
         email,
         sub,
         companyName,
-        inviteLink,
     }) => {
         const resp = await apiInvoker.teamMember.createMember(
             companyId,
@@ -24,8 +23,7 @@ export const createMember = createEffect(
             title,
             email,
             sub,
-            companyName,
-            inviteLink
+            companyName
         );
         return resp.data;
     }

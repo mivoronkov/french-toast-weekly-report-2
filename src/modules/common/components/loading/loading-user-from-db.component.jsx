@@ -7,6 +7,7 @@ import { setTriedToGetUserFromDBToStore } from '../../../store/tried-to-get-user
 import { useAuth0 } from '@auth0/auth0-react';
 import { setTokenToStore } from '../../../api/api-axios';
 
+// Currently not used component
 export function LoadingUserFromDB() {
     const { getAccessTokenSilently } = useAuth0();
     const getUserFromDBToUserStore = async () => {

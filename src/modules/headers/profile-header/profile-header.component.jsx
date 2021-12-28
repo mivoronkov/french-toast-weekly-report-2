@@ -1,10 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { AvatarComponent } from '../../common/components/avatar/avatar.component';
 import { useStore } from 'effector-react';
 import { userInDBStore } from '../../store/user-in-d-b-store';
-import { getClosesReport, reportsStore } from '../../store/weekly-report-store';
-import { useAuth0 } from '@auth0/auth0-react';
 
 export function ProfileHeaderComponent({
     first_name,
