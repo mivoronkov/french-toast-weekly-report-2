@@ -69,24 +69,31 @@ export function TeamReportsLineItem({
         <div className='row flex-nowrap d-flex flex-column bg-white align-items-center mb-2 mx-0 shadow'>
             <div className={cardControlClasses.join(' ')}>
                 <div className='col-sm-3 row flex-nowrap justify-content-around'>
-                    <div className='col px-4'>
+                    <div className='col px-1'>
                         <AvatarComponent
                             lastName={lastName}
                             firstName={firstName}
                             avatarPath={avatarPath}
                         />
                     </div>
-                    <div className='col-md-8 align-items-end py-2 px-2'>
-                        <div className='row font-weight-500'>
-                            {firstName ? firstName + ' ' : ''}
-                            {lastName}
+                    {weeklyInformation ? (
+                        <div className='d-flex justify-content-start align-items-center col-md-8 py-2 px-1'>
+                            <div className='row font-weight-500'>
+                                {firstName ? firstName + ' ' : ''}
+                                {lastName}
+                            </div>
                         </div>
-                        <div className='row text-black-50 font-weight-500'>
-                            {weeklyInformation
-                                ? 'has a report'
-                                : 'is missing a report'}
+                    ) : (
+                        <div className='align-items-end col-md-8 py-2 px-1'>
+                            <div className='row font-weight-500'>
+                                {firstName ? firstName + ' ' : ''}
+                                {lastName}
+                            </div>
+                            <div className='row text-black-50 font-weight-500'>
+                                is missing a report
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
                 {weeklyInformation && weeklyNotations ? (
                     <div className={classList.join(' ')}>

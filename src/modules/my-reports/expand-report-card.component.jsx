@@ -46,7 +46,7 @@ export function ExpandReportCard({
         })
     );
     const collapsedButtonClasses = ['btn', 'dropdown-toggle', 'col'];
-    const durationLabelClasses = ['py-3', 'my-2', 'col-lg-7', 'fw-bold'];
+    const durationLabelClasses = ['py-3', 'my-2', 'col-lg-7'];
     const cardControlClasses = [
         'row',
         'flex-nowrap',

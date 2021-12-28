@@ -139,6 +139,14 @@ export const apiInvoker = {
                 `companies/${companyId}/members/${memberId}/reports`
             );
         },
+        async getAllFormatted(companyId, memberId) {
+            return await instanceAPI.get(
+                `companies/${companyId}/members/${memberId}/reports`,
+                {
+                    params: { shouldFormatReports: true },
+                }
+            );
+        },
         async getInInterval(companyId, memberId, team, week) {
             return await instanceAPI.get(
                 `companies/${companyId}/members/${memberId}/reports/current-reports`,

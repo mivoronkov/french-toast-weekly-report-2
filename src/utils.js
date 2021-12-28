@@ -75,7 +75,6 @@ export const inviteLinks = {
 export async function getUserWithFetch(token) {
     try {
         const response = await fetch(
-            //TODO: change to server address
             `${process.env.REACT_APP_API_ENDPOINT}/user`,
             {
                 headers: { Authorization: `Bearer ${token}` },
