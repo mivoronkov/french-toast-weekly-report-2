@@ -131,7 +131,7 @@ export function App() {
                     element={<MyReports {...myReportStub} />}
                 />
                 <Route
-                    path='/fill-out-a-report'
+                    path='/companies/:companyId/members/:id/reports/create'
                     element={<FillOutAReport {...fillOOutAReport} />}
                 />
                 <Route

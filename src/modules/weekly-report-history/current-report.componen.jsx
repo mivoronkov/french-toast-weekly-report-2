@@ -6,7 +6,6 @@ import { LineItem } from '../my-reports/line-item.component';
 import { TeamReportsCards } from '../team-reports/team-reports-cards.component';
 import { getClosesReport, reportsStore } from '../store/weekly-report-store';
 import { useStore } from 'effector-react';
-import { userInDBStore } from '../store/user-in-d-b-store';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { ReportCalendar } from '../common/components/topbar/report-calendar.component';
 import { weeklyLabel } from '../common/utils/get-week';

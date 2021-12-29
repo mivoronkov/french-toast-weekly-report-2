@@ -29,7 +29,7 @@ export function SidebarComponent() {
                     />
                     <SidebarElementComponent
                         elementName={'Fill out a Report'}
-                        link={'/fill-out-a-report'}
+                        link={`/companies/${userInDB.companyId}/members/${userInDB.id}/reports/create`}
                     />
                 </ul>
             </div>
