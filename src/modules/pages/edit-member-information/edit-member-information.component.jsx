@@ -20,7 +20,6 @@ import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { Loading } from '../../common/components/loading/loading.component';
 
-
 export function EditMemberInformation({
     firstName,
     lastName,
@@ -73,9 +72,9 @@ export function EditMemberInformation({
     }, [params.companyId]);
 
     const updateUser = async () => {
-        const memberId = query.get('id') ?? userInDB.id;
+        const memberId = query.get('id') ?? params.id;
         if (memberId === undefined) return;
-        let tm = await apiInvoker.teamMember.get(userInDB.companyId, memberId);
+        let tm = await apiInvoker.teamMember.get(params.companyId, memberId);
         tm = tm.data;
         if (tm === undefined) return;
         setInitFormValues({

@@ -15,7 +15,6 @@ import { useParams } from 'react-router-dom';
 import { useModal } from 'react-hooks-use-modal';
 import { FillOutAReportPopupComponent } from '../popups/fill-out-a-report/fill-out-a-report-popup.component';
 
-
 export function FillOutAReportContent({ firstName }) {
     const userInDB = useStore(userInDBStore);
     const params = useParams();
