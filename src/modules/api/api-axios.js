@@ -153,7 +153,7 @@ export const apiInvoker = {
         },
         async getInInterval(companyId, memberId, team, week) {
             return await instanceAPI.get(
-                `companies/${companyId}/members/${memberId}/reports/current-reports`,
+                `companies/${companyId}/members/${memberId}/reports/team-reports/current-reports`,
                 {
                     params: {
                         week: week,
@@ -164,7 +164,7 @@ export const apiInvoker = {
         },
         async getOldExtended(companyId, memberId, team, filter) {
             return await instanceAPI.get(
-                `companies/${companyId}/members/${memberId}/reports/old-reports/`,
+                `companies/${companyId}/members/${memberId}/reports/team-reports/old-reports`,
                 {
                     params: {
                         filter: filter,

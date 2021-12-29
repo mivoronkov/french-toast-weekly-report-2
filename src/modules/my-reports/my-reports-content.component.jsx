@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { useParams } from 'react-router-dom';
 import { ExpandAllButton } from '../common/components/buttons/expand-all-button.component';
 import { LineItem } from '../my-reports/line-item.component';
 import { ExpandCards } from './expand-cards.component';
@@ -17,7 +18,7 @@ import { Loading } from '../common/components/loading/loading.component';
 import { setErrorToStore } from '../store/error-store';
 
 export function MyReportsContent({ data }) {
-    const userInDB = useStore(userInDBStore);
+    const params = useParams();
     const myReports = useStore(reportsStore);
     const [isInitialized, setIsInitialized] = useState(false);
 
@@ -26,8 +27,8 @@ export function MyReportsContent({ data }) {
         setIsInitialized(false);
         try {
             const reports = await getAllReportsFormatted({
-                companyId: userInDB.companyId,
-                memberId: userInDB.id,
+                companyId: params.companyId,
+                memberId: params.id,
             });
             setIsInitialized(true);
         } catch (error) {
@@ -38,7 +39,7 @@ export function MyReportsContent({ data }) {
                 setErrorToStore(error);
             }
         }
-    }, [userInDB.id, userInDB.companyId]);
+    }, [params.id, params.companyId]);
 
     return (
         <>

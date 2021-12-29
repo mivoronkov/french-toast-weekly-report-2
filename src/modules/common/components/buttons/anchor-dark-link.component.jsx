@@ -1,23 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
-export function AnchorDarkLink({ anchor, ...props }) {
+export function AnchorDarkLink({ anchor, activeParam, ...props }) {
+    let [searchParams] = useSearchParams();
+    const param = searchParams.get(activeParam.param);
+    const isActive =
+        activeParam.value !== '' ? param === activeParam.value : param !== null;
     return (
         <li className='page-item'>
-            <NavLink
+            <Link
                 to={anchor}
-                className={({ isActive }) =>
-                    isActive
-                        ? 'page-link bg-dark text-warning'
-                        : 'page-link bg-dark'
-                }>
+                className={`page-link bg-dark ${
+                    isActive ? 'text-warning' : ''
+                }`}>
                 {props.children}
-            </NavLink>
+            </Link>
         </li>
     );
 }
 AnchorDarkLink.propTypes = {
     children: PropTypes.any,
     anchor: PropTypes.string,
+    activeParam: PropTypes.shape({
+        param: PropTypes.string,
+        value: PropTypes.string,
+    }),
 };

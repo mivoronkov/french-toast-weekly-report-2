@@ -16,6 +16,7 @@ import { apiInvoker } from '../../api/api-axios';
 import { getAllTeammates, teammatesStore } from '../../store/teammates-store';
 import { inviteLinks } from '../../../utils';
 import { companyStore, getCompany } from '../../store/company-store';
+import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { Loading } from '../../common/components/loading/loading.component';
 
@@ -32,6 +33,7 @@ export function EditMemberInformation({
 }) {
     const userInDB = useStore(userInDBStore);
     const company = useStore(companyStore);
+    const params = useParams();
     const allTeammates = useStore(teammatesStore);
     const query = useQuery();
 
@@ -44,8 +46,8 @@ export function EditMemberInformation({
     const onSubmit = async (values, { setSubmitting }) => {
         console.log('submit');
         await apiInvoker.teamMember.updateMember(
-            userInDB.companyId,
-            teamMemberToEdit.id,
+            params.companyId,
+            params.id,
             values.firstName,
             values.lastName,
             values.title
@@ -66,13 +68,13 @@ export function EditMemberInformation({
         }
     );
     useEffect(() => {
-        getAllTeammates(userInDB.companyId);
-    }, [userInDB.companyId]);
+        getAllTeammates(params.companyId);
+    }, [params.companyId]);
 
     const updateUser = async () => {
-        const memberId = query.get('id') ?? userInDB.id;
+        const memberId = query.get('id') ?? params.id;
         if (memberId === undefined) return;
-        let tm = await apiInvoker.teamMember.get(userInDB.companyId, memberId);
+        let tm = await apiInvoker.teamMember.get(params.companyId, memberId);
         tm = tm.data;
         if (tm === undefined) return;
         setInitFormValues({
@@ -98,8 +100,8 @@ export function EditMemberInformation({
 
     async function onLeadersSave(leaders) {
         const leadersId = leaders.map((el) => el.id);
-        await apiInvoker.links.updateLeaders(teamMemberToEdit.id, leadersId);
-        await getUserFromDB();
+        await apiInvoker.links.updateLeaders(params.id, leadersId);
+        getUserFromDB();
         closeEditLeaders();
         await updateUser();
     }
@@ -113,10 +115,7 @@ export function EditMemberInformation({
     });
     async function onReportingMembersSave(followers) {
         const followersId = followers.map((el) => el.id);
-        await apiInvoker.links.updateFollowers(
-            teamMemberToEdit.id,
-            followersId
-        );
+        await apiInvoker.links.updateFollowers(params.id, followersId);
         getUserFromDB();
         closeEditReportingMembers();
         await updateUser();

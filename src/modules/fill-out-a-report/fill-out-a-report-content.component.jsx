@@ -11,11 +11,13 @@ import { useStore } from 'effector-react';
 import { userInDBStore } from '../store/user-in-d-b-store';
 import { createReport } from '../store/weekly-report-store';
 import { ErrorShadow } from '../containers/error-block/error-shadow.component';
+import { useParams } from 'react-router-dom';
 import { useModal } from 'react-hooks-use-modal';
 import { FillOutAReportPopupComponent } from '../popups/fill-out-a-report/fill-out-a-report-popup.component';
 
 export function FillOutAReportContent({ firstName }) {
     const userInDB = useStore(userInDBStore);
+    const params = useParams();
 
     const [dateState, setDateState] = useState({
         startDate: moment()
@@ -71,8 +73,8 @@ export function FillOutAReportContent({ firstName }) {
 
     const onSubmit = async (values, { resetForm }) => {
         let createdReport = await createReport({
-            companyId: userInDB.companyId,
-            memberId: userInDB.id,
+            companyId: params.companyId,
+            memberId: params.id,
             moraleLevel: values.moraleInput,
             moraleCommentary: values.moraleCommentTextarea,
             stressLevel: values.stressInput,

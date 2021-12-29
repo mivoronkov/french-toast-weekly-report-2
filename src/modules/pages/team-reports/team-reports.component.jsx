@@ -1,32 +1,21 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TeamReportsHeader } from '../../team-reports/team-reports-header.component';
-import { TeamReportsContent } from '../../team-reports/team-reports-content.component';
 import { Helmet } from 'react-helmet';
 import { ReportCalendar } from '../../common/components/topbar/report-calendar.component';
 import { weeklyLabel } from '../../common/utils/get-week';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate, useSearchParams } from 'react-router-dom';
+import { CurrentReports } from '../../weekly-report-history/current-report.componen';
+import { OldReports } from '../../weekly-report-history/old-extended-report.component';
 
 export function TeamReports({ previousPeriod, currentPeriod, members }) {
-    let navigate = useNavigate();
-    useEffect(() => {
-        navigate('current');
-    }, []);
-
-    const weeks = weeklyLabel(new Date());
     return (
         <main className='flex-grow-1 overflow-auto'>
             <Helmet>
                 <title>Team reports</title>
             </Helmet>
-            <TeamReportsHeader members={members} />
-            <div className='d-flex flex-column align-items-center w-100'>
-                <ReportCalendar
-                    currentPeriod={weeks.currentWeek}
-                    previousPeriod={weeks.previousWeek}
-                />
-                <Outlet />
-            </div>
+            <TeamReportsHeader />
+            <Outlet />
         </main>
     );
 }

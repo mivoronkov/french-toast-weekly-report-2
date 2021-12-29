@@ -6,16 +6,18 @@ import { AvatarComponent } from '../common/components/avatar/avatar.component';
 import { useStore } from 'effector-react';
 import { reportsStore } from '../store/weekly-report-store';
 import { OldPeriodReports } from '../store/old-reports-store';
-import { matchPath, useLocation } from 'react-router-dom';
+import { matchPath, useLocation, useSearchParams } from 'react-router-dom';
 
 export function TeamReportsHeader({ maxAvatarsDisplayed = 4 }) {
     const reports = useStore(reportsStore);
     const oldReports = useStore(OldPeriodReports);
-    const { pathname } = useLocation();
+    let [searchParams] = useSearchParams();
 
-    let match = matchPath(pathname, '/team-reports/immediate-team/older');
     let members = reports;
-    if (match?.pattern.end && oldReports?.overviewReportsDtos) {
+    if (
+        searchParams.get('filter') !== null &&
+        oldReports?.overviewReportsDtos
+    ) {
         members = oldReports?.overviewReportsDtos;
     }
 
@@ -58,14 +60,27 @@ export function TeamReportsHeader({ maxAvatarsDisplayed = 4 }) {
     return (
         <header className='d-flex flex-column justify-content-between align-items-center text-light p-4 bg-dark'>
             <TeamSelector />
-            <div className='row gx-0 mt-2'>{avatarRowElements}</div>
-            <h2 className='mt-4'>
-                Your team{' '}
-                <strong>
-                    has {hasSomeWeeklyReports ? '' : 'not '}submitted reports
-                </strong>{' '}
-                this week.
-            </h2>
+            {searchParams.has('team') ? (
+                <div className='d-flex flex-column justify-content-between align-items-center text-light'>
+                    <div className='row gx-0 mt-2'>{avatarRowElements}</div>
+                    <h2 className='mt-4'>
+                        Your team{' '}
+                        <strong>
+                            has {hasSomeWeeklyReports ? '' : 'not '}submitted
+                            reports
+                        </strong>{' '}
+                        this week.
+                    </h2>
+                </div>
+            ) : (
+                <div className='d-flex flex-column justify-content-between align-items-center text-light'>
+                    <h1 className='my-2'>Weekly report history</h1>
+                    <h4 className='mt-3'>
+                        Get a bigger picture of how your tem has been doing over
+                        time.
+                    </h4>
+                </div>
+            )}
         </header>
     );
 }

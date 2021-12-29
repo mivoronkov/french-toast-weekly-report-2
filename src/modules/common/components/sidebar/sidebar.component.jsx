@@ -3,8 +3,11 @@ import React from 'react';
 import logo from '../../../../img/logo.png';
 import { SidebarElementComponent } from './sidebar-element.component';
 import { AuthenticationButtonComponent } from '../buttons/authentication-button.component';
+import { useStore } from 'effector-react';
+import { userInDBStore } from '../../../store/user-in-d-b-store';
 
 export function SidebarComponent() {
+    const userInDB = useStore(userInDBStore);
     return (
         <aside className='p-3 d-flex flex-column justify-content-between text fixed-bottom h-100'>
             <div>
@@ -17,15 +20,16 @@ export function SidebarComponent() {
                     />
                     <SidebarElementComponent
                         elementName={'Team Reports'}
-                        link={'/team-reports'}
+                        link={`/companies/${userInDB.companyId}/members/${userInDB.id}/team-reports`}
+                        notExact={true}
                     />
                     <SidebarElementComponent
                         elementName={'My Reports'}
-                        link={'/my-reports'}
+                        link={`/companies/${userInDB.companyId}/members/${userInDB.id}/reports`}
                     />
                     <SidebarElementComponent
                         elementName={'Fill out a Report'}
-                        link={'/fill-out-a-report'}
+                        link={`/companies/${userInDB.companyId}/members/${userInDB.id}/reports/create`}
                     />
                 </ul>
             </div>
@@ -34,13 +38,13 @@ export function SidebarComponent() {
                     <SidebarElementComponent
                         elementName={'My Company'}
                         extraClasses={'pt-3 pb-3'}
-                        link={'/my-company'}
+                        link={`/companies/${userInDB.companyId}`}
                     />
                     <SidebarElementComponent
                         elementName={' My Profile'}
                         extraClasses={'pt-3 pb-3'}
                         iconClass={'bi bi-gear-fill'}
-                        link={'/edit-member-information'}
+                        link={`/companies/${userInDB.companyId}/members/${userInDB.id}`}
                     />
                     <AuthenticationButtonComponent />
                 </ul>
