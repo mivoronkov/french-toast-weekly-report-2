@@ -17,6 +17,7 @@ import { apiInvoker } from '../../api/api-axios';
 import { getAllTeammates, teammatesStore } from '../../store/teammates-store';
 import { inviteLinks } from '../../../utils';
 import { companyStore, getCompany } from '../../store/company-store';
+import { useParams } from 'react-router-dom';
 
 export function EditMemberInformation({
     firstName,
@@ -31,6 +32,7 @@ export function EditMemberInformation({
 }) {
     const userInDB = useStore(userInDBStore);
     const company = useStore(companyStore);
+    const params = useParams();
     const allTeammates = useStore(teammatesStore);
 
     const [EditLeadersModal, openEditLeaders, closeEditLeaders] = useModal(
@@ -42,11 +44,11 @@ export function EditMemberInformation({
     );
     useEffect(() => {
         getAllTeammates(userInDB.companyId);
-    }, [userInDB.companyId]);
+    }, [params.companyId]);
 
     async function onLeadersSave(leaders) {
         const leadersId = leaders.map((el) => el.id);
-        await apiInvoker.links.updateLeaders(userInDB.id, leadersId);
+        await apiInvoker.links.updateLeaders(params.id, leadersId);
         getUserFromDB();
         closeEditLeaders();
     }
@@ -60,7 +62,7 @@ export function EditMemberInformation({
     });
     async function onReportingMembersSave(followers) {
         const followersId = followers.map((el) => el.id);
-        await apiInvoker.links.updateFollowers(userInDB.id, followersId);
+        await apiInvoker.links.updateFollowers(params.id, followersId);
         getUserFromDB();
         closeEditReportingMembers();
     }
@@ -91,8 +93,8 @@ export function EditMemberInformation({
     };
     const onSubmit = async (values, { setSubmitting }) => {
         await apiInvoker.teamMember.updateMember(
-            userInDB.companyId,
-            userInDB.id,
+            params.companyId,
+            params.id,
             values.firstName,
             values.lastName,
             values.title

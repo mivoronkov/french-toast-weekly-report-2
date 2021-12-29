@@ -8,10 +8,12 @@ export function SidebarElementComponent({
     extraClasses,
     iconClass,
     link = '/',
+    notExact,
 }) {
     return (
         <li className={`nav-item p-2 ${extraClasses ? extraClasses : ''}`}>
             <NavLink
+                end={notExact ? false : true}
                 className={({ isActive }) => {
                     return isActive
                         ? 'nav-link text-warning active'
@@ -30,4 +32,5 @@ SidebarElementComponent.propTypes = {
     extraClasses: PropTypes.string,
     iconClass: PropTypes.string,
     link: PropTypes.string,
+    notExact: PropTypes.boolean,
 };

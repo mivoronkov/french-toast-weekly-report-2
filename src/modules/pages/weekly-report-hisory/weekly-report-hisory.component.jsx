@@ -6,6 +6,9 @@ import { WeeklyReportHistoryHeader } from '../../headers/weekly-report-hisory-he
 import { ReportCalendar } from '../../common/components/topbar/report-calendar.component';
 import { Helmet } from 'react-helmet';
 import { weeklyLabel } from '../../common/utils/get-week';
+import { useStore } from 'effector-react';
+import { userInDBStore } from '../../store/user-in-d-b-store';
+import { TeamReportsHeader } from '../../team-reports/team-reports-header.component';
 
 export function WeeklyReportHistory({
     previousPeriod,
@@ -13,11 +16,6 @@ export function WeeklyReportHistory({
     totalMood,
     membersMood,
 }) {
-    let navigate = useNavigate();
-    useEffect(() => {
-        navigate('current');
-    }, []);
-
     const weeks = weeklyLabel(new Date());
 
     return (
@@ -25,7 +23,7 @@ export function WeeklyReportHistory({
             <Helmet>
                 <title>Weekly report history</title>
             </Helmet>
-            <WeeklyReportHistoryHeader />
+            <TeamReportsHeader />
             <div className='d-flex flex-column align-items-center w-100'>
                 <ReportCalendar
                     currentPeriod={weeks.currentWeek}

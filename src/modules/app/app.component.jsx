@@ -115,65 +115,19 @@ export function App() {
             <Routes>
                 <Route path='/invite-your-team' element={<InviteYourTeam />} />
                 <Route
-                    path='/team-reports'
-                    element={<TeamHeaderContainerComponent />}>
+                    path='/companies/:companyId/members/:id/team-reports'
+                    element={<TeamReports />}>
                     <Route
-                        path='immediate-team'
-                        element={<TeamReports {...teamReportsStub} />}>
-                        <Route
-                            path='older'
-                            element={<OldReports team={'immediate'} />}
-                        />
-                        <Route
-                            path='current'
-                            element={
-                                <CurrentReports
-                                    team={'immediate'}
-                                    week={'current'}
-                                />
-                            }
-                        />
-                        <Route
-                            path='previous'
-                            element={
-                                <CurrentReports
-                                    team={'immediate'}
-                                    week={'previous'}
-                                />
-                            }
-                        />
-                    </Route>
+                        path='/companies/:companyId/members/:id/team-reports/old-reports'
+                        element={<OldReports />}
+                    />
                     <Route
-                        path='extended-team'
-                        element={
-                            <WeeklyReportHistory {...weeklyReportHistory} />
-                        }>
-                        <Route
-                            path='older'
-                            element={<OldReports team={'extended'} />}
-                        />
-                        <Route
-                            path='current'
-                            element={
-                                <CurrentReports
-                                    team={'extended'}
-                                    week={'current'}
-                                />
-                            }
-                        />
-                        <Route
-                            path='previous'
-                            element={
-                                <CurrentReports
-                                    team={'extended'}
-                                    week={'previous'}
-                                />
-                            }
-                        />
-                    </Route>
+                        path='/companies/:companyId/members/:id/team-reports/current-reports'
+                        element={<CurrentReports />}
+                    />
                 </Route>
                 <Route
-                    path='/my-reports'
+                    path='/companies/:companyId/members/:id/reports'
                     element={<MyReports {...myReportStub} />}
                 />
                 <Route
@@ -181,11 +135,7 @@ export function App() {
                     element={<FillOutAReport {...fillOOutAReport} />}
                 />
                 <Route
-                    path='/fill-out-a-report'
-                    element={<FillOutAReport {...fillOOutAReport} />}
-                />
-                <Route
-                    path='/my-company'
+                    path='/companies/:companyId'
                     element={<MyCompanyComponent {...myCompanyStub} />}
                 />
                 <Route
@@ -193,11 +143,11 @@ export function App() {
                     element={<NewCompanyRegistration />}
                 />
                 <Route
-                    path='/team-members'
+                    path='/companies/:companyId/members'
                     element={<TeamMembers {...teamMembersStub} />}
                 />
                 <Route
-                    path='/edit-member-information'
+                    path='/companies/:companyId/members/:id'
                     element={
                         <RequireAuth>
                             <EditMemberInformation

@@ -7,22 +7,36 @@ import { TeamReportsCards } from '../team-reports/team-reports-cards.component';
 import { getClosesReport, reportsStore } from '../store/weekly-report-store';
 import { useStore } from 'effector-react';
 import { userInDBStore } from '../store/user-in-d-b-store';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { ReportCalendar } from '../common/components/topbar/report-calendar.component';
+import { weeklyLabel } from '../common/utils/get-week';
 
 export function CurrentReports({ team, week }) {
-    const userInDB = useStore(userInDBStore);
+    let [searchParams] = useSearchParams();
+    const weekParam = searchParams.get('week');
+    const teamParam = searchParams.get('team');
+    const params = useParams();
+
     const closesReport = useStore(reportsStore);
 
     useEffect(() => {
         getClosesReport({
-            companyId: userInDB.companyId,
-            memberId: userInDB.id,
-            team: team,
-            week: week,
+            companyId: params.companyId,
+            memberId: params.id,
+            team: teamParam,
+            week: weekParam,
         });
-    }, [team, week]);
+    }, [teamParam, weekParam, params]);
+
+    const weeks = weeklyLabel(new Date());
+
     return (
         <div className='d-flex flex-column align-items-center w-100 pb-5'>
-            <SectionLabel labelText={`${team} team`} />
+            <ReportCalendar
+                currentPeriod={weeks.currentWeek}
+                previousPeriod={weeks.previousWeek}
+            />
+            <SectionLabel labelText={`${teamParam} team`} />
             <ExpandAllButton>
                 <LineItem />
                 <TeamReportsCards data={closesReport} />

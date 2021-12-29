@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { SelectingReportCharacteristics } from './selecting-report-characteristics.component';
 import { SectionLabel } from '../common/components/labels/section-label.component';
@@ -9,20 +9,25 @@ import {
     getOldTeamReports,
 } from '../store/old-reports-store';
 import { useStore } from 'effector-react';
-import { userInDBStore } from '../store/user-in-d-b-store';
-import { CurrentReports } from './current-report.componen';
+import { useParams, useSearchParams } from 'react-router-dom';
+import { weeklyLabel } from '../common/utils/get-week';
+import { ReportCalendar } from '../common/components/topbar/report-calendar.component';
 
-export function OldReports({ team }) {
-    const userInDB = useStore(userInDBStore);
+export function OldReports() {
     const oldReports = useStore(OldPeriodReports);
+    const [searchParams] = useSearchParams();
+    const team = searchParams.get('team');
+    const filter = searchParams.get('filter');
+    const params = useParams();
+
     useEffect(() => {
         getOldTeamReports({
-            companyId: userInDB.companyId,
-            memberId: userInDB.id,
+            companyId: params.companyId,
+            memberId: params.id,
             team: team,
-            filter: 'overall',
+            filter: filter,
         });
-    }, []);
+    }, [searchParams, params]);
 
     let membersEmotionalConsist = oldReports?.overviewReportsDtos?.map(
         (oldReport) => {
@@ -45,8 +50,14 @@ export function OldReports({ team }) {
             />
         );
     }
+    const weeks = weeklyLabel(new Date());
+
     return (
         <div className='d-flex flex-column align-items-center w-100'>
+            <ReportCalendar
+                currentPeriod={weeks.currentWeek}
+                previousPeriod={weeks.previousWeek}
+            />
             <SelectingReportCharacteristics team={team} />
             <SectionLabel labelText={`${team} team average`} />
             <WeeklyLabels />

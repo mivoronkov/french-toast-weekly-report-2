@@ -10,24 +10,21 @@ import { Form, Formik } from 'formik';
 import { useStore } from 'effector-react';
 import { apiInvoker } from '../../api/api-axios';
 import { companyStore, getCompany } from '../../store/company-store';
-import { userInDBStore } from '../../store/user-in-d-b-store';
 import * as Yup from 'yup';
 import { ErrorShadow } from '../../containers/error-block/error-shadow.component';
+import { useParams } from 'react-router-dom';
 
 export function MyCompanyComponent() {
     const { name: companyName, joinedDate, companyId } = useStore(companyStore);
-    const userInDB = useStore(userInDBStore);
+    let params = useParams();
     useEffect(() => {
-        getCompany(userInDB.companyId);
-    }, []);
+        getCompany(params.companyId);
+    }, [params.companyId]);
 
     const formInitValues = { companyName: '' };
     const onSubmit = async (values, { setSubmitting }) => {
-        await apiInvoker.companies.update(
-            userInDB.companyId,
-            values.companyName
-        );
-        await getCompany(userInDB.companyId);
+        await apiInvoker.companies.update(params.companyId, values.companyName);
+        await getCompany(params.companyId);
         setSubmitting(false);
     };
     const validateName = Yup.object().shape({
@@ -93,7 +90,7 @@ export function MyCompanyComponent() {
                             weekly report.
                         </b>
                     </p>
-                    <Link to='/team-members'>
+                    <Link to={`/companies/${params.companyId}/members`}>
                         <button className='btn btn-outline-dark mt-2'>
                             See All Team Members
                         </button>
