@@ -8,9 +8,12 @@ import { inviteLinks } from '../../../utils';
 import { InviteYourTeamSuccessMessageComponent } from '../../invite-your-team/invite-your-team-success-message.component';
 import { Form, Formik } from 'formik';
 import { EditFieldComponent } from '../../common/components/edit-field/edit-field.component';
+import { setInviteSuccessMessageLinkToStore } from '../../store/invite-success-message-link-store';
+import emailjs from 'emailjs-com';
+import { setFailedToSendEmailStore } from '../../store/failed-to-send-email-store';
 
 export function InviteYourTeam() {
-    const [showSuccess, setShowSuccess] = useState(false);
+    const [showExtraMessage, setShowExtraMessage] = useState(false);
     const formInitValues = {
         firstName: '',
         lastName: '',
@@ -20,11 +23,35 @@ export function InviteYourTeam() {
 
     const onSubmit = async (values, { setSubmitting }) => {
         let resp = await apiInvoker.companies.get(userInDb.companyId);
-        alert(
-            `This link should be sent to ${values.email} with the title "Accept invite":\n` +
-                `${inviteLinks.generateLink(userInDb, resp.data.name, values)}`
+        const generatedLink = inviteLinks.generateLink(
+            userInDb,
+            resp.data.name,
+            values
         );
-        setShowSuccess(true);
+        setInviteSuccessMessageLinkToStore(generatedLink);
+
+        // Send email
+        const emailParams = {
+            to_name: values.firstName + ' ' + values.lastName,
+            from_name: userInDb.firstName + ' ' + userInDb.lastName,
+            invite_link: generatedLink,
+            email: values.email,
+        };
+        try {
+            await emailjs.send(
+                process.env.REACT_APP_EMAILJS_SERVICE_ID,
+                process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+                emailParams,
+                process.env.REACT_APP_EMAILJS_USER_ID
+            );
+            setFailedToSendEmailStore(false);
+        } catch (error) {
+            console.log("Couldn't send email", error);
+            setFailedToSendEmailStore(true);
+        } finally {
+            setShowExtraMessage(true);
+        }
+
         setSubmitting(false);
     };
 
@@ -35,7 +62,9 @@ export function InviteYourTeam() {
             </Helmet>
             <TextHeaderComponent title={'Invite Your Team'} />
             <div className='p-2 container-fluid'>
-                {showSuccess ? <InviteYourTeamSuccessMessageComponent /> : null}
+                {showExtraMessage ? (
+                    <InviteYourTeamSuccessMessageComponent />
+                ) : null}
                 <div className='form mx-auto card shadow-sm card-body'>
                     <div className='pb-2 fw-bold'>
                         Enter the team member you would like to invite.

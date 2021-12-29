@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './avatar.styles.scss';
+import { getImageSrcIfValid } from '../../../../utils';
 
 export function makeAvatarText(firstName, lastName) {
     if (firstName && firstName.length > 0) {
@@ -20,14 +21,9 @@ export const AvatarComponent = function ({
 }) {
     const [currentSrc, setCurrentSrc] = useState(null);
     useEffect(() => {
-        const image = new Image();
-        image.onload = () => {
-            setCurrentSrc(avatarPath);
-        };
-        image.onerror = () => {
-            setCurrentSrc(null);
-        };
-        image.src = avatarPath;
+        getImageSrcIfValid(avatarPath)
+            .then(() => setCurrentSrc(avatarPath))
+            .catch(() => setCurrentSrc(null));
     }, [avatarPath]);
     const avatarSizeCss =
         size === 'big' ? 'avatar-size-big' : 'avatar-size-default';

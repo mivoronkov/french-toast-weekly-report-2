@@ -12,6 +12,9 @@ import { userInDBStore } from '../store/user-in-d-b-store';
 import { createReport } from '../store/weekly-report-store';
 import { ErrorShadow } from '../containers/error-block/error-shadow.component';
 import { useParams } from 'react-router-dom';
+import { useModal } from 'react-hooks-use-modal';
+import { FillOutAReportPopupComponent } from '../popups/fill-out-a-report/fill-out-a-report-popup.component';
+
 
 export function FillOutAReportContent({ firstName }) {
     const userInDB = useStore(userInDBStore);
@@ -63,6 +66,12 @@ export function FillOutAReportContent({ firstName }) {
         date: '',
     };
 
+    const [SuccessMessageModal, openSuccessMessage, closeSuccessMessage] =
+        useModal('root', {
+            preventScroll: true,
+            closeOnOverlayClick: false,
+        });
+
     const onSubmit = async (values, { resetForm }) => {
         let createdReport = await createReport({
             companyId: params.companyId,
@@ -79,7 +88,6 @@ export function FillOutAReportContent({ firstName }) {
             weekStartDate: dateState.startDate,
             weekEndDate: dateState.endDate,
         });
-        alert('Report was successfully sent');
         // Reset Formik form
         resetForm();
         setDateState({
@@ -89,6 +97,7 @@ export function FillOutAReportContent({ firstName }) {
                 .set('minute', 0),
             endDate: moment().set('hour', 12).set('minute', 0),
         });
+        openSuccessMessage();
     };
     const sighupSchema = Yup.object().shape({
         moraleInput: Yup.number().min(1).max(5).required('Required'),
@@ -233,6 +242,9 @@ export function FillOutAReportContent({ firstName }) {
                     </Form>
                 )}
             </Formik>
+            <SuccessMessageModal>
+                <FillOutAReportPopupComponent onClose={closeSuccessMessage} />
+            </SuccessMessageModal>
         </div>
     );
 }

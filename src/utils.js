@@ -102,3 +102,12 @@ export async function getUserWithFetch(token) {
         };
     }
 }
+
+export async function getImageSrcIfValid(avatarPath) {
+    return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(avatarPath);
+        image.onerror = (error) => reject(error);
+        image.src = avatarPath;
+    });
+}

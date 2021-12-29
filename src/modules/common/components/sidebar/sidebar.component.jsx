@@ -36,11 +36,6 @@ export function SidebarComponent() {
             <div>
                 <ul className='nav nav-pills flex-column'>
                     <SidebarElementComponent
-                        elementName={'Back to Elite'}
-                        extraClasses={'p-2 pb-3'}
-                        link={'/back-to-elite'}
-                    />
-                    <SidebarElementComponent
                         elementName={'My Company'}
                         extraClasses={'pt-3 pb-3'}
                         link={`/companies/${userInDB.companyId}`}

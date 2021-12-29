@@ -4,6 +4,7 @@ import { setTokenToStore } from '../api/api-axios';
 import { getUserFromDB } from '../store/user-in-d-b-store';
 import { setIsWaitingResponse } from '../store/user-request-store';
 
+// Currently not used component
 export function Initialisation() {
     const { getAccessTokenSilently } = useAuth0();
     useEffect(() => {

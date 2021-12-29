@@ -25,8 +25,6 @@ export function CompleteRegistrationContent() {
             email: user.email,
             sub: user.sub,
             companyName: createdCompany.name,
-            //TODO: add invite link generation
-            inviteLink: 'example.com',
         });
 
         window.location.reload();
