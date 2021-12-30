@@ -4,3 +4,4 @@
 ./node_modules/.bin/eslint src/**/*.js
 ./node_modules/.bin/eslint src/**/*.jsx
 ./node_modules/.bin/prettier --write src/**/*.js
+./node_modules/.bin/prettier --write src/**/*.jsx
