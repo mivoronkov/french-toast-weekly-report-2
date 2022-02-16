@@ -38,9 +38,9 @@ pipeline {
           sh 'docker version'
 
           sh 'docker login --username AWS --password-stdin < mytoken.txt 529396670287.dkr.ecr.us-west-2.amazonaws.com'
-          sh 'docker build -t 529396670287.dkr.ecr.us-west-2.amazonaws.com/trogaev-ecr:v5 .'
+          sh 'docker build -t 529396670287.dkr.ecr.us-west-2.amazonaws.com/trogaev-ecr:v1 .'
           //sh 'docker tag weekly-team-report-html:v1 529396670287.dkr.ecr.us-west-2.amazonaws.com/trogaev-ecr:v1'
-          sh 'docker push 529396670287.dkr.ecr.us-west-2.amazonaws.com/trogaev-ecr:v5'
+          sh 'docker push 529396670287.dkr.ecr.us-west-2.amazonaws.com/trogaev-ecr:v1'
         }
       }
     }
